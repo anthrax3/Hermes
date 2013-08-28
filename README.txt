@@ -23,11 +23,11 @@ General Flow
 -> user only runs 'win_findbugrun.bat'
 
 
-win_finbugrun.bat -> takes -> target jars -> and produces results that are fed into -> parser
+win_finbugrun.bat takes target jars and produces results that are fed into parser
 
-parser -> parses results and defect densities and produces -> formatted inputs for -> analyzer
+parser parses results and defect densities and produces formatted inputs for analyzer
 
-analyzer -> takes formatted inputs and 
+analyzer takes formatted inputs and 
 
 
 
