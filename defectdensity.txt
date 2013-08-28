@@ -1,0 +1,5 @@
+kind	name	density/KNCSS	bugs	NCSS	
+project		5.9	26	4426	
+package	edu.uci.ics.crawler4j.crawler	8.3	5	599	
+package	edu.uci.ics.crawler4j.frontier	19.2	9	468	
+package	edu.uci.ics.crawler4j.url	13.8	5	362	
