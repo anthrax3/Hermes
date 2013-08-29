@@ -15,7 +15,7 @@ if NOT "%1"=="" (
 		echo NOTE: These commands are for reference only - they will not work on this script.
 		echo.
 		echo.
-		C:\FindBugs\bin\findbugs.bat -help
+		findbugs-2.0.2\bin\findbugs.bat -help
 	) ELSE (
 		echo.
 		echo USAGE of findbugrun batch script
@@ -30,10 +30,10 @@ if NOT "%1"=="" (
 	)
 ) ELSE (
 	echo Running Findbugs...
-	C:\FindBugs\bin\findbugs.bat -textui -xml -auxclasspath %classpath% -output fb_results.xml Target_jars\crawler4j-3.5.jar
+	findbugs-2.0.2\bin\findbugs.bat -textui -xml -auxclasspath %classpath% -output fb_results.xml Target_jars\crawler4j-3.5.jar
 	echo Done.
 	echo Calculating Defect Densities...
-	C:\FindBugs\bin\findbugs.bat -defectDensity fb_results.xml > defectdensity.txt
+	findbugs-2.0.2\bin\findbugs.bat -defectDensity fb_results.xml > defectdensity.txt
 	echo Done.
 	echo Running Parser...
 	python Parser\parser.py -d defectdensity.txt -b fb_results.xml
