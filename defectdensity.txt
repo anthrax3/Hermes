@@ -1,5 +1,17 @@
-kind	name	density/KNCSS	bugs	NCSS	
-project		5.9	26	4426	
-package	edu.uci.ics.crawler4j.crawler	8.3	5	599	
-package	edu.uci.ics.crawler4j.frontier	19.2	9	468	
-package	edu.uci.ics.crawler4j.url	13.8	5	362	
+edu.umd.cs.findbugs.gui2.Driver [options] [project or analysis results file]
+Options:
+  General FindBugs options:
+    -project <project>                  analyze given project
+    -home <home directory>              specify FindBugs home directory
+    -pluginList <jar1[:jar2...]>        specify list of plugin Jar files to load
+    -effort[:min|less|default|more|max] set analysis effort level
+    -adjustExperimental                 lower priority of experimental Bug Patterns
+    -workHard                           ensure analysis effort is at least 'default'
+    -conserveSpace                      same as -effort:min (for backward compatibility)
+    -f <font size>                      set font size
+    -clear                              clear saved GUI settings and exit
+    -priority <thread priority>         set analysis thread priority
+    -loadBugs <saved analysis results>  load bugs from saved analysis results
+    -d                                  disable docking
+    --nodock                            disable docking
+    -look[:plastic|gtk|native]          set UI look and feel
