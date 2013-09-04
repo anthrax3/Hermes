@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.0.5312 report, generated Tue Aug 06 11:13:53 PDT 2013 -->
+
+<report>
+  <stats>
+    <packages value="2"/>
+    <classes value="3"/>
+    <methods value="7"/>
+    <srcfiles value="3"/>
+    <srclines value="30"/>
+  </stats>
+  <data>
+    <all name="all classes">
+      <coverage type="class, %" value="100% (3/3)"/>
+      <coverage type="method, %" value="100% (7/7)"/>
+      <coverage type="block, %" value="95%  (120/126)"/>
+      <coverage type="line, %" value="90%  (27/30)"/>
+
+      <package name="search">
+        <coverage type="class, %" value="100% (2/2)"/>
+        <coverage type="method, %" value="100% (4/4)"/>
+        <coverage type="block, %" value="91%  (64/70)"/>
+        <coverage type="line, %" value="84%  (16/19)"/>
+
+        <srcfile name="LinearSearch.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (2/2)"/>
+          <coverage type="block, %" value="85%  (23/27)"/>
+          <coverage type="line, %" value="71%  (5/7)"/>
+
+          <class name="LinearSearch">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="85%  (23/27)"/>
+            <coverage type="line, %" value="71%  (5/7)"/>
+
+            <method name="find (int [], int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="83%  (20/24)"/>
+              <coverage type="line, %" value="67%  (4/6)"/>
+            </method>
+            <method name="LinearSearch (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="BinarySearch.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (2/2)"/>
+          <coverage type="block, %" value="95%  (41/43)"/>
+          <coverage type="line, %" value="92%  (11/12)"/>
+
+          <class name="BinarySearch">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="95%  (41/43)"/>
+            <coverage type="line, %" value="92%  (11/12)"/>
+
+            <method name="find (int [], int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="95%  (38/40)"/>
+              <coverage type="line, %" value="91%  (10/11)"/>
+            </method>
+            <method name="BinarySearch (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+      </package>
+      <package name="default package">
+        <coverage type="class, %" value="100% (1/1)"/>
+        <coverage type="method, %" value="100% (3/3)"/>
+        <coverage type="block, %" value="100% (56/56)"/>
+        <coverage type="line, %" value="100% (11/11)"/>
+
+        <srcfile name="Main.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (3/3)"/>
+          <coverage type="block, %" value="100% (56/56)"/>
+          <coverage type="line, %" value="100% (11/11)"/>
+
+          <class name="Main">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (3/3)"/>
+            <coverage type="block, %" value="100% (56/56)"/>
+            <coverage type="line, %" value="100% (11/11)"/>
+
+            <method name="Main (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="doSearch (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (42/42)"/>
+              <coverage type="line, %" value="100% (6/6)"/>
+            </method>
+            <method name="main (String []): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (11/11)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+        </srcfile>
+      </package>
+    </all>
+  </data>
+</report>
