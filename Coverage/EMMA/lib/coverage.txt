@@ -1,0 +1,20 @@
+[EMMA v2.0.5312 report, generated Wed Sep 04 11:30:43 PDT 2013]
+-------------------------------------------------------------------------------
+OVERALL COVERAGE SUMMARY:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+97%  (121/125)!	49%  (249/510)!	71%  (14129/19842)!	66%  (2293.4/3493)!	all classes
+
+OVERALL STATS SUMMARY:
+
+total packages:	1
+total classes:	125
+total methods:	510
+total executable files:	30
+total executable lines:	3493
+
+COVERAGE BREAKDOWN BY PACKAGE:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+97%  (121/125)!	49%  (249/510)!	71%  (14129/19842)!	66%  (2293.4/3493)!	default package
+-------------------------------------------------------------------------------
