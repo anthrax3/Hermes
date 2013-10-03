@@ -5,9 +5,12 @@
 # (This program will handle all the transmission of data)
 # 
 
-import sys, getopt
+import sys, getopt, traceback
 import xml.etree.cElementTree as et
-import urllib, urllib2
+import urllib, urllib2, json
+import imp
+
+cvg = imp.load_source('DETAILS', '../Config/coverage.py')
 
 
 
@@ -19,7 +22,7 @@ class Transmitter:
 
 	def __init__(self, path):
 		self.filepath = path
-		self.receiver_address = "127.0.0.1:8080"
+		self.receiver_address = 'http://' + cvg.DETAILS.CVG_ADDRESS + ":" + str(cvg.DETAILS.CVG_PORT)
 
 
 	def setDestination(self, dest):
@@ -37,69 +40,33 @@ class Transmitter:
 		f = None
 		fileData = ""
 		try:
+			print 'Reading %s' % filepath
 			f = open(self.filepath, 'r')
 			fileData = f.read()
+			print("Closing %s" % (filepath))
 			f.close()
 		except IOError as e:
 			print 'I/O Error ({0}): {1}'.format(e.errno, e.strerror)
 		except Exception as e:
 			print 'An unexpected error occurred while trying to open file path: %s' % (e)
 		else:
+			print("Closing %s" % (filepath))
 			f.close()
 
 
 		if fileData:
 			try:
+				print("Encoding Data...")
 				params = urllib.urlencode({
-					'data': fileData
+					'data': str(fileData)
 					})
-				response = urllib2.urlopen(self.receiver_address, params).read()
 
-				# DEBUG======================================================================
-				print 'Response: ', response
+				print("Sending data...")
+				urllib2.urlopen(self.receiver_address, params)
+				print("Done.\n")
 
-
-
-			except Exception as e:
+			except IOError as e:
 				print 'An unepected exception has occurred: %s' % (e)
-
-
-			# Parsing data - this should be in the genetic algorithm 
-			# part ... the transmitter will be simple and just x-mit
-			# the entire xml file.
-			'''
-			xmltree = et.fromstring(fileData)
-
-			# class %, method %, block %, line %, name
-			listofoverallresults = []
-			listofpackageresults = []
-
-			# total packages, classes, methods, executable files, executable lines
-			listofstatsresults = []
-			for el in xmltree.findall('stats'):
-				for ch in el.getchildren():
-					listofstatsresults.append( ch.get("value") )
-
-
-			# DEBUG============================================================
-			print listofstatsresults, "\n"
-
-
-			for el in xmltree.findall('data/all/coverage'):
-				listofoverallresults.append( (el.get("type"), el.get("value")) )
-
-
-			# DEBUG============================================================
-			print listofoverallresults, "\n"
-
-
-			for el in xmltree.findall('data/all/package'):
-				print el.items()
-				sys.exit(0)
-			'''
-
-
-
 
 
 
@@ -113,14 +80,9 @@ def usage(self):
 
 
 
-
-
-
-
 if __name__ == "__main__":
 
 	filepath = ""
-
 	arguments = sys.argv[1:]
 
 	try:
@@ -129,15 +91,11 @@ if __name__ == "__main__":
 		usage()
 		sys.exit(2)
 
-
 	for opt, arg in opts:
 		if opt in ("-f", "--emmaoutputfile"):
 			filepath = arg
 
-
 	if filepath:
-
-		print 'opening %s' % filepath
 		# Run transmitter with file from specified filepath
 		t = Transmitter(filepath)
 		t.transmit()
