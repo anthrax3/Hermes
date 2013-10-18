@@ -10,8 +10,8 @@ import xml.etree.cElementTree as et
 import urllib, urllib2, json
 import imp
 
-cvg = imp.load_source('DETAILS', '../Config/coverage.py')
-
+#cvg = imp.load_source('DETAILS', '../Config/coverage.py')
+cvg = imp.load_source('DETAILS', 'Config/coverage.py')
 
 
 class Transmitter:
