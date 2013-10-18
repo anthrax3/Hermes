@@ -46,9 +46,11 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 			datafilename = '%sEMMA_dump_%s.xml' % (cvg.DETAILS.LIST_XML_DUMP_PATH, time.time())
 			with open(datafilename, 'w') as f:
 				f.write(postvars['data'][0])
-			f.close()
 
 			self.send_response(200)
+			self.send_header("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:10.0.1) Gecko/20100101 Firefox/10.0.1")
+			self.send_header("Content-type", "text/html")
+			self.end_headers()
 
 		except Exception as e:
 			print("An unexpected error occurred while processing POST: %s" % (e))

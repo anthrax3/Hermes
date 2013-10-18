@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.0.5312 report, generated Fri Oct 18 00:00:38 PDT 2013 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.0.5312 report, generated Fri Oct 18 00:57:36 PDT 2013 -->
 
 <report>
   <stats>
@@ -11,9 +11,9 @@
   <data>
     <all name="all classes">
       <coverage type="class, %" value="85%  (574/674)"/>
-      <coverage type="method, %" value="46%  (3116/6799)"/>
-      <coverage type="block, %" value="49%  (96553/196747)"/>
-      <coverage type="line, %" value="42%  (16343.1/39325)"/>
+      <coverage type="method, %" value="46%  (3113/6799)"/>
+      <coverage type="block, %" value="49%  (96029/196747)"/>
+      <coverage type="line, %" value="41%  (16225.6/39325)"/>
 
       <package name="org.apache.http.client">
         <coverage type="class, %" value="0%   (0/4)"/>
@@ -18581,709 +18581,6 @@
           </class>
         </srcfile>
       </package>
-      <package name="org.apache.http.impl.io">
-        <coverage type="class, %" value="64%  (9/14)"/>
-        <coverage type="method, %" value="35%  (35/100)"/>
-        <coverage type="block, %" value="30%  (770/2606)"/>
-        <coverage type="line, %" value="32%  (214.9/682)"/>
-
-        <srcfile name="ChunkedInputStream.java">
-          <coverage type="class, %" value="0%   (0/1)"/>
-          <coverage type="method, %" value="0%   (0/10)"/>
-          <coverage type="block, %" value="0%   (0/357)"/>
-          <coverage type="line, %" value="0%   (0/92)"/>
-
-          <class name="ChunkedInputStream">
-            <coverage type="class, %" value="0%   (0/1)"/>
-            <coverage type="method, %" value="0%   (0/10)"/>
-            <coverage type="block, %" value="0%   (0/357)"/>
-            <coverage type="line, %" value="0%   (0/92)"/>
-
-            <method name="ChunkedInputStream (SessionInputBuffer): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/35)"/>
-              <coverage type="line, %" value="0%   (0/11)"/>
-            </method>
-            <method name="available (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/19)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="close (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/31)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
-            </method>
-            <method name="getChunkSize (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/75)"/>
-              <coverage type="line, %" value="0%   (0/20)"/>
-            </method>
-            <method name="getFooters (): Header []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/5)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="nextChunk (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/27)"/>
-              <coverage type="line, %" value="0%   (0/9)"/>
-            </method>
-            <method name="parseTrailerHeaders (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/30)"/>
-              <coverage type="line, %" value="0%   (0/7)"/>
-            </method>
-            <method name="read (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/47)"/>
-              <coverage type="line, %" value="0%   (0/14)"/>
-            </method>
-            <method name="read (byte []): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="read (byte [], int, int): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/81)"/>
-              <coverage type="line, %" value="0%   (0/17)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="ChunkedOutputStream.java">
-          <coverage type="class, %" value="0%   (0/1)"/>
-          <coverage type="method, %" value="0%   (0/11)"/>
-          <coverage type="block, %" value="0%   (0/191)"/>
-          <coverage type="line, %" value="0%   (0/52)"/>
-
-          <class name="ChunkedOutputStream">
-            <coverage type="class, %" value="0%   (0/1)"/>
-            <coverage type="method, %" value="0%   (0/11)"/>
-            <coverage type="block, %" value="0%   (0/191)"/>
-            <coverage type="line, %" value="0%   (0/52)"/>
-
-            <method name="ChunkedOutputStream (SessionOutputBuffer): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/5)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="ChunkedOutputStream (SessionOutputBuffer, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/19)"/>
-              <coverage type="line, %" value="0%   (0/7)"/>
-            </method>
-            <method name="close (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/12)"/>
-              <coverage type="line, %" value="0%   (0/5)"/>
-            </method>
-            <method name="finish (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/11)"/>
-              <coverage type="line, %" value="0%   (0/5)"/>
-            </method>
-            <method name="flush (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/6)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-            <method name="flushCache (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/25)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="flushCacheWithAppend (byte [], int, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/30)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="write (byte []): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="write (byte [], int, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/37)"/>
-              <coverage type="line, %" value="0%   (0/7)"/>
-            </method>
-            <method name="write (int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/30)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="writeClosingChunk (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/9)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="ContentLengthInputStream.java">
-          <coverage type="class, %" value="0%   (0/1)"/>
-          <coverage type="method, %" value="0%   (0/7)"/>
-          <coverage type="block, %" value="0%   (0/270)"/>
-          <coverage type="line, %" value="0%   (0/58)"/>
-
-          <class name="ContentLengthInputStream">
-            <coverage type="class, %" value="0%   (0/1)"/>
-            <coverage type="method, %" value="0%   (0/7)"/>
-            <coverage type="block, %" value="0%   (0/270)"/>
-            <coverage type="line, %" value="0%   (0/58)"/>
-
-            <method name="ContentLengthInputStream (SessionInputBuffer, long): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/34)"/>
-              <coverage type="line, %" value="0%   (0/11)"/>
-            </method>
-            <method name="available (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/20)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="close (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/28)"/>
-              <coverage type="line, %" value="0%   (0/7)"/>
-            </method>
-            <method name="read (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/55)"/>
-              <coverage type="line, %" value="0%   (0/10)"/>
-            </method>
-            <method name="read (byte []): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="read (byte [], int, int): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/77)"/>
-              <coverage type="line, %" value="0%   (0/12)"/>
-            </method>
-            <method name="skip (long): long">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/49)"/>
-              <coverage type="line, %" value="0%   (0/13)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="ContentLengthOutputStream.java">
-          <coverage type="class, %" value="0%   (0/1)"/>
-          <coverage type="method, %" value="0%   (0/6)"/>
-          <coverage type="block, %" value="0%   (0/119)"/>
-          <coverage type="line, %" value="0%   (0/33)"/>
-
-          <class name="ContentLengthOutputStream">
-            <coverage type="class, %" value="0%   (0/1)"/>
-            <coverage type="method, %" value="0%   (0/6)"/>
-            <coverage type="block, %" value="0%   (0/119)"/>
-            <coverage type="line, %" value="0%   (0/33)"/>
-
-            <method name="ContentLengthOutputStream (SessionOutputBuffer, long): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/31)"/>
-              <coverage type="line, %" value="0%   (0/10)"/>
-            </method>
-            <method name="close (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/10)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="flush (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="write (byte []): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="write (byte [], int, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/42)"/>
-              <coverage type="line, %" value="0%   (0/9)"/>
-            </method>
-            <method name="write (int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/25)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="IdentityOutputStream.java">
-          <coverage type="class, %" value="0%   (0/1)"/>
-          <coverage type="method, %" value="0%   (0/6)"/>
-          <coverage type="block, %" value="0%   (0/65)"/>
-          <coverage type="line, %" value="0%   (0/22)"/>
-
-          <class name="IdentityOutputStream">
-            <coverage type="class, %" value="0%   (0/1)"/>
-            <coverage type="method, %" value="0%   (0/6)"/>
-            <coverage type="block, %" value="0%   (0/65)"/>
-            <coverage type="line, %" value="0%   (0/22)"/>
-
-            <method name="IdentityOutputStream (SessionOutputBuffer): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/16)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="close (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/10)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="flush (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="write (byte []): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="write (byte [], int, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/15)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="write (int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/13)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="SocketInputBuffer.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="50%  (2/4)"/>
-          <coverage type="block, %" value="39%  (33/84)"/>
-          <coverage type="line, %" value="42%  (10.8/26)"/>
-
-          <class name="SocketInputBuffer">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="50%  (2/4)"/>
-            <coverage type="block, %" value="39%  (33/84)"/>
-            <coverage type="line, %" value="42%  (10.8/26)"/>
-
-            <method name="isDataAvailable (int): boolean">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/36)"/>
-              <coverage type="line, %" value="0%   (0/11)"/>
-            </method>
-            <method name="isEof (): boolean">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="SocketInputBuffer (Socket, int, HttpParams): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="69%  (22/32)"/>
-              <coverage type="line, %" value="73%  (8/11)"/>
-            </method>
-            <method name="fillBuffer (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="85%  (11/13)"/>
-              <coverage type="line, %" value="95%  (2.8/3)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="AbstractSessionInputBuffer.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="55%  (11/20)"/>
-          <coverage type="block, %" value="39%  (262/665)"/>
-          <coverage type="line, %" value="43%  (69.1/161)"/>
-
-          <class name="AbstractSessionInputBuffer">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="55%  (11/20)"/>
-            <coverage type="block, %" value="39%  (262/665)"/>
-            <coverage type="line, %" value="43%  (69.1/161)"/>
-
-            <method name="appendDecoded (CharArrayBuffer, ByteBuffer): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/78)"/>
-              <coverage type="line, %" value="0%   (0/18)"/>
-            </method>
-            <method name="available (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/6)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="capacity (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="handleDecodingResult (CoderResult, CharArrayBuffer, ByteBuffer): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/29)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
-            </method>
-            <method name="length (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/6)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="lineFromLineBuffer (CharArrayBuffer): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/53)"/>
-              <coverage type="line, %" value="0%   (0/13)"/>
-            </method>
-            <method name="read (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/26)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="read (byte []): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/11)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-            <method name="readLine (): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/17)"/>
-              <coverage type="line, %" value="0%   (0/5)"/>
-            </method>
-            <method name="read (byte [], int, int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="29%  (25/87)"/>
-              <coverage type="line, %" value="33%  (7/21)"/>
-            </method>
-            <method name="readLine (CharArrayBuffer): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="33%  (36/108)"/>
-              <coverage type="line, %" value="46%  (12.3/27)"/>
-            </method>
-            <method name="lineFromReadBuffer (CharArrayBuffer, int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="77%  (36/47)"/>
-              <coverage type="line, %" value="80%  (8/10)"/>
-            </method>
-            <method name="hasBufferedData (): boolean">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="78%  (7/9)"/>
-              <coverage type="line, %" value="77%  (0.8/1)"/>
-            </method>
-            <method name="init (InputStream, int, HttpParams): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="81%  (64/79)"/>
-              <coverage type="line, %" value="85%  (17/20)"/>
-            </method>
-            <method name="fillBuffer (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="82%  (49/60)"/>
-              <coverage type="line, %" value="86%  (12/14)"/>
-            </method>
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="AbstractSessionInputBuffer (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (15/15)"/>
-              <coverage type="line, %" value="100% (5/5)"/>
-            </method>
-            <method name="createTransportMetrics (): HttpTransportMetricsImpl">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getMetrics (): HttpTransportMetrics">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="locateLF (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (19/19)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="IdentityInputStream.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="40%  (2/5)"/>
-          <coverage type="block, %" value="40%  (21/52)"/>
-          <coverage type="line, %" value="41%  (7/17)"/>
-
-          <class name="IdentityInputStream">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="40%  (2/5)"/>
-            <coverage type="block, %" value="40%  (21/52)"/>
-            <coverage type="line, %" value="41%  (7/17)"/>
-
-            <method name="available (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/11)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-            <method name="close (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="read (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/9)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-            <method name="IdentityInputStream (SessionInputBuffer): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="69%  (11/16)"/>
-              <coverage type="line, %" value="83%  (5/6)"/>
-            </method>
-            <method name="read (byte [], int, int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="83%  (10/12)"/>
-              <coverage type="line, %" value="67%  (2/3)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="AbstractSessionOutputBuffer.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="59%  (10/17)"/>
-          <coverage type="block, %" value="51%  (196/388)"/>
-          <coverage type="line, %" value="50%  (54/108)"/>
-
-          <class name="AbstractSessionOutputBuffer">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="59%  (10/17)"/>
-            <coverage type="block, %" value="51%  (196/388)"/>
-            <coverage type="line, %" value="50%  (54/108)"/>
-
-            <method name="available (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/6)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="capacity (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="handleEncodingResult (CoderResult): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/24)"/>
-              <coverage type="line, %" value="0%   (0/7)"/>
-            </method>
-            <method name="length (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="write (int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/11)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="writeEncoded (CharBuffer): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/64)"/>
-              <coverage type="line, %" value="0%   (0/17)"/>
-            </method>
-            <method name="writeLine (String): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/33)"/>
-              <coverage type="line, %" value="0%   (0/10)"/>
-            </method>
-            <method name="write (byte [], int, int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="63%  (29/46)"/>
-              <coverage type="line, %" value="55%  (6/11)"/>
-            </method>
-            <method name="init (OutputStream, int, HttpParams): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="76%  (48/63)"/>
-              <coverage type="line, %" value="81%  (13/16)"/>
-            </method>
-            <method name="writeLine (CharArrayBuffer): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="79%  (50/63)"/>
-              <coverage type="line, %" value="80%  (16/20)"/>
-            </method>
-            <method name="write (byte []): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="90%  (9/10)"/>
-              <coverage type="line, %" value="75%  (3/4)"/>
-            </method>
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (15/15)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="AbstractSessionOutputBuffer (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (9/9)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
-            </method>
-            <method name="createTransportMetrics (): HttpTransportMetricsImpl">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="flush (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (6/6)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
-            </method>
-            <method name="flushBuffer (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (23/23)"/>
-              <coverage type="line, %" value="100% (6/6)"/>
-            </method>
-            <method name="getMetrics (): HttpTransportMetrics">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="HttpTransportMetricsImpl.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="40%  (2/5)"/>
-          <coverage type="block, %" value="54%  (13/24)"/>
-          <coverage type="line, %" value="50%  (5/10)"/>
-
-          <class name="HttpTransportMetricsImpl">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="40%  (2/5)"/>
-            <coverage type="block, %" value="54%  (13/24)"/>
-            <coverage type="line, %" value="50%  (5/10)"/>
-
-            <method name="getBytesTransferred (): long">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="reset (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="setBytesTransferred (long): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="HttpTransportMetricsImpl (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (6/6)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
-            </method>
-            <method name="incrementBytesTransferred (long): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (7/7)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="AbstractMessageParser.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="75%  (3/4)"/>
-          <coverage type="block, %" value="56%  (157/281)"/>
-          <coverage type="line, %" value="60%  (43.1/72)"/>
-
-          <class name="AbstractMessageParser">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="75%  (3/4)"/>
-            <coverage type="block, %" value="56%  (157/281)"/>
-            <coverage type="line, %" value="60%  (43.1/72)"/>
-
-            <method name="parseHeaders (SessionInputBuffer, int, int, LineParser): Header []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/15)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="parseHeaders (SessionInputBuffer, int, int, LineParser, List): Header []">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="48%  (77/161)"/>
-              <coverage type="line, %" value="52%  (21.2/41)"/>
-            </method>
-            <method name="AbstractMessageParser (SessionInputBuffer, LineParser, HttpParams): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="74%  (35/47)"/>
-              <coverage type="line, %" value="83%  (9.9/12)"/>
-            </method>
-            <method name="parse (): HttpMessage">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="78%  (45/58)"/>
-              <coverage type="line, %" value="80%  (12/15)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="SocketOutputBuffer.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="100% (1/1)"/>
-          <coverage type="block, %" value="62%  (16/26)"/>
-          <coverage type="line, %" value="67%  (6/9)"/>
-
-          <class name="SocketOutputBuffer">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (1/1)"/>
-            <coverage type="block, %" value="62%  (16/26)"/>
-            <coverage type="line, %" value="67%  (6/9)"/>
-
-            <method name="SocketOutputBuffer (Socket, int, HttpParams): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="62%  (16/26)"/>
-              <coverage type="line, %" value="67%  (6/9)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="AbstractMessageWriter.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="100% (2/2)"/>
-          <coverage type="block, %" value="81%  (52/64)"/>
-          <coverage type="line, %" value="88%  (14.9/17)"/>
-
-          <class name="AbstractMessageWriter">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (2/2)"/>
-            <coverage type="block, %" value="81%  (52/64)"/>
-            <coverage type="line, %" value="88%  (14.9/17)"/>
-
-            <method name="AbstractMessageWriter (SessionOutputBuffer, LineFormatter, HttpParams): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="73%  (19/26)"/>
-              <coverage type="line, %" value="84%  (5.9/7)"/>
-            </method>
-            <method name="write (HttpMessage): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="87%  (33/38)"/>
-              <coverage type="line, %" value="90%  (9/10)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="HttpRequestWriter.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="100% (2/2)"/>
-          <coverage type="block, %" value="100% (20/20)"/>
-          <coverage type="line, %" value="100% (5/5)"/>
-
-          <class name="HttpRequestWriter">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (2/2)"/>
-            <coverage type="block, %" value="100% (20/20)"/>
-            <coverage type="line, %" value="100% (5/5)"/>
-
-            <method name="HttpRequestWriter (SessionOutputBuffer, LineFormatter, HttpParams): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (6/6)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="writeHeadLine (HttpRequest): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (14/14)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
-            </method>
-          </class>
-        </srcfile>
-      </package>
       <package name="org.apache.commons.logging.impl">
         <coverage type="class, %" value="100% (7/7)"/>
         <coverage type="method, %" value="44%  (38/86)"/>
@@ -20029,6 +19326,709 @@
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (4/4)"/>
               <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+      </package>
+      <package name="org.apache.http.impl.io">
+        <coverage type="class, %" value="64%  (9/14)"/>
+        <coverage type="method, %" value="35%  (35/100)"/>
+        <coverage type="block, %" value="31%  (796/2606)"/>
+        <coverage type="line, %" value="32%  (219.1/682)"/>
+
+        <srcfile name="ChunkedInputStream.java">
+          <coverage type="class, %" value="0%   (0/1)"/>
+          <coverage type="method, %" value="0%   (0/10)"/>
+          <coverage type="block, %" value="0%   (0/357)"/>
+          <coverage type="line, %" value="0%   (0/92)"/>
+
+          <class name="ChunkedInputStream">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/10)"/>
+            <coverage type="block, %" value="0%   (0/357)"/>
+            <coverage type="line, %" value="0%   (0/92)"/>
+
+            <method name="ChunkedInputStream (SessionInputBuffer): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/35)"/>
+              <coverage type="line, %" value="0%   (0/11)"/>
+            </method>
+            <method name="available (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/19)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="close (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/31)"/>
+              <coverage type="line, %" value="0%   (0/8)"/>
+            </method>
+            <method name="getChunkSize (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/75)"/>
+              <coverage type="line, %" value="0%   (0/20)"/>
+            </method>
+            <method name="getFooters (): Header []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/5)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="nextChunk (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/27)"/>
+              <coverage type="line, %" value="0%   (0/9)"/>
+            </method>
+            <method name="parseTrailerHeaders (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/30)"/>
+              <coverage type="line, %" value="0%   (0/7)"/>
+            </method>
+            <method name="read (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/47)"/>
+              <coverage type="line, %" value="0%   (0/14)"/>
+            </method>
+            <method name="read (byte []): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="read (byte [], int, int): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/81)"/>
+              <coverage type="line, %" value="0%   (0/17)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="ChunkedOutputStream.java">
+          <coverage type="class, %" value="0%   (0/1)"/>
+          <coverage type="method, %" value="0%   (0/11)"/>
+          <coverage type="block, %" value="0%   (0/191)"/>
+          <coverage type="line, %" value="0%   (0/52)"/>
+
+          <class name="ChunkedOutputStream">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/11)"/>
+            <coverage type="block, %" value="0%   (0/191)"/>
+            <coverage type="line, %" value="0%   (0/52)"/>
+
+            <method name="ChunkedOutputStream (SessionOutputBuffer): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/5)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="ChunkedOutputStream (SessionOutputBuffer, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/19)"/>
+              <coverage type="line, %" value="0%   (0/7)"/>
+            </method>
+            <method name="close (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/12)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
+            </method>
+            <method name="finish (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/11)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
+            </method>
+            <method name="flush (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+            <method name="flushCache (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/25)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="flushCacheWithAppend (byte [], int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/30)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="write (byte []): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="write (byte [], int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/37)"/>
+              <coverage type="line, %" value="0%   (0/7)"/>
+            </method>
+            <method name="write (int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/30)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="writeClosingChunk (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/9)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="ContentLengthInputStream.java">
+          <coverage type="class, %" value="0%   (0/1)"/>
+          <coverage type="method, %" value="0%   (0/7)"/>
+          <coverage type="block, %" value="0%   (0/270)"/>
+          <coverage type="line, %" value="0%   (0/58)"/>
+
+          <class name="ContentLengthInputStream">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/7)"/>
+            <coverage type="block, %" value="0%   (0/270)"/>
+            <coverage type="line, %" value="0%   (0/58)"/>
+
+            <method name="ContentLengthInputStream (SessionInputBuffer, long): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/34)"/>
+              <coverage type="line, %" value="0%   (0/11)"/>
+            </method>
+            <method name="available (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/20)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="close (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/28)"/>
+              <coverage type="line, %" value="0%   (0/7)"/>
+            </method>
+            <method name="read (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/55)"/>
+              <coverage type="line, %" value="0%   (0/10)"/>
+            </method>
+            <method name="read (byte []): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="read (byte [], int, int): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/77)"/>
+              <coverage type="line, %" value="0%   (0/12)"/>
+            </method>
+            <method name="skip (long): long">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/49)"/>
+              <coverage type="line, %" value="0%   (0/13)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="ContentLengthOutputStream.java">
+          <coverage type="class, %" value="0%   (0/1)"/>
+          <coverage type="method, %" value="0%   (0/6)"/>
+          <coverage type="block, %" value="0%   (0/119)"/>
+          <coverage type="line, %" value="0%   (0/33)"/>
+
+          <class name="ContentLengthOutputStream">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/6)"/>
+            <coverage type="block, %" value="0%   (0/119)"/>
+            <coverage type="line, %" value="0%   (0/33)"/>
+
+            <method name="ContentLengthOutputStream (SessionOutputBuffer, long): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/31)"/>
+              <coverage type="line, %" value="0%   (0/10)"/>
+            </method>
+            <method name="close (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/10)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="flush (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="write (byte []): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="write (byte [], int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/42)"/>
+              <coverage type="line, %" value="0%   (0/9)"/>
+            </method>
+            <method name="write (int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/25)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="IdentityOutputStream.java">
+          <coverage type="class, %" value="0%   (0/1)"/>
+          <coverage type="method, %" value="0%   (0/6)"/>
+          <coverage type="block, %" value="0%   (0/65)"/>
+          <coverage type="line, %" value="0%   (0/22)"/>
+
+          <class name="IdentityOutputStream">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/6)"/>
+            <coverage type="block, %" value="0%   (0/65)"/>
+            <coverage type="line, %" value="0%   (0/22)"/>
+
+            <method name="IdentityOutputStream (SessionOutputBuffer): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/16)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="close (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/10)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="flush (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="write (byte []): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="write (byte [], int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/15)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="write (int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/13)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="SocketInputBuffer.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="50%  (2/4)"/>
+          <coverage type="block, %" value="39%  (33/84)"/>
+          <coverage type="line, %" value="42%  (10.8/26)"/>
+
+          <class name="SocketInputBuffer">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="50%  (2/4)"/>
+            <coverage type="block, %" value="39%  (33/84)"/>
+            <coverage type="line, %" value="42%  (10.8/26)"/>
+
+            <method name="isDataAvailable (int): boolean">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/36)"/>
+              <coverage type="line, %" value="0%   (0/11)"/>
+            </method>
+            <method name="isEof (): boolean">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="SocketInputBuffer (Socket, int, HttpParams): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="69%  (22/32)"/>
+              <coverage type="line, %" value="73%  (8/11)"/>
+            </method>
+            <method name="fillBuffer (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="85%  (11/13)"/>
+              <coverage type="line, %" value="95%  (2.8/3)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="IdentityInputStream.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="40%  (2/5)"/>
+          <coverage type="block, %" value="40%  (21/52)"/>
+          <coverage type="line, %" value="41%  (7/17)"/>
+
+          <class name="IdentityInputStream">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="40%  (2/5)"/>
+            <coverage type="block, %" value="40%  (21/52)"/>
+            <coverage type="line, %" value="41%  (7/17)"/>
+
+            <method name="available (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/11)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+            <method name="close (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="read (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/9)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+            <method name="IdentityInputStream (SessionInputBuffer): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="69%  (11/16)"/>
+              <coverage type="line, %" value="83%  (5/6)"/>
+            </method>
+            <method name="read (byte [], int, int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="83%  (10/12)"/>
+              <coverage type="line, %" value="67%  (2/3)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="AbstractSessionInputBuffer.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="55%  (11/20)"/>
+          <coverage type="block, %" value="43%  (288/665)"/>
+          <coverage type="line, %" value="46%  (73.3/161)"/>
+
+          <class name="AbstractSessionInputBuffer">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="55%  (11/20)"/>
+            <coverage type="block, %" value="43%  (288/665)"/>
+            <coverage type="line, %" value="46%  (73.3/161)"/>
+
+            <method name="appendDecoded (CharArrayBuffer, ByteBuffer): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/78)"/>
+              <coverage type="line, %" value="0%   (0/18)"/>
+            </method>
+            <method name="available (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="capacity (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="handleDecodingResult (CoderResult, CharArrayBuffer, ByteBuffer): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/29)"/>
+              <coverage type="line, %" value="0%   (0/8)"/>
+            </method>
+            <method name="length (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="lineFromLineBuffer (CharArrayBuffer): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/53)"/>
+              <coverage type="line, %" value="0%   (0/13)"/>
+            </method>
+            <method name="read (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/26)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="read (byte []): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/11)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+            <method name="readLine (): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/17)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
+            </method>
+            <method name="readLine (CharArrayBuffer): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="33%  (36/108)"/>
+              <coverage type="line, %" value="46%  (12.3/27)"/>
+            </method>
+            <method name="read (byte [], int, int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="56%  (49/87)"/>
+              <coverage type="line, %" value="52%  (11/21)"/>
+            </method>
+            <method name="lineFromReadBuffer (CharArrayBuffer, int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="77%  (36/47)"/>
+              <coverage type="line, %" value="80%  (8/10)"/>
+            </method>
+            <method name="init (InputStream, int, HttpParams): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="81%  (64/79)"/>
+              <coverage type="line, %" value="85%  (17/20)"/>
+            </method>
+            <method name="fillBuffer (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="82%  (49/60)"/>
+              <coverage type="line, %" value="86%  (12/14)"/>
+            </method>
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="AbstractSessionInputBuffer (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (15/15)"/>
+              <coverage type="line, %" value="100% (5/5)"/>
+            </method>
+            <method name="createTransportMetrics (): HttpTransportMetricsImpl">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getMetrics (): HttpTransportMetrics">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="hasBufferedData (): boolean">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (9/9)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="locateLF (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (19/19)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="AbstractSessionOutputBuffer.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="59%  (10/17)"/>
+          <coverage type="block, %" value="51%  (196/388)"/>
+          <coverage type="line, %" value="50%  (54/108)"/>
+
+          <class name="AbstractSessionOutputBuffer">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="59%  (10/17)"/>
+            <coverage type="block, %" value="51%  (196/388)"/>
+            <coverage type="line, %" value="50%  (54/108)"/>
+
+            <method name="available (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="capacity (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="handleEncodingResult (CoderResult): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/24)"/>
+              <coverage type="line, %" value="0%   (0/7)"/>
+            </method>
+            <method name="length (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="write (int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/11)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="writeEncoded (CharBuffer): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/64)"/>
+              <coverage type="line, %" value="0%   (0/17)"/>
+            </method>
+            <method name="writeLine (String): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/33)"/>
+              <coverage type="line, %" value="0%   (0/10)"/>
+            </method>
+            <method name="write (byte [], int, int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="63%  (29/46)"/>
+              <coverage type="line, %" value="55%  (6/11)"/>
+            </method>
+            <method name="init (OutputStream, int, HttpParams): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="76%  (48/63)"/>
+              <coverage type="line, %" value="81%  (13/16)"/>
+            </method>
+            <method name="writeLine (CharArrayBuffer): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="79%  (50/63)"/>
+              <coverage type="line, %" value="80%  (16/20)"/>
+            </method>
+            <method name="write (byte []): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="90%  (9/10)"/>
+              <coverage type="line, %" value="75%  (3/4)"/>
+            </method>
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (15/15)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="AbstractSessionOutputBuffer (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (9/9)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="createTransportMetrics (): HttpTransportMetricsImpl">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="flush (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="flushBuffer (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (23/23)"/>
+              <coverage type="line, %" value="100% (6/6)"/>
+            </method>
+            <method name="getMetrics (): HttpTransportMetrics">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="HttpTransportMetricsImpl.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="40%  (2/5)"/>
+          <coverage type="block, %" value="54%  (13/24)"/>
+          <coverage type="line, %" value="50%  (5/10)"/>
+
+          <class name="HttpTransportMetricsImpl">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="40%  (2/5)"/>
+            <coverage type="block, %" value="54%  (13/24)"/>
+            <coverage type="line, %" value="50%  (5/10)"/>
+
+            <method name="getBytesTransferred (): long">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="reset (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="setBytesTransferred (long): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="HttpTransportMetricsImpl (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="incrementBytesTransferred (long): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (7/7)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="AbstractMessageParser.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="75%  (3/4)"/>
+          <coverage type="block, %" value="56%  (157/281)"/>
+          <coverage type="line, %" value="60%  (43.1/72)"/>
+
+          <class name="AbstractMessageParser">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="75%  (3/4)"/>
+            <coverage type="block, %" value="56%  (157/281)"/>
+            <coverage type="line, %" value="60%  (43.1/72)"/>
+
+            <method name="parseHeaders (SessionInputBuffer, int, int, LineParser): Header []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/15)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="parseHeaders (SessionInputBuffer, int, int, LineParser, List): Header []">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="48%  (77/161)"/>
+              <coverage type="line, %" value="52%  (21.2/41)"/>
+            </method>
+            <method name="AbstractMessageParser (SessionInputBuffer, LineParser, HttpParams): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="74%  (35/47)"/>
+              <coverage type="line, %" value="83%  (9.9/12)"/>
+            </method>
+            <method name="parse (): HttpMessage">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="78%  (45/58)"/>
+              <coverage type="line, %" value="80%  (12/15)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="SocketOutputBuffer.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (1/1)"/>
+          <coverage type="block, %" value="62%  (16/26)"/>
+          <coverage type="line, %" value="67%  (6/9)"/>
+
+          <class name="SocketOutputBuffer">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (1/1)"/>
+            <coverage type="block, %" value="62%  (16/26)"/>
+            <coverage type="line, %" value="67%  (6/9)"/>
+
+            <method name="SocketOutputBuffer (Socket, int, HttpParams): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="62%  (16/26)"/>
+              <coverage type="line, %" value="67%  (6/9)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="AbstractMessageWriter.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (2/2)"/>
+          <coverage type="block, %" value="81%  (52/64)"/>
+          <coverage type="line, %" value="88%  (14.9/17)"/>
+
+          <class name="AbstractMessageWriter">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="81%  (52/64)"/>
+            <coverage type="line, %" value="88%  (14.9/17)"/>
+
+            <method name="AbstractMessageWriter (SessionOutputBuffer, LineFormatter, HttpParams): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="73%  (19/26)"/>
+              <coverage type="line, %" value="84%  (5.9/7)"/>
+            </method>
+            <method name="write (HttpMessage): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="87%  (33/38)"/>
+              <coverage type="line, %" value="90%  (9/10)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="HttpRequestWriter.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (2/2)"/>
+          <coverage type="block, %" value="100% (20/20)"/>
+          <coverage type="line, %" value="100% (5/5)"/>
+
+          <class name="HttpRequestWriter">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="100% (20/20)"/>
+            <coverage type="line, %" value="100% (5/5)"/>
+
+            <method name="HttpRequestWriter (SessionOutputBuffer, LineFormatter, HttpParams): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="writeHeadLine (HttpRequest): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (14/14)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
             </method>
           </class>
         </srcfile>
@@ -34962,6 +34962,379 @@
           </class>
         </srcfile>
       </package>
+      <package name="com.sleepycat.util">
+        <coverage type="class, %" value="100% (4/4)"/>
+        <coverage type="method, %" value="50%  (31/62)"/>
+        <coverage type="block, %" value="48%  (720/1504)"/>
+        <coverage type="line, %" value="51%  (165.6/326)"/>
+
+        <srcfile name="FastOutputStream.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="40%  (10/25)"/>
+          <coverage type="block, %" value="37%  (98/264)"/>
+          <coverage type="line, %" value="35%  (23.9/69)"/>
+
+          <class name="FastOutputStream">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="40%  (10/25)"/>
+            <coverage type="block, %" value="37%  (98/264)"/>
+            <coverage type="line, %" value="35%  (23.9/69)"/>
+
+            <method name="FastOutputStream (byte []): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/9)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="FastOutputStream (byte [], int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/9)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="FastOutputStream (int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+            <method name="FastOutputStream (int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+            <method name="reset (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="size (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="toByteArray (): byte []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/19)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
+            </method>
+            <method name="toString (): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/9)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="toString (String): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/10)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="write (byte []): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="write (byte [], int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="write (int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="writeFast (byte []): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/32)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="writeFast (byte [], int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/29)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="writeTo (OutputStream): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/8)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="writeFast (int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="88%  (21/24)"/>
+              <coverage type="line, %" value="75%  (3/4)"/>
+            </method>
+            <method name="bump (int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="90%  (28/31)"/>
+              <coverage type="line, %" value="98%  (4.9/5)"/>
+            </method>
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="FastOutputStream (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (7/7)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="addSize (int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (7/7)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="getBufferBytes (): byte []">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getBufferLength (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getBufferOffset (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (2/2)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="initBuffer (int, int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (8/8)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="makeSpace (int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (15/15)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="FastInputStream.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="29%  (5/17)"/>
+          <coverage type="block, %" value="40%  (62/154)"/>
+          <coverage type="line, %" value="34%  (13/38)"/>
+
+          <class name="FastInputStream">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="29%  (5/17)"/>
+            <coverage type="block, %" value="40%  (62/154)"/>
+            <coverage type="line, %" value="34%  (13/38)"/>
+
+            <method name="FastInputStream (byte []): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/10)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="getBufferBytes (): byte []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="getBufferLength (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="getBufferOffset (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="mark (int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/5)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="markSupported (): boolean">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/2)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="read (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="read (byte []): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="read (byte [], int, int): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="readFast (byte []): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="readFast (byte [], int, int): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/31)"/>
+              <coverage type="line, %" value="0%   (0/8)"/>
+            </method>
+            <method name="reset (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/5)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="skip (long): long">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="73%  (16/22)"/>
+              <coverage type="line, %" value="80%  (4/5)"/>
+            </method>
+            <method name="readFast (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="95%  (19/20)"/>
+              <coverage type="line, %" value="95%  (1/1)"/>
+            </method>
+            <method name="FastInputStream (byte [], int, int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (14/14)"/>
+              <coverage type="line, %" value="100% (5/5)"/>
+            </method>
+            <method name="available (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="skipFast (int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (7/7)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="UtfOps.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="73%  (8/11)"/>
+          <coverage type="block, %" value="46%  (162/354)"/>
+          <coverage type="line, %" value="54%  (39.2/73)"/>
+
+          <class name="UtfOps">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="73%  (8/11)"/>
+            <coverage type="block, %" value="46%  (162/354)"/>
+            <coverage type="line, %" value="54%  (39.2/73)"/>
+
+            <method name="UtfOps (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="getCharLength (byte []): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="stringToBytes (String): byte []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/21)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
+            </method>
+            <method name="bytesToChars (byte [], int, char [], int, int, boolean): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="30%  (35/117)"/>
+              <coverage type="line, %" value="35%  (6.7/19)"/>
+            </method>
+            <method name="charsToBytes (char [], int, byte [], int, int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="31%  (29/93)"/>
+              <coverage type="line, %" value="50%  (6/12)"/>
+            </method>
+            <method name="getCharLength (byte [], int, int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="74%  (23/31)"/>
+              <coverage type="line, %" value="62%  (8/13)"/>
+            </method>
+            <method name="getByteLength (char [], int, int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="82%  (27/33)"/>
+              <coverage type="line, %" value="70%  (7/10)"/>
+            </method>
+            <method name="bytesToString (byte [], int, int): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="93%  (25/27)"/>
+              <coverage type="line, %" value="90%  (4.5/5)"/>
+            </method>
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="getByteLength (char []): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getZeroTerminatedByteLength (byte [], int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (11/11)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="PackedInteger.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="89%  (8/9)"/>
+          <coverage type="block, %" value="54%  (398/732)"/>
+          <coverage type="line, %" value="61%  (89.5/146)"/>
+
+          <class name="PackedInteger">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="89%  (8/9)"/>
+            <coverage type="block, %" value="54%  (398/732)"/>
+            <coverage type="line, %" value="61%  (89.5/146)"/>
+
+            <method name="PackedInteger (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="readInt (byte [], int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="15%  (13/88)"/>
+              <coverage type="line, %" value="25%  (4/16)"/>
+            </method>
+            <method name="readLong (byte [], int): long">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="25%  (38/153)"/>
+              <coverage type="line, %" value="36%  (8.5/24)"/>
+            </method>
+            <method name="writeLong (byte [], int, long): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="61%  (139/227)"/>
+              <coverage type="line, %" value="62%  (25.4/41)"/>
+            </method>
+            <method name="getReadIntLength (byte [], int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="72%  (18/25)"/>
+              <coverage type="line, %" value="83%  (5/6)"/>
+            </method>
+            <method name="getWriteLongLength (long): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="72%  (57/79)"/>
+              <coverage type="line, %" value="65%  (13/20)"/>
+            </method>
+            <method name="writeInt (byte [], int, int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="81%  (92/114)"/>
+              <coverage type="line, %" value="86%  (21.6/25)"/>
+            </method>
+            <method name="getWriteIntLength (int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="95%  (37/39)"/>
+              <coverage type="line, %" value="92%  (11/12)"/>
+            </method>
+            <method name="getReadLongLength (byte [], int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+      </package>
       <package name="org.apache.http.impl.conn">
         <coverage type="class, %" value="93%  (14/15)"/>
         <coverage type="method, %" value="55%  (80/146)"/>
@@ -35895,6 +36268,291 @@
           </class>
         </srcfile>
       </package>
+      <package name="edu.uci.ics.crawler4j.url">
+        <coverage type="class, %" value="100% (5/5)"/>
+        <coverage type="method, %" value="77%  (33/43)"/>
+        <coverage type="block, %" value="51%  (615/1213)"/>
+        <coverage type="line, %" value="54%  (157.1/293)"/>
+
+        <srcfile name="URLCanonicalizer.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="57%  (4/7)"/>
+          <coverage type="block, %" value="38%  (126/334)"/>
+          <coverage type="line, %" value="40%  (28.2/71)"/>
+
+          <class name="URLCanonicalizer">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="57%  (4/7)"/>
+            <coverage type="block, %" value="38%  (126/334)"/>
+            <coverage type="line, %" value="40%  (28.2/71)"/>
+
+            <method name="URLCanonicalizer (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="canonicalize (SortedMap): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/75)"/>
+              <coverage type="line, %" value="0%   (0/14)"/>
+            </method>
+            <method name="percentEncodeRfc3986 (String): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/27)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="createParameterMap (String): SortedMap">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="5%   (4/80)"/>
+              <coverage type="line, %" value="9%   (1.4/16)"/>
+            </method>
+            <method name="getCanonicalURL (String, String): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="80%  (110/137)"/>
+              <coverage type="line, %" value="77%  (24.8/32)"/>
+            </method>
+            <method name="getCanonicalURL (String): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="normalizePath (String): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (8/8)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="UrlResolver.java">
+          <coverage type="class, %" value="100% (2/2)"/>
+          <coverage type="method, %" value="70%  (7/10)"/>
+          <coverage type="block, %" value="45%  (254/568)"/>
+          <coverage type="line, %" value="48%  (71.4/148)"/>
+
+          <class name="UrlResolver">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="71%  (5/7)"/>
+            <coverage type="block, %" value="42%  (194/463)"/>
+            <coverage type="line, %" value="46%  (54.4/119)"/>
+
+            <method name="UrlResolver (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="removeLeadingSlashPoints (String): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/11)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+            <method name="resolveUrl (UrlResolver$Url, String): UrlResolver$Url">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="6%   (13/211)"/>
+              <coverage type="line, %" value="10%  (5/51)"/>
+            </method>
+            <method name="resolveUrl (String, String): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="58%  (14/24)"/>
+              <coverage type="line, %" value="67%  (4/6)"/>
+            </method>
+            <method name="isValidScheme (String): boolean">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="66%  (29/44)"/>
+              <coverage type="line, %" value="68%  (7.4/11)"/>
+            </method>
+            <method name="parseUrl (String): UrlResolver$Url">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="79%  (122/154)"/>
+              <coverage type="line, %" value="79%  (34/43)"/>
+            </method>
+            <method name="indexOf (String, char, int, int): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (16/16)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+          <class name="UrlResolver$Url">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="67%  (2/3)"/>
+            <coverage type="block, %" value="57%  (60/105)"/>
+            <coverage type="line, %" value="59%  (17/29)"/>
+
+            <method name="UrlResolver$Url (UrlResolver$Url): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/27)"/>
+              <coverage type="line, %" value="0%   (0/8)"/>
+            </method>
+            <method name="toString (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="76%  (57/75)"/>
+              <coverage type="line, %" value="79%  (15/19)"/>
+            </method>
+            <method name="UrlResolver$Url (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="WebURL.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="82%  (18/22)"/>
+          <coverage type="block, %" value="72%  (171/239)"/>
+          <coverage type="line, %" value="76%  (41/54)"/>
+
+          <class name="WebURL">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="82%  (18/22)"/>
+            <coverage type="block, %" value="72%  (171/239)"/>
+            <coverage type="line, %" value="76%  (41/54)"/>
+
+            <method name="equals (Object): boolean">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/30)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="hashCode (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="setPath (String): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="toString (): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="setURL (String): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="81%  (114/141)"/>
+              <coverage type="line, %" value="86%  (18/21)"/>
+            </method>
+            <method name="WebURL (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getAnchor (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getDepth (): short">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getDocid (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getDomain (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getParentDocid (): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getParentUrl (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getPath (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getPriority (): byte">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getSubDomain (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getURL (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="setAnchor (String): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="setDepth (short): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="setDocid (int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="setParentDocid (int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="setParentUrl (String): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="setPriority (byte): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="TLDList.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (4/4)"/>
+          <coverage type="block, %" value="89%  (64/72)"/>
+          <coverage type="line, %" value="82%  (16.5/20)"/>
+
+          <class name="TLDList">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (4/4)"/>
+            <coverage type="block, %" value="89%  (64/72)"/>
+            <coverage type="line, %" value="82%  (16.5/20)"/>
+
+            <method name="TLDList (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="87%  (52/60)"/>
+              <coverage type="line, %" value="79%  (13.5/17)"/>
+            </method>
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (5/5)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="contains (String): boolean">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (5/5)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getInstance (): TLDList">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (2/2)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+      </package>
       <package name="edu.uci.ics.crawler4j.robotstxt">
         <coverage type="class, %" value="100% (4/4)"/>
         <coverage type="method, %" value="60%  (12/20)"/>
@@ -36326,291 +36984,6 @@
             <method name="getCharset (): Charset">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-          </class>
-        </srcfile>
-      </package>
-      <package name="edu.uci.ics.crawler4j.url">
-        <coverage type="class, %" value="100% (5/5)"/>
-        <coverage type="method, %" value="77%  (33/43)"/>
-        <coverage type="block, %" value="53%  (638/1213)"/>
-        <coverage type="line, %" value="55%  (162.1/293)"/>
-
-        <srcfile name="URLCanonicalizer.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="57%  (4/7)"/>
-          <coverage type="block, %" value="38%  (126/334)"/>
-          <coverage type="line, %" value="40%  (28.2/71)"/>
-
-          <class name="URLCanonicalizer">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="57%  (4/7)"/>
-            <coverage type="block, %" value="38%  (126/334)"/>
-            <coverage type="line, %" value="40%  (28.2/71)"/>
-
-            <method name="URLCanonicalizer (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="canonicalize (SortedMap): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/75)"/>
-              <coverage type="line, %" value="0%   (0/14)"/>
-            </method>
-            <method name="percentEncodeRfc3986 (String): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/27)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="createParameterMap (String): SortedMap">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="5%   (4/80)"/>
-              <coverage type="line, %" value="9%   (1.4/16)"/>
-            </method>
-            <method name="getCanonicalURL (String, String): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="80%  (110/137)"/>
-              <coverage type="line, %" value="77%  (24.8/32)"/>
-            </method>
-            <method name="getCanonicalURL (String): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="normalizePath (String): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (8/8)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="UrlResolver.java">
-          <coverage type="class, %" value="100% (2/2)"/>
-          <coverage type="method, %" value="70%  (7/10)"/>
-          <coverage type="block, %" value="49%  (277/568)"/>
-          <coverage type="line, %" value="52%  (76.4/148)"/>
-
-          <class name="UrlResolver">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="71%  (5/7)"/>
-            <coverage type="block, %" value="45%  (208/463)"/>
-            <coverage type="line, %" value="48%  (57.4/119)"/>
-
-            <method name="UrlResolver (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="removeLeadingSlashPoints (String): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/11)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-            <method name="resolveUrl (UrlResolver$Url, String): UrlResolver$Url">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="6%   (13/211)"/>
-              <coverage type="line, %" value="10%  (5/51)"/>
-            </method>
-            <method name="resolveUrl (String, String): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="58%  (14/24)"/>
-              <coverage type="line, %" value="67%  (4/6)"/>
-            </method>
-            <method name="isValidScheme (String): boolean">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="66%  (29/44)"/>
-              <coverage type="line, %" value="68%  (7.4/11)"/>
-            </method>
-            <method name="parseUrl (String): UrlResolver$Url">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="88%  (136/154)"/>
-              <coverage type="line, %" value="86%  (37/43)"/>
-            </method>
-            <method name="indexOf (String, char, int, int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (16/16)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
-            </method>
-          </class>
-          <class name="UrlResolver$Url">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="67%  (2/3)"/>
-            <coverage type="block, %" value="66%  (69/105)"/>
-            <coverage type="line, %" value="66%  (19/29)"/>
-
-            <method name="UrlResolver$Url (UrlResolver$Url): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/27)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
-            </method>
-            <method name="toString (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="88%  (66/75)"/>
-              <coverage type="line, %" value="89%  (17/19)"/>
-            </method>
-            <method name="UrlResolver$Url (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="WebURL.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="82%  (18/22)"/>
-          <coverage type="block, %" value="72%  (171/239)"/>
-          <coverage type="line, %" value="76%  (41/54)"/>
-
-          <class name="WebURL">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="82%  (18/22)"/>
-            <coverage type="block, %" value="72%  (171/239)"/>
-            <coverage type="line, %" value="76%  (41/54)"/>
-
-            <method name="equals (Object): boolean">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/30)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="hashCode (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="setPath (String): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="toString (): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="setURL (String): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="81%  (114/141)"/>
-              <coverage type="line, %" value="86%  (18/21)"/>
-            </method>
-            <method name="WebURL (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getAnchor (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getDepth (): short">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getDocid (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getDomain (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getParentDocid (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getParentUrl (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getPath (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getPriority (): byte">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getSubDomain (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getURL (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="setAnchor (String): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="setDepth (short): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="setDocid (int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="setParentDocid (int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="setParentUrl (String): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="setPriority (byte): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="TLDList.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="100% (4/4)"/>
-          <coverage type="block, %" value="89%  (64/72)"/>
-          <coverage type="line, %" value="82%  (16.5/20)"/>
-
-          <class name="TLDList">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (4/4)"/>
-            <coverage type="block, %" value="89%  (64/72)"/>
-            <coverage type="line, %" value="82%  (16.5/20)"/>
-
-            <method name="TLDList (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="87%  (52/60)"/>
-              <coverage type="line, %" value="79%  (13.5/17)"/>
-            </method>
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (5/5)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="contains (String): boolean">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (5/5)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getInstance (): TLDList">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (2/2)"/>
               <coverage type="line, %" value="100% (1/1)"/>
             </method>
           </class>
@@ -37888,379 +38261,6 @@
           </class>
         </srcfile>
       </package>
-      <package name="com.sleepycat.util">
-        <coverage type="class, %" value="100% (4/4)"/>
-        <coverage type="method, %" value="50%  (31/62)"/>
-        <coverage type="block, %" value="58%  (865/1504)"/>
-        <coverage type="line, %" value="58%  (188.6/326)"/>
-
-        <srcfile name="FastOutputStream.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="40%  (10/25)"/>
-          <coverage type="block, %" value="38%  (101/264)"/>
-          <coverage type="line, %" value="36%  (24.9/69)"/>
-
-          <class name="FastOutputStream">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="40%  (10/25)"/>
-            <coverage type="block, %" value="38%  (101/264)"/>
-            <coverage type="line, %" value="36%  (24.9/69)"/>
-
-            <method name="FastOutputStream (byte []): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/9)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="FastOutputStream (byte [], int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/9)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="FastOutputStream (int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-            <method name="FastOutputStream (int, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-            <method name="reset (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="size (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="toByteArray (): byte []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/19)"/>
-              <coverage type="line, %" value="0%   (0/5)"/>
-            </method>
-            <method name="toString (): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/9)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="toString (String): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/10)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="write (byte []): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="write (byte [], int, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/6)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="write (int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="writeFast (byte []): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/32)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="writeFast (byte [], int, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/29)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="writeTo (OutputStream): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/8)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="bump (int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="90%  (28/31)"/>
-              <coverage type="line, %" value="98%  (4.9/5)"/>
-            </method>
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="FastOutputStream (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (7/7)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
-            </method>
-            <method name="addSize (int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (7/7)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="getBufferBytes (): byte []">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getBufferLength (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getBufferOffset (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (2/2)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="initBuffer (int, int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (8/8)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
-            </method>
-            <method name="makeSpace (int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (15/15)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
-            </method>
-            <method name="writeFast (int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (24/24)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="FastInputStream.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="29%  (5/17)"/>
-          <coverage type="block, %" value="40%  (62/154)"/>
-          <coverage type="line, %" value="34%  (13/38)"/>
-
-          <class name="FastInputStream">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="29%  (5/17)"/>
-            <coverage type="block, %" value="40%  (62/154)"/>
-            <coverage type="line, %" value="34%  (13/38)"/>
-
-            <method name="FastInputStream (byte []): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/10)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="getBufferBytes (): byte []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="getBufferLength (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="getBufferOffset (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="mark (int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/5)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="markSupported (): boolean">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/2)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="read (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="read (byte []): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="read (byte [], int, int): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/6)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="readFast (byte []): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="readFast (byte [], int, int): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/31)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
-            </method>
-            <method name="reset (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/5)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="skip (long): long">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="73%  (16/22)"/>
-              <coverage type="line, %" value="80%  (4/5)"/>
-            </method>
-            <method name="readFast (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="95%  (19/20)"/>
-              <coverage type="line, %" value="95%  (1/1)"/>
-            </method>
-            <method name="FastInputStream (byte [], int, int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (14/14)"/>
-              <coverage type="line, %" value="100% (5/5)"/>
-            </method>
-            <method name="available (): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (6/6)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="skipFast (int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (7/7)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="PackedInteger.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="89%  (8/9)"/>
-          <coverage type="block, %" value="54%  (398/732)"/>
-          <coverage type="line, %" value="61%  (89.5/146)"/>
-
-          <class name="PackedInteger">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="89%  (8/9)"/>
-            <coverage type="block, %" value="54%  (398/732)"/>
-            <coverage type="line, %" value="61%  (89.5/146)"/>
-
-            <method name="PackedInteger (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="readInt (byte [], int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="15%  (13/88)"/>
-              <coverage type="line, %" value="25%  (4/16)"/>
-            </method>
-            <method name="readLong (byte [], int): long">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="25%  (38/153)"/>
-              <coverage type="line, %" value="36%  (8.5/24)"/>
-            </method>
-            <method name="writeLong (byte [], int, long): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="61%  (139/227)"/>
-              <coverage type="line, %" value="62%  (25.4/41)"/>
-            </method>
-            <method name="getReadIntLength (byte [], int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="72%  (18/25)"/>
-              <coverage type="line, %" value="83%  (5/6)"/>
-            </method>
-            <method name="getWriteLongLength (long): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="72%  (57/79)"/>
-              <coverage type="line, %" value="65%  (13/20)"/>
-            </method>
-            <method name="writeInt (byte [], int, int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="81%  (92/114)"/>
-              <coverage type="line, %" value="86%  (21.6/25)"/>
-            </method>
-            <method name="getWriteIntLength (int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="95%  (37/39)"/>
-              <coverage type="line, %" value="92%  (11/12)"/>
-            </method>
-            <method name="getReadLongLength (byte [], int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="UtfOps.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="73%  (8/11)"/>
-          <coverage type="block, %" value="86%  (304/354)"/>
-          <coverage type="line, %" value="84%  (61.2/73)"/>
-
-          <class name="UtfOps">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="73%  (8/11)"/>
-            <coverage type="block, %" value="86%  (304/354)"/>
-            <coverage type="line, %" value="84%  (61.2/73)"/>
-
-            <method name="UtfOps (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="getCharLength (byte []): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/6)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="stringToBytes (String): byte []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/21)"/>
-              <coverage type="line, %" value="0%   (0/5)"/>
-            </method>
-            <method name="getCharLength (byte [], int, int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="87%  (27/31)"/>
-              <coverage type="line, %" value="92%  (12/13)"/>
-            </method>
-            <method name="bytesToChars (byte [], int, char [], int, int, boolean): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="88%  (103/117)"/>
-              <coverage type="line, %" value="83%  (15.7/19)"/>
-            </method>
-            <method name="bytesToString (byte [], int, int): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="93%  (25/27)"/>
-              <coverage type="line, %" value="90%  (4.5/5)"/>
-            </method>
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (6/6)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="charsToBytes (char [], int, byte [], int, int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (93/93)"/>
-              <coverage type="line, %" value="100% (12/12)"/>
-            </method>
-            <method name="getByteLength (char []): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (6/6)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getByteLength (char [], int, int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (33/33)"/>
-              <coverage type="line, %" value="100% (10/10)"/>
-            </method>
-            <method name="getZeroTerminatedByteLength (byte [], int): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (11/11)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
-            </method>
-          </class>
-        </srcfile>
-      </package>
       <package name="edu.uci.ics.crawler4j.frontier">
         <coverage type="class, %" value="100% (5/5)"/>
         <coverage type="method, %" value="88%  (35/40)"/>
@@ -39199,8 +39199,8 @@
       <package name="org.apache.tika.sax">
         <coverage type="class, %" value="100% (6/6)"/>
         <coverage type="method, %" value="77%  (44/57)"/>
-        <coverage type="block, %" value="74%  (776/1054)"/>
-        <coverage type="line, %" value="67%  (161.3/239)"/>
+        <coverage type="block, %" value="73%  (768/1054)"/>
+        <coverage type="line, %" value="67%  (159.6/239)"/>
 
         <srcfile name="ContentHandlerDecorator.java">
           <coverage type="class, %" value="100% (1/1)"/>
@@ -39301,61 +39301,17 @@
             </method>
           </class>
         </srcfile>
-        <srcfile name="TextContentHandler.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="67%  (4/6)"/>
-          <coverage type="block, %" value="66%  (21/32)"/>
-          <coverage type="line, %" value="75%  (9/12)"/>
-
-          <class name="TextContentHandler">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="67%  (4/6)"/>
-            <coverage type="block, %" value="66%  (21/32)"/>
-            <coverage type="line, %" value="75%  (9/12)"/>
-
-            <method name="ignorableWhitespace (char [], int, int): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="toString (): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="TextContentHandler (ContentHandler): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (6/6)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
-            </method>
-            <method name="characters (char [], int, int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (7/7)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="endDocument (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-            <method name="startDocument (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-          </class>
-        </srcfile>
         <srcfile name="SafeContentHandler.java">
           <coverage type="class, %" value="100% (3/3)"/>
           <coverage type="method, %" value="94%  (16/17)"/>
-          <coverage type="block, %" value="67%  (194/291)"/>
-          <coverage type="line, %" value="70%  (45/64)"/>
+          <coverage type="block, %" value="64%  (186/291)"/>
+          <coverage type="line, %" value="68%  (43.3/64)"/>
 
           <class name="SafeContentHandler">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="92%  (12/13)"/>
-            <coverage type="block, %" value="63%  (168/265)"/>
-            <coverage type="line, %" value="68%  (41/60)"/>
+            <coverage type="block, %" value="60%  (160/265)"/>
+            <coverage type="line, %" value="66%  (39.3/60)"/>
 
             <method name="writeReplacement (SafeContentHandler$Output): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -39369,8 +39325,8 @@
             </method>
             <method name="isInvalid (int): boolean">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="63%  (27/43)"/>
-              <coverage type="line, %" value="72%  (5/7)"/>
+              <coverage type="block, %" value="44%  (19/43)"/>
+              <coverage type="line, %" value="47%  (3.3/7)"/>
             </method>
             <method name="filter (char [], int, int, SafeContentHandler$Output): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -39454,6 +39410,50 @@
             <method name="write (char [], int, int): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (7/7)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="TextContentHandler.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="67%  (4/6)"/>
+          <coverage type="block, %" value="66%  (21/32)"/>
+          <coverage type="line, %" value="75%  (9/12)"/>
+
+          <class name="TextContentHandler">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="67%  (4/6)"/>
+            <coverage type="block, %" value="66%  (21/32)"/>
+            <coverage type="line, %" value="75%  (9/12)"/>
+
+            <method name="ignorableWhitespace (char [], int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="toString (): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="TextContentHandler (ContentHandler): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="characters (char [], int, int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (7/7)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="endDocument (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="startDocument (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (4/4)"/>
               <coverage type="line, %" value="100% (2/2)"/>
             </method>
           </class>
@@ -39561,20 +39561,20 @@
       <package name="org.apache.tika.parser.html">
         <coverage type="class, %" value="100% (8/8)"/>
         <coverage type="method, %" value="92%  (36/39)"/>
-        <coverage type="block, %" value="75%  (1289/1712)"/>
-        <coverage type="line, %" value="72%  (197.7/275)"/>
+        <coverage type="block, %" value="75%  (1282/1712)"/>
+        <coverage type="line, %" value="71%  (194.7/275)"/>
 
         <srcfile name="HtmlHandler.java">
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="82%  (9/11)"/>
-          <coverage type="block, %" value="49%  (315/643)"/>
-          <coverage type="line, %" value="54%  (67.7/125)"/>
+          <coverage type="block, %" value="48%  (310/643)"/>
+          <coverage type="line, %" value="53%  (65.7/125)"/>
 
           <class name="HtmlHandler">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="82%  (9/11)"/>
-            <coverage type="block, %" value="49%  (315/643)"/>
-            <coverage type="line, %" value="54%  (67.7/125)"/>
+            <coverage type="block, %" value="48%  (310/643)"/>
+            <coverage type="line, %" value="53%  (65.7/125)"/>
 
             <method name="addHtmlMetadata (String, String): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -39591,15 +39591,15 @@
               <coverage type="block, %" value="13%  (11/85)"/>
               <coverage type="line, %" value="30%  (3.3/11)"/>
             </method>
+            <method name="startElementWithSafeAttributes (String, Attributes): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="51%  (67/132)"/>
+              <coverage type="line, %" value="53%  (15/28)"/>
+            </method>
             <method name="startElement (String, String, String, Attributes): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="54%  (78/144)"/>
               <coverage type="line, %" value="56%  (14/25)"/>
-            </method>
-            <method name="startElementWithSafeAttributes (String, Attributes): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="55%  (72/132)"/>
-              <coverage type="line, %" value="61%  (17/28)"/>
             </method>
             <method name="characters (char [], int, int): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -39722,15 +39722,20 @@
         <srcfile name="DefaultHtmlMapper.java">
           <coverage type="class, %" value="100% (4/4)"/>
           <coverage type="method, %" value="100% (10/10)"/>
-          <coverage type="block, %" value="100% (672/672)"/>
-          <coverage type="line, %" value="100% (68/68)"/>
+          <coverage type="block, %" value="100% (670/672)"/>
+          <coverage type="line, %" value="99%  (67/68)"/>
 
           <class name="DefaultHtmlMapper">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="100% (7/7)"/>
-            <coverage type="block, %" value="100% (73/73)"/>
-            <coverage type="line, %" value="100% (15/15)"/>
+            <coverage type="block, %" value="97%  (71/73)"/>
+            <coverage type="line, %" value="93%  (14/15)"/>
 
+            <method name="mapSafeAttribute (String, String): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="87%  (13/15)"/>
+              <coverage type="line, %" value="75%  (3/4)"/>
+            </method>
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (17/17)"/>
@@ -39755,11 +39760,6 @@
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (4/4)"/>
               <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="mapSafeAttribute (String, String): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (15/15)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
             </method>
             <method name="mapSafeElement (String): String">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -39846,22 +39846,27 @@
       </package>
       <package name="org.ccil.cowan.tagsoup">
         <coverage type="class, %" value="100% (8/8)"/>
-        <coverage type="method, %" value="59%  (89/151)"/>
-        <coverage type="block, %" value="88%  (17915/20359)"/>
-        <coverage type="line, %" value="87%  (3405.7/3904)"/>
+        <coverage type="method, %" value="57%  (86/151)"/>
+        <coverage type="block, %" value="87%  (17801/20359)"/>
+        <coverage type="line, %" value="87%  (3381.9/3904)"/>
 
         <srcfile name="Parser.java">
           <coverage type="class, %" value="100% (2/2)"/>
-          <coverage type="method, %" value="47%  (28/60)"/>
-          <coverage type="block, %" value="46%  (1076/2318)"/>
-          <coverage type="line, %" value="50%  (252.7/503)"/>
+          <coverage type="method, %" value="45%  (27/60)"/>
+          <coverage type="block, %" value="44%  (1021/2318)"/>
+          <coverage type="line, %" value="48%  (240.7/503)"/>
 
           <class name="Parser">
             <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="47%  (27/58)"/>
-            <coverage type="block, %" value="46%  (1070/2307)"/>
-            <coverage type="line, %" value="50%  (252.7/502)"/>
+            <coverage type="method, %" value="45%  (26/58)"/>
+            <coverage type="block, %" value="44%  (1015/2307)"/>
+            <coverage type="line, %" value="48%  (240.7/502)"/>
 
+            <method name="adup (char [], int, int): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/19)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
             <method name="cdsect (char [], int, int): void">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/12)"/>
@@ -40054,8 +40059,13 @@
             </method>
             <method name="makeName (char [], int, int): String">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="62%  (61/99)"/>
-              <coverage type="line, %" value="62%  (12.4/20)"/>
+              <coverage type="block, %" value="46%  (46/99)"/>
+              <coverage type="line, %" value="52%  (10.4/20)"/>
+            </method>
+            <method name="rectify (Element): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="51%  (42/82)"/>
+              <coverage type="line, %" value="56%  (12.2/22)"/>
             </method>
             <method name="getReader (InputSource): Reader">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -40092,11 +40102,6 @@
               <coverage type="block, %" value="76%  (87/114)"/>
               <coverage type="line, %" value="79%  (19.8/25)"/>
             </method>
-            <method name="rectify (Element): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="78%  (64/82)"/>
-              <coverage type="line, %" value="84%  (18.5/22)"/>
-            </method>
             <method name="pop (): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="84%  (67/80)"/>
@@ -40121,11 +40126,6 @@
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="93%  (70/75)"/>
               <coverage type="line, %" value="96%  (13.4/14)"/>
-            </method>
-            <method name="adup (char [], int, int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="95%  (18/19)"/>
-              <coverage type="line, %" value="96%  (3.8/4)"/>
             </method>
             <method name="aval (char [], int, int): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -40317,17 +40317,22 @@
         </srcfile>
         <srcfile name="ElementType.java">
           <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="75%  (15/20)"/>
-          <coverage type="block, %" value="56%  (152/272)"/>
-          <coverage type="line, %" value="58%  (38/65)"/>
+          <coverage type="method, %" value="70%  (14/20)"/>
+          <coverage type="block, %" value="54%  (148/272)"/>
+          <coverage type="line, %" value="57%  (36.9/65)"/>
 
           <class name="ElementType">
             <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="75%  (15/20)"/>
-            <coverage type="block, %" value="56%  (152/272)"/>
-            <coverage type="line, %" value="58%  (38/65)"/>
+            <coverage type="method, %" value="70%  (14/20)"/>
+            <coverage type="block, %" value="54%  (148/272)"/>
+            <coverage type="line, %" value="57%  (36.9/65)"/>
 
             <method name="memberOf (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="parent (): ElementType">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/3)"/>
               <coverage type="line, %" value="0%   (0/1)"/>
@@ -40372,6 +40377,11 @@
               <coverage type="block, %" value="68%  (47/69)"/>
               <coverage type="line, %" value="71%  (10/14)"/>
             </method>
+            <method name="canContain (ElementType): boolean">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="90%  (9/10)"/>
+              <coverage type="line, %" value="90%  (0.9/1)"/>
+            </method>
             <method name="ElementType (String, int, int, int, Schema): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (34/34)"/>
@@ -40380,11 +40390,6 @@
             <method name="atts (): AttributesImpl">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="canContain (ElementType): boolean">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (10/10)"/>
               <coverage type="line, %" value="100% (1/1)"/>
             </method>
             <method name="flags (): int">
@@ -40408,11 +40413,6 @@
               <coverage type="line, %" value="100% (1/1)"/>
             </method>
             <method name="namespace (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="parent (): ElementType">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (3/3)"/>
               <coverage type="line, %" value="100% (1/1)"/>
@@ -40505,15 +40505,15 @@
         </srcfile>
         <srcfile name="Element.java">
           <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="78%  (14/18)"/>
-          <coverage type="block, %" value="70%  (105/150)"/>
-          <coverage type="line, %" value="74%  (25/34)"/>
+          <coverage type="method, %" value="72%  (13/18)"/>
+          <coverage type="block, %" value="67%  (101/150)"/>
+          <coverage type="line, %" value="71%  (24/34)"/>
 
           <class name="Element">
             <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="78%  (14/18)"/>
-            <coverage type="block, %" value="70%  (105/150)"/>
-            <coverage type="line, %" value="74%  (25/34)"/>
+            <coverage type="method, %" value="72%  (13/18)"/>
+            <coverage type="block, %" value="67%  (101/150)"/>
+            <coverage type="line, %" value="71%  (24/34)"/>
 
             <method name="anonymize (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -40521,6 +40521,11 @@
               <coverage type="line, %" value="0%   (0/4)"/>
             </method>
             <method name="memberOf (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="parent (): ElementType">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/4)"/>
               <coverage type="line, %" value="0%   (0/1)"/>
@@ -40590,11 +40595,6 @@
               <coverage type="block, %" value="100% (3/3)"/>
               <coverage type="line, %" value="100% (1/1)"/>
             </method>
-            <method name="parent (): ElementType">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (4/4)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
             <method name="setAttribute (String, String, String): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (9/9)"/>
@@ -40610,14 +40610,14 @@
         <srcfile name="HTMLScanner.java">
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="50%  (7/14)"/>
-          <coverage type="block, %" value="84%  (3267/3873)"/>
-          <coverage type="line, %" value="43%  (105/245)"/>
+          <coverage type="block, %" value="83%  (3216/3873)"/>
+          <coverage type="line, %" value="39%  (95.4/245)"/>
 
           <class name="HTMLScanner">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="50%  (7/14)"/>
-            <coverage type="block, %" value="84%  (3267/3873)"/>
-            <coverage type="line, %" value="43%  (105/245)"/>
+            <coverage type="block, %" value="83%  (3216/3873)"/>
+            <coverage type="line, %" value="39%  (95.4/245)"/>
 
             <method name="getColumnNumber (): int">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -40656,8 +40656,13 @@
             </method>
             <method name="scan (Reader, ScanHandler): void">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="31%  (243/775)"/>
-              <coverage type="line, %" value="31%  (56/181)"/>
+              <coverage type="block, %" value="26%  (203/775)"/>
+              <coverage type="line, %" value="27%  (48.4/181)"/>
+            </method>
+            <method name="save (int, ScanHandler): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="82%  (49/60)"/>
+              <coverage type="line, %" value="78%  (7/9)"/>
             </method>
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -40678,11 +40683,6 @@
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (19/19)"/>
               <coverage type="line, %" value="100% (4/4)"/>
-            </method>
-            <method name="save (int, ScanHandler): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (60/60)"/>
-              <coverage type="line, %" value="100% (9/9)"/>
             </method>
             <method name="unread (PushbackReader, int): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -40843,8 +40843,8 @@
       <package name="org.apache.tika.parser.txt">
         <coverage type="class, %" value="100% (68/68)"/>
         <coverage type="method, %" value="80%  (224/279)"/>
-        <coverage type="block, %" value="98%  (27352/27977)"/>
-        <coverage type="line, %" value="78%  (604.4/774)"/>
+        <coverage type="block, %" value="97%  (27099/27977)"/>
+        <coverage type="line, %" value="70%  (539.2/774)"/>
 
         <srcfile name="CharsetMatch.java">
           <coverage type="class, %" value="100% (1/1)"/>
@@ -40920,6 +40920,35 @@
             </method>
           </class>
         </srcfile>
+        <srcfile name="CharsetRecog_UTF8.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (3/3)"/>
+          <coverage type="block, %" value="39%  (64/163)"/>
+          <coverage type="line, %" value="38%  (17.6/47)"/>
+
+          <class name="CharsetRecog_UTF8">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (3/3)"/>
+            <coverage type="block, %" value="39%  (64/163)"/>
+            <coverage type="line, %" value="38%  (17.6/47)"/>
+
+            <method name="match (CharsetDetector): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="37%  (59/158)"/>
+              <coverage type="line, %" value="35%  (15.6/45)"/>
+            </method>
+            <method name="CharsetRecog_UTF8 (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getName (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (2/2)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
         <srcfile name="CharsetRecognizer.java">
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="50%  (1/2)"/>
@@ -40940,35 +40969,6 @@
             <method name="CharsetRecognizer (): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="CharsetRecog_UTF8.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="100% (3/3)"/>
-          <coverage type="block, %" value="75%  (123/163)"/>
-          <coverage type="line, %" value="81%  (38.2/47)"/>
-
-          <class name="CharsetRecog_UTF8">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (3/3)"/>
-            <coverage type="block, %" value="75%  (123/163)"/>
-            <coverage type="line, %" value="81%  (38.2/47)"/>
-
-            <method name="match (CharsetDetector): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="75%  (118/158)"/>
-              <coverage type="line, %" value="80%  (36.2/45)"/>
-            </method>
-            <method name="CharsetRecog_UTF8 (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getName (): String">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (2/2)"/>
               <coverage type="line, %" value="100% (1/1)"/>
             </method>
           </class>
@@ -41097,22 +41097,111 @@
             </method>
           </class>
         </srcfile>
+        <srcfile name="CharsetDetector.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="53%  (8/15)"/>
+          <coverage type="block, %" value="87%  (619/715)"/>
+          <coverage type="line, %" value="80%  (131.5/165)"/>
+
+          <class name="CharsetDetector">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="53%  (8/15)"/>
+            <coverage type="block, %" value="87%  (619/715)"/>
+            <coverage type="line, %" value="80%  (131.5/165)"/>
+
+            <method name="detect (): CharsetMatch">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/14)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="getAllDetectableCharsets (): String []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/2)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="getReader (InputStream, String): Reader">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/20)"/>
+              <coverage type="line, %" value="0%   (0/8)"/>
+            </method>
+            <method name="getString (byte [], String): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/21)"/>
+              <coverage type="line, %" value="0%   (0/8)"/>
+            </method>
+            <method name="inputFilterEnabled (): boolean">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="setCanonicalDeclaredEncoding (String): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/10)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="setDeclaredEncoding (String): CharsetDetector">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/5)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="detectAll (): CharsetMatch []">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="81%  (61/75)"/>
+              <coverage type="line, %" value="91%  (14.5/16)"/>
+            </method>
+            <method name="MungeInput (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="95%  (139/146)"/>
+              <coverage type="line, %" value="89%  (31/35)"/>
+            </method>
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="CharsetDetector (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (17/17)"/>
+              <coverage type="line, %" value="100% (6/6)"/>
+            </method>
+            <method name="createRecognizers (): ArrayList">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (332/332)"/>
+              <coverage type="line, %" value="100% (57/57)"/>
+            </method>
+            <method name="enableInputFilter (boolean): boolean">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (8/8)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="setText (InputStream): CharsetDetector">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (48/48)"/>
+              <coverage type="line, %" value="100% (15/15)"/>
+            </method>
+            <method name="setText (byte []): CharsetDetector">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (11/11)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+        </srcfile>
         <srcfile name="CharsetRecog_2022.java">
           <coverage type="class, %" value="100% (4/4)"/>
           <coverage type="method, %" value="100% (11/11)"/>
-          <coverage type="block, %" value="87%  (538/618)"/>
-          <coverage type="line, %" value="56%  (22/39)"/>
+          <coverage type="block, %" value="87%  (537/618)"/>
+          <coverage type="line, %" value="54%  (21/39)"/>
 
           <class name="CharsetRecog_2022">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="100% (2/2)"/>
-            <coverage type="block, %" value="31%  (36/116)"/>
-            <coverage type="line, %" value="39%  (11/28)"/>
+            <coverage type="block, %" value="30%  (35/116)"/>
+            <coverage type="line, %" value="36%  (10/28)"/>
 
             <method name="match (byte [], int, byte [][]): int">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="29%  (33/113)"/>
-              <coverage type="line, %" value="35%  (9/26)"/>
+              <coverage type="block, %" value="28%  (32/113)"/>
+              <coverage type="line, %" value="31%  (8/26)"/>
             </method>
             <method name="CharsetRecog_2022 (): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -41187,130 +41276,41 @@
             </method>
           </class>
         </srcfile>
-        <srcfile name="CharsetDetector.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="53%  (8/15)"/>
-          <coverage type="block, %" value="87%  (623/715)"/>
-          <coverage type="line, %" value="81%  (133.5/165)"/>
-
-          <class name="CharsetDetector">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="53%  (8/15)"/>
-            <coverage type="block, %" value="87%  (623/715)"/>
-            <coverage type="line, %" value="81%  (133.5/165)"/>
-
-            <method name="detect (): CharsetMatch">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/14)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="getAllDetectableCharsets (): String []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/2)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="getReader (InputStream, String): Reader">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/20)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
-            </method>
-            <method name="getString (byte [], String): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/21)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
-            </method>
-            <method name="inputFilterEnabled (): boolean">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="setCanonicalDeclaredEncoding (String): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/10)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="setDeclaredEncoding (String): CharsetDetector">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/5)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="detectAll (): CharsetMatch []">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="81%  (61/75)"/>
-              <coverage type="line, %" value="91%  (14.5/16)"/>
-            </method>
-            <method name="MungeInput (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="98%  (143/146)"/>
-              <coverage type="line, %" value="94%  (33/35)"/>
-            </method>
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="CharsetDetector (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (17/17)"/>
-              <coverage type="line, %" value="100% (6/6)"/>
-            </method>
-            <method name="createRecognizers (): ArrayList">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (332/332)"/>
-              <coverage type="line, %" value="100% (57/57)"/>
-            </method>
-            <method name="enableInputFilter (boolean): boolean">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (8/8)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
-            </method>
-            <method name="setText (InputStream): CharsetDetector">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (48/48)"/>
-              <coverage type="line, %" value="100% (15/15)"/>
-            </method>
-            <method name="setText (byte []): CharsetDetector">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (11/11)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
-            </method>
-          </class>
-        </srcfile>
         <srcfile name="CharsetRecog_mbcs.java">
           <coverage type="class, %" value="100% (8/8)"/>
           <coverage type="method, %" value="86%  (30/35)"/>
-          <coverage type="block, %" value="96%  (2315/2406)"/>
-          <coverage type="line, %" value="86%  (137/160)"/>
+          <coverage type="block, %" value="88%  (2126/2406)"/>
+          <coverage type="line, %" value="60%  (95.2/160)"/>
 
-          <class name="CharsetRecog_mbcs">
+          <class name="CharsetRecog_mbcs$CharsetRecog_euc">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="100% (2/2)"/>
-            <coverage type="block, %" value="65%  (84/130)"/>
-            <coverage type="line, %" value="74%  (29/39)"/>
+            <coverage type="block, %" value="42%  (40/96)"/>
+            <coverage type="line, %" value="52%  (14/27)"/>
 
-            <method name="match (CharsetDetector, int []): int">
+            <method name="nextChar (CharsetRecog_mbcs$iteratedChar, CharsetDetector): boolean">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="64%  (81/127)"/>
-              <coverage type="line, %" value="73%  (27/37)"/>
+              <coverage type="block, %" value="40%  (37/93)"/>
+              <coverage type="line, %" value="48%  (12/25)"/>
             </method>
-            <method name="CharsetRecog_mbcs (): void">
+            <method name="CharsetRecog_mbcs$CharsetRecog_euc (): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (3/3)"/>
               <coverage type="line, %" value="100% (2/2)"/>
             </method>
           </class>
-          <class name="CharsetRecog_mbcs$CharsetRecog_euc">
+          <class name="CharsetRecog_mbcs">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="100% (2/2)"/>
-            <coverage type="block, %" value="81%  (78/96)"/>
-            <coverage type="line, %" value="85%  (23/27)"/>
+            <coverage type="block, %" value="46%  (60/130)"/>
+            <coverage type="line, %" value="52%  (20.4/39)"/>
 
-            <method name="nextChar (CharsetRecog_mbcs$iteratedChar, CharsetDetector): boolean">
+            <method name="match (CharsetDetector, int []): int">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="81%  (75/93)"/>
-              <coverage type="line, %" value="84%  (21/25)"/>
+              <coverage type="block, %" value="45%  (57/127)"/>
+              <coverage type="line, %" value="50%  (18.4/37)"/>
             </method>
-            <method name="CharsetRecog_mbcs$CharsetRecog_euc (): void">
+            <method name="CharsetRecog_mbcs (): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (3/3)"/>
               <coverage type="line, %" value="100% (2/2)"/>
@@ -41319,8 +41319,8 @@
           <class name="CharsetRecog_mbcs$CharsetRecog_gb_18030">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="83%  (5/6)"/>
-            <coverage type="block, %" value="97%  (513/528)"/>
-            <coverage type="line, %" value="90%  (28/31)"/>
+            <coverage type="block, %" value="86%  (453/528)"/>
+            <coverage type="line, %" value="55%  (17/31)"/>
 
             <method name="getLanguage (): String">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -41329,8 +41329,8 @@
             </method>
             <method name="nextChar (CharsetRecog_mbcs$iteratedChar, CharsetDetector): boolean">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="88%  (99/112)"/>
-              <coverage type="line, %" value="92%  (24/26)"/>
+              <coverage type="block, %" value="35%  (39/112)"/>
+              <coverage type="line, %" value="50%  (13/26)"/>
             </method>
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -41356,8 +41356,8 @@
           <class name="CharsetRecog_mbcs$CharsetRecog_sjis">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="83%  (5/6)"/>
-            <coverage type="block, %" value="99%  (301/305)"/>
-            <coverage type="line, %" value="89%  (17/19)"/>
+            <coverage type="block, %" value="87%  (265/305)"/>
+            <coverage type="line, %" value="54%  (10.3/19)"/>
 
             <method name="getLanguage (): String">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -41366,8 +41366,8 @@
             </method>
             <method name="nextChar (CharsetRecog_mbcs$iteratedChar, CharsetDetector): boolean">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="97%  (59/61)"/>
-              <coverage type="line, %" value="93%  (13/14)"/>
+              <coverage type="block, %" value="38%  (23/61)"/>
+              <coverage type="line, %" value="45%  (6.3/14)"/>
             </method>
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -41393,8 +41393,8 @@
           <class name="CharsetRecog_mbcs$CharsetRecog_big5">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="83%  (5/6)"/>
-            <coverage type="block, %" value="99%  (452/456)"/>
-            <coverage type="line, %" value="89%  (17/19)"/>
+            <coverage type="block, %" value="92%  (421/456)"/>
+            <coverage type="line, %" value="55%  (10.5/19)"/>
 
             <method name="getLanguage (): String">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -41403,8 +41403,8 @@
             </method>
             <method name="nextChar (CharsetRecog_mbcs$iteratedChar, CharsetDetector): boolean">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="96%  (54/56)"/>
-              <coverage type="line, %" value="93%  (13/14)"/>
+              <coverage type="block, %" value="41%  (23/56)"/>
+              <coverage type="line, %" value="46%  (6.5/14)"/>
             </method>
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>

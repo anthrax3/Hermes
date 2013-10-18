@@ -1,5 +1,7 @@
 
 from sulley import *
+import random
+
 
 '''
 s_initialize("HTTP Requests")
@@ -216,7 +218,7 @@ s_block_end("anchors")
 
 # Extra anchor that will be unique so that the crawler has somewhere to go (if duplicates)
 s_static("<a href=\"http://127.0.0.1/")
-s_checksum("anchors", algorithm="md5")
+s_static( str(random.randint(-999999, 999999)) )
 s_static("\">extra seed anchor</a>")
 
 s_static("</body></html>")

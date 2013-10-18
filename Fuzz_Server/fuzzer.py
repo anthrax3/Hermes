@@ -44,11 +44,6 @@ request = s_get('HTML Anchors')
 mutations = request.num_mutations()
 
 
-
-
-
-
-
 # Request handler class
 class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 
