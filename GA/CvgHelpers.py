@@ -38,7 +38,7 @@ class EMMAXMLParser:
 
 		# DEBUG============================================================
 		# total packages, classes, methods, executable files, executable lines
-		print "Stats Results:\n", self.listofstatsresults, "\n"
+		#print "Stats Results:\n", self.listofstatsresults, "\n"
 
 
 		for el in xmltree.findall('data/all/coverage'):
@@ -46,7 +46,7 @@ class EMMAXMLParser:
 
 
 		# DEBUG============================================================
-		print "Overall Results:\n", self.listofoverallresults, "\n"
+		#print "Overall Results:\n", self.listofoverallresults, "\n"
 
 
 		for el in xmltree.findall('data/all/package'):

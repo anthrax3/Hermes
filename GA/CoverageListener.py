@@ -56,12 +56,15 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 		try:
 			# Parse the parameters
 			parser = EMMAXMLParser()
-			data = parser.extractEMMAData(postvars['data'][0])
+			parser.extractEMMAData(postvars['data'][0])
+			list_overallresults = parser.getOverallResults()
+			list_stats = parser.getStatsResults()
 		except Exception as e:
 			print 'An unexpected error occurred while parsing POST data: %s' % (e)
 
-		if data:
-			pass
+		if list_stats and list_overallresults:
+			print '\nStats:\t' + str(list_stats) + '\n'
+			print 'Overall:\t' + str(list_overallresults) + '\n'
 
 
 
