@@ -68,7 +68,7 @@ class Transmitter:
 			except IOError as e:
 				print 'An unepected I/O exception has occurred: %s' % (e)
 			except:
-				print 'An unexpected error has occurred.'
+				print 'An unexpected error has occurred. \n', sys.exc_info()[0]
 
 
 

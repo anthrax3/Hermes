@@ -31,10 +31,12 @@ cvg = imp.load_source('DETAILS', '../Config/coverage.py')
 class ListenerRequestHandler(BaseHTTPRequestHandler):
 
 	def do_HEAD(self):
-		pass
+		self.send_response(200)
+		self.end_headers()
 
 	def do_GET(self):
-		pass
+		self.send_response(200)
+		self.end_headers()
 
 	def do_POST(self):
 		try:
@@ -49,7 +51,7 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 
 			self.send_response(200)
 			self.send_header("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:10.0.1) Gecko/20100101 Firefox/10.0.1")
-			self.send_header("Content-type", "text/html")
+			self.send_header("Content-type", "text/xml")
 			self.end_headers()
 
 		except Exception as e:
@@ -67,6 +69,8 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 		if list_stats and list_overallresults:
 			print '\nStats:\t' + str(list_stats) + '\n'
 			print 'Overall:\t' + str(list_overallresults) + '\n'
+
+		return
 
 
 

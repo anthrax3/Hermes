@@ -15,7 +15,7 @@ class DETAILS:
 	CVG_PORT 		= 28000
 	CVG_ADDRESS 	= "127.0.0.1"
 
-	LIST_XML_DUMP_PATH = "Reports%s" % (os.sep)
+	LIST_XML_DUMP_PATH = ".." + str(os.sep) + "GA" + str(os.sep) + "Reports" + str(os.sep)
 	
 
 

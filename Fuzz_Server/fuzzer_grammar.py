@@ -76,98 +76,121 @@ http://www.exploit-db.com/wp-content/themes/exploit/docs/25717.pdf
 </html>
 '''
 
+
 s_initialize('HTML Total')
-s_delim("<")
-s_string("html")
-s_delim(">")
-
-s_delim("<")
-s_string("head")
-s_delim(">")
-
-s_delim("<")
-s_string("title")
-s_delim(">")
-
-s_delim("<")
-s_string("/title")
-s_delim(">")
-
-s_delim("<")
-s_string("/head")
-s_delim(">")
-
-# Beginning of Body
-
-s_delim("<")
-s_string("body")
-s_delim(">")
 
 
+if s_block_start("All HTML"):
+    s_delim("<")
+    s_string("html")
+    s_delim(">")
 
-# <a href="http://127.0.0.1/">anchor text here</a>
+    s_delim("<")
+    s_string("head")
+    s_delim(">")
+
+    s_delim("<")
+    s_string("title")
+    s_delim(">")
+
+    s_delim("<")
+    s_string("/title")
+    s_delim(">")
+
+    s_delim("<")
+    s_string("/head")
+    s_delim(">")
+
+    # Beginning of Body
+
+    s_delim("<")
+    s_string("body")
+    s_delim(">")
+
+
+
+    # <a href="http://127.0.0.1/">anchor text here</a>
+    s_delim("<")
+    s_string("a")
+    s_delim(" ")
+    s_string("href")
+    s_delim("=")
+    s_delim("\"")
+    s_static("http://127.0.0.1")    # try to point it to localhost (make localhost a delim) and then fuzz the other portion of the url?
+    s_delim("/")
+    s_string("")
+    s_delim("\"")
+    s_delim(">")
+    s_string("anchor text here")
+    s_delim("<")
+    s_delim("/")
+    s_string("a")
+    s_delim(">")
+
+
+    # <a href="http://127.0.0.1/test">another anchor text here</a>
+    s_delim("<")
+    s_string("a")
+    s_delim(" ")
+    s_string("href")
+    s_delim("=")
+    s_delim("\"")
+    s_static("http://127.0.0.1")    # try to point it to localhost (make localhost a delim) and then fuzz the other portion of the url?
+    s_delim("/")
+    s_string("test")
+    s_delim("\"")
+    s_delim(">")
+    s_string("another anchor text here")
+    s_delim("<")
+    s_delim("/")
+    s_string("a")
+    s_delim(">")
+
+
+    # <a href="http://127.0.0.1/testymctesterson">another another anchor text here</a>
+    s_delim("<")
+    s_string("a")
+    s_delim(" ")
+    s_string("href")
+    s_delim("=")
+    s_delim("\"")
+    s_static("http://127.0.0.1")    # try to point it to localhost (make localhost a delim) and then fuzz the other portion of the url?
+    s_delim("/")
+    s_string("testymctesterson")
+    s_delim("\"")
+    s_delim(">")
+    s_string("another another anchor text here")
+    s_delim("<")
+    s_delim("/")
+    s_string("a")
+    s_delim(">")
+
+    # <p>here is some more text to see what happens</p>
+    s_delim("<")
+    s_string("p")
+    s_delim(">")
+    s_string("here is some more text to see what happens")
+    s_delim("<")
+    s_string("/p")
+    s_delim(">")
+
+s_block_end("All HTML")
+
 s_delim("<")
 s_string("a")
 s_delim(" ")
 s_string("href")
 s_delim("=")
 s_delim("\"")
-s_static("http://127.0.0.1")    # try to point it to localhost (make localhost a delim) and then fuzz the other portion of the url?
+s_static("http://127.0.0.1")
 s_delim("/")
-s_string("")
+s_checksum("All HTML")
 s_delim("\"")
 s_delim(">")
-s_string("anchor text here")
+s_string("checksum anchor")
 s_delim("<")
 s_delim("/")
 s_string("a")
-s_delim(">")
-
-
-# <a href="http://127.0.0.1/test">another anchor text here</a>
-s_delim("<")
-s_string("a")
-s_delim(" ")
-s_string("href")
-s_delim("=")
-s_delim("\"")
-s_static("http://127.0.0.1")    # try to point it to localhost (make localhost a delim) and then fuzz the other portion of the url?
-s_delim("/")
-s_string("test")
-s_delim("\"")
-s_delim(">")
-s_string("another anchor text here")
-s_delim("<")
-s_delim("/")
-s_string("a")
-s_delim(">")
-
-
-# <a href="http://127.0.0.1/testymctesterson">another another anchor text here</a>
-s_delim("<")
-s_string("a")
-s_delim(" ")
-s_string("href")
-s_delim("=")
-s_delim("\"")
-s_static("http://127.0.0.1")    # try to point it to localhost (make localhost a delim) and then fuzz the other portion of the url?
-s_delim("/")
-s_string("testymctesterson")
-s_delim("\"")
-s_delim(">")
-s_string("another another anchor text here")
-s_delim("<")
-s_delim("/")
-s_string("a")
-s_delim(">")
-
-# <p>here is some more text to see what happens</p>
-s_delim("<")
-s_string("p")
-s_delim(">")
-s_string("here is some more text to see what happens")
-s_delim("<")
-s_string("/p")
 s_delim(">")
 
 s_delim("<")
@@ -200,26 +223,38 @@ s_delim(">")
 
 s_initialize("HTML Anchors")
 
-s_static("<html><head><title></title></head><body>")
+if s_block_start("All HTML"):
 
-if s_block_start("anchors"):
+    s_static("<html><head><title>Sulley Says Hello!</title></head><body>")
+
+    if s_block_start("anchors"):
+        s_static("<a href=\"http://127.0.0.1/")
+        s_string("test")
+        s_static("\">test anchor 1</a>")
+
+        s_static("<a href=\"http://127.0.0.1")
+        s_string("/testymctesterson")
+        s_static("\">test anchor 2</a>")
+
+        s_static("<a href=\"http://127.0.0.1/")
+        s_string("test")
+        s_static("\">test anchor 3</a>")
+    s_block_end("anchors")
+
+    s_static("<img src=\"http://127.0.0.1/")
+    s_string("myimagestring")
+    s_static("\">test image</a>")
+
     s_static("<a href=\"http://127.0.0.1/")
-    s_string("test")
-    s_static("\">test anchor 1</a>")
+    s_checksum("anchors", algorithm='sha1')
+    s_static("\">internal checksum anchor</a>")
 
-    s_static("<a href=\"http://127.0.0.1")
-    s_string("/testymctesterson")
-    s_static("\">test anchor 2</a>")
-
-    s_static("<a href=\"http://127.0.0.1/")
-    s_string("test")
-    s_static("\">test anchor 3</a>")
-s_block_end("anchors")
+s_block_end("All HTML")
 
 # Extra anchor that will be unique so that the crawler has somewhere to go (if duplicates)
 s_static("<a href=\"http://127.0.0.1/")
-s_static( str(random.randint(-999999, 999999)) )
-s_static("\">extra seed anchor</a>")
+s_checksum("All HTML", algorithm='sha1')
+s_static("\">external checksum anchor</a>")
 
 s_static("</body></html>")
 
