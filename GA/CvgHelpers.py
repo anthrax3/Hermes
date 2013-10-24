@@ -25,10 +25,6 @@ class EMMAXMLParser:
 
 		xmltree = et.fromstring(xmlfile)
 
-		# class %, method %, block %, line %, name
-		self.listofoverallresults = []
-		self.listofpackageresults = []
-
 		# total packages, classes, methods, executable files, executable lines
 		self.listofstatsresults = []
 		for el in xmltree.findall('stats'):
@@ -41,16 +37,19 @@ class EMMAXMLParser:
 		#print "Stats Results:\n", self.listofstatsresults, "\n"
 
 
-		for el in xmltree.findall('data/all/coverage'):
-			self.listofoverallresults.append( (el.get("type"), el.get("value")) )
+		self.listofoverallresults = [(item.get("type"), item.get("value")) for item in xmltree.findall('data/all/coverage')]
 
 
 		# DEBUG============================================================
 		#print "Overall Results:\n", self.listofoverallresults, "\n"
 
+		# class %, method %, block %, line %, name
+		self.listofpackageresults = [item.get("name") for item in xmltree.findall('data/all/package')]
 
-		for el in xmltree.findall('data/all/package'):
-			print el.items()
+		for item in self.listofpackageresults:
+			print "Package: " + str(item)
+
+
 
 
 

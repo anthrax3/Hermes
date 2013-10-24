@@ -39,6 +39,12 @@ class FB_Bug(object):
 		self._rank = 0
 
 
+	def printNicely(self):
+		print "FindBug Bug (" + str(self._category) + ")"
+		print "\tType:\t\t" + str(self._bugtype) + " (Priority " + str(self._priority) + ")" 
+		print "\tClass:\t\t" + str(self._classname)
+		print "\tBug Rank:\t" + str(self._rank)
+
 
 	@property
 	def raw_bug_info(self):
@@ -151,6 +157,21 @@ class FB_PackageDefectDensity(object):
 		self._mostseverebugrank = 40
 
 		self._buglist = []
+
+	def printNicely(self):
+		print "Findbug Package Defect Density (Object)"
+		print "Name: \t\t\t" + self._name
+		print "Kind: \t\t\t" + self._kind
+		print "Density: \t\t" + self._density
+		print "Bugs: \t\t\t" + self._bugs
+		print "NCSS: \t\t\t" + self._NCSS
+		print "AVG Bug Rank: \t\t" + str(self._avgbugrank)
+		print "Most Severe Bug Rank: \t" + str(self._mostseverebugrank)
+		print "Bug List: \t\t" 
+
+		for bug in self._buglist:
+			bug.printNicely()
+			print ""
 
 
 	@property

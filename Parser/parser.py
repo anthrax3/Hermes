@@ -11,7 +11,7 @@ import pickle
 
 
 
-class FBParser:
+class FBParser(object):
 
 	FB_OutputFile = ''
 	FB_DefDensityFile = ''

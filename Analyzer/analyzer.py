@@ -6,6 +6,10 @@ import sys, getopt
 from analyzer_helpers import FB_PackageDefectDensity, FB_Bug
 import bugranks
 
+import imp
+
+cvg = imp.load_source('DETAILS', '../Config/analysis.py')
+
 
 #
 #	GENERAL FLOW:
@@ -22,12 +26,14 @@ import bugranks
 # Try to optimize the GA to look for 'bug coverage' 
 
 
-class FBAnalyzer:
+class FBAnalyzer(object):
 
 	parser_results_file = ""
 	parser_defdens_file = ""
 	parser_results_list = []
 	parser_defdens_list = []
+
+	SAVE_FILENAME = cvg.DETAILS.TARGET_FILENAME
 
 
 	def __init__(self, tmpPR='parse_results.txt', tmpDD='parse_densities.txt'):
@@ -152,6 +158,7 @@ class FBAnalyzer:
 
 
 		# Calculate Bug Ranks for each bug discovered (store in the bug's class)
+		# Do this using the bugranks specified by the findbugs documentation - stored values in bugranks.py
 		for bug in self.buglist:
 			tmp_rank = 0
 
@@ -191,19 +198,69 @@ class FBAnalyzer:
 
 
 		# find the package with the worst average severity. If there is a tie, take the one with the most severe bug.
-		target = None
-		target_avgbugrank = 40
-		for dd in self.defectdensitieslist:
-			if dd.avgbugrank < target_avgbugrank:
-				target = dd
-				target_avgbugrank = dd.avgbugrank
-			if dd.avgbugrank == target_avgbugrank:
-				if dd.mostseverebugrank < target.mostseverebugrank:
+		target_list = []
+		max_targets = 4
+		iterations = 0
+
+		while len(target_list) < max_targets and iterations <= len(self.defectdensitieslist):
+
+			target = None
+			target_avgbugrank = 999
+
+			for dd in self.defectdensitieslist:
+				# Do not include classes with no name (edge?), project details, or previously added targets
+				if dd in target_list or dd.name == "" or dd.kind == "project":
+					continue
+				if dd.avgbugrank < target_avgbugrank:
 					target = dd
+					target_avgbugrank = dd.avgbugrank
+				if dd.avgbugrank == target_avgbugrank:
+					if dd.mostseverebugrank < target.mostseverebugrank:
+						target = dd
+
+			if target:
+				target_list.append(target)
+
+			# Just in case there are not enough results to hit the max target
+			iterations = iterations + 1
+
 
 		# At this point, we have a target package that contains the most severe bugs from static analysis and a list of those bugs
 		# along with the defect density metrics to prove it and all of the data that describes the bug types and context
 
+		# DEBUG
+		#--------------------------------------------------------------------------------------------------
+		print '='*40
+		for target in target_list:
+			print 'Target Object: ' + str(target)
+			target.printNicely()
+			print "-"*40
+		print '\n'
+		#--------------------------------------------------------------------------------------------------
+
+
+		#--------------------------------------------------------------------------------------------------		
+		#TODO
+		# Save the information to a file somehow (pickle?)
+		#--------------------------------------------------------------------------------------------------
+
+		self.saveThis(target_list, self.SAVE_FILENAME)
+
+
+
+
+
+
+
+	def saveThis(self, data, filename):
+		try:
+			f = self.savefile = open(filename, 'wb')
+			pickle.dump(data, f)
+			f.close()
+		except IOError as e:
+			print 'I/O error ({0}): {1}'.format(e.errno, e.strerror)
+		except:
+			print "Unexpected error opening file to save results."
 
 
 
@@ -248,3 +305,6 @@ if __name__ == "__main__":
 		a = FBAnalyzer(tmpPR, tmpDD)
 		a.initialize()
 		a.analyze()
+	else:
+		usage()
+		sys.exit(2)

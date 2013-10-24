@@ -1,5 +1,6 @@
 from sulley import *
-import fuzzer_grammar
+#import fuzzer_grammar
+
 
 
 # Example
@@ -35,12 +36,15 @@ for count in range(mutations):
 # listen for crawler requests
 # 
 
-import sys, os, time
+import sys, os, time, imp
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 
+prot = imp.load_source('*', '../PD_Creator/protocol.py')
+
+
 #request = s_get('HTML Total')
-request = s_get('HTML Anchors')
+request = s_get('Protocol Definition')
 mutations = request.num_mutations()
 
 

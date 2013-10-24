@@ -47,6 +47,7 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 			# Write the data dump to a unique filename
 			datafilename = '%sEMMA_dump_%s.xml' % (cvg.DETAILS.LIST_XML_DUMP_PATH, time.time())
 			with open(datafilename, 'w') as f:
+				print 'Writing POST data to ' + str( datafilename )
 				f.write(postvars['data'][0])
 
 			self.send_response(200)

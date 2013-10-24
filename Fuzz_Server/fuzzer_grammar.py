@@ -243,7 +243,9 @@ if s_block_start("All HTML"):
 
     s_static("<img src=\"http://127.0.0.1/")
     s_string("myimagestring")
-    s_static("\">test image</a>")
+    s_static("\" alt=\"")
+    s_string("alt img text")
+    s_static("\" />")
 
     s_static("<a href=\"http://127.0.0.1/")
     s_checksum("anchors", algorithm='sha1')
