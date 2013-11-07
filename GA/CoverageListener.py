@@ -24,8 +24,9 @@ from CvgHelpers import EMMAXMLParser
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from urlparse import parse_qs
 
-cvg = imp.load_source('DETAILS', '../Config/coverage.py')
+#cvg = imp.load_source('DETAILS', '../Config/coverage.py')
 
+from Config.coverage import DETAILS
 
 
 class ListenerRequestHandler(BaseHTTPRequestHandler):
@@ -45,7 +46,7 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 			postvars = parse_qs(self.rfile.read(length), keep_blank_values=1)
 
 			# Write the data dump to a unique filename
-			datafilename = '%sEMMA_dump_%s.xml' % (cvg.DETAILS.LIST_XML_DUMP_PATH, time.time())
+			datafilename = '%sEMMA_dump_%s.xml' % (DETAILS.LIST_XML_DUMP_PATH, time.time())
 			with open(datafilename, 'w') as f:
 				print 'Writing POST data to ' + str( datafilename )
 				f.write(postvars['data'][0])
@@ -82,8 +83,8 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 class Listener:
 
 	def __init__(self):
-		self.port = cvg.DETAILS.CVG_PORT
-		self.address = cvg.DETAILS.CVG_ADDRESS
+		self.port = DETAILS.CVG_PORT
+		self.address = DETAILS.CVG_ADDRESS
 
 
 	def run(self):
@@ -107,7 +108,7 @@ class Listener:
 
 
 
-
-if __name__ == "__main__":
-	l = Listener()
-	l.run()
+# DEBUG
+#if __name__ == "__main__":
+#	l = Listener()
+#	l.run()
