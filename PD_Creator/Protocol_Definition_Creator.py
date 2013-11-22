@@ -32,8 +32,8 @@ class PDef_Creator(object):
 	# ------------------------------------------------------------------------------------------------------------------------
 	def __init__(self):
 		self.generator = SulleyHelpers("Protocol Definition")
-		self.helper_functions = HelperFunctions()
-		self.target_list = self.helper_functions.loadPickledFile(DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME)
+		#self.helper_functions = HelperFunctions()
+		#self.target_list = self.helper_functions.loadPickledFile(DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME)
 
 
 
@@ -41,7 +41,7 @@ class PDef_Creator(object):
 	# ------------------------------------------------------------------------------------------------------------------------
 	def reset(self):
 		self.generator = SulleyHelpers("Protocol Definition")
-		self.helper_functions = HelperFunctions()
+		#self.helper_functions = HelperFunctions()
 
 
 
@@ -288,6 +288,30 @@ class PDef_Creator(object):
 		html_end = self.generator.addSulleyStatic("</body></html>")
 
 		return self.generator.addToDefinition(all_html_block + html_checksum_line + html_end)
+
+
+
+	# ------------------------------------------------------------------------------------------------------------------------
+	def genStaticHTMLPage(self):
+		#	<html>
+		#	<head><title></title></head>
+		#	<body>
+		#	</body>
+		#	</html>
+
+		html = self.generator.addSulleyStatic("<html><head><title></title></head><body></body></html>", 0)
+		return self.generator.addToDefinition(html)
+
+
+	# ------------------------------------------------------------------------------------------------------------------------
+	def genStaticHTMLPageWithOneAnchor(self):
+		str_html = "<html><head><title></title></head><body><a href=\\\"http://127.0.0.1/test\\\"></a></body></html>"
+		html = self.generator.addSulleyStatic(str_html, 0)
+		return self.generator.addToDefinition(html)
+
+
+
+
 
 
 # DEBUG

@@ -360,7 +360,7 @@ class HelperFunctions(object):
 
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 	'''
 	s = SulleyHelpers("HTML Anchors")
 	print ""

@@ -1,40 +1,5 @@
 
-#import fuzzer_grammar
 
-
-
-# Example
-'''
-sess = sessions.session(session_filename="http_test.session")
-
-myip = "localhost"
-target = sessions.target(myip, 8080)
-target.netmon = pedrpc.client(myip, 26001)
-target.procmon = pedrpc.client(myip, 26002)
-
-sess.add_target(target)
-sess.connect(s_get("HTML"))
-
-sess.fuzz()
-'''
-
-# TEST Outputs
-'''
-import time, sys
-
-request = s_get("HTML")
-mutations = request.num_mutations()
-for count in range(mutations):
-	if count > 100:
-		sys.exit()
-	print request.render()
-	request.mutate()
-'''
-
-
-# startup server on localhost
-# listen for crawler requests
-# 
 
 import sys, os, time, imp
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
@@ -42,7 +7,6 @@ from datetime import datetime, timedelta
 
 from sulley import *
 import PD_Creator.protocol
-
 
 
 # load the auto-generated protocol definition
@@ -89,22 +53,11 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 		s.end_headers()
 
 	def do_GET(self):
+		#print '%s\tGET request received.' % (datetime.now())
 
-		# Check if we should still be going (time and max requests)
-		'''
-		if self.Start_Time:
-			endtime = self.Start_Time + timedelta(minutes=self.Max_Time_Mins)
-			if datetime.now() > endtime:
-				raise StopServerException()
-		else:
-			self.Start_Time = datetime.now()
-
-		if self.Current_Response >= self.Max_Responses:
-			raise StopServerException()
-		'''
-			
-
-		print '%s\tGET request received.' % (datetime.now())
+		# Each request has 60 seconds to finish, else it times out
+		self.rfile._sock.settimeout(10)
+		self.wfile._sock.settimeout(10)
 
 		self.send_response(200)
 		self.send_header('Content-type', 'text/html')
@@ -186,13 +139,18 @@ class FuzzServer():
 			START_TIME = datetime.now()
 
 			while self.server_running:
-				#httpd.serve_forever()
 				httpd.handle_request()
 
 		except KeyboardInterrupt:
 			pass
 		httpd.server_close()
 		print 'Server stopped on %s:%s' % (host, port)
+
+
+	def reset(self):
+		self.server_running = True
+		self.CURRENT_RESPONSES = 0
+		self.START_TIME = None
 
 
 	def argHandler(self, *args):

@@ -29,6 +29,7 @@ from urlparse import parse_qs
 from Config.coverage import DETAILS
 
 
+
 class ListenerRequestHandler(BaseHTTPRequestHandler):
 
 	def do_HEAD(self):
@@ -46,9 +47,10 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 			postvars = parse_qs(self.rfile.read(length), keep_blank_values=1)
 
 			# Write the data dump to a unique filename
-			datafilename = '%sEMMA_dump_%s.xml' % (DETAILS.LIST_XML_DUMP_PATH, time.time())
-			with open(datafilename, 'w') as f:
-				print 'Writing POST data to ' + str( datafilename )
+			datafilename = 'EMMA_dump_%s' % (time.time())
+			datafilepath = '%s%s.xml' % (DETAILS.LIST_XML_DUMP_PATH, datafilename)
+			with open(datafilepath, 'w') as f:
+				print 'Writing POST data to ' + str( datafilepath )
 				f.write(postvars['data'][0])
 
 			self.send_response(200)
@@ -68,8 +70,14 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 		except Exception as e:
 			print 'An unexpected error occurred while parsing POST data: %s' % (e)
 
+		# Save the corresponding data file in the logs with the snapshot information / stats
 		if list_stats and list_overallresults:
-			print '\nStats:\t' + str(list_stats) + '\n'
+			logpath = '%s%s.txt' % (DETAILS.CVG_LOG_PATH, datafilename)
+			with open(logpath, 'w') as f:
+				towrite = 'Stats:\t' + str(list_stats) + '\n\nOverall:\t' + str(list_overallresults)
+				f.write(towrite)
+
+			print '\nStats:\t' + str(list_stats)
 			print 'Overall:\t' + str(list_overallresults) + '\n'
 
 		return

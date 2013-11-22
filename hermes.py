@@ -79,7 +79,8 @@ class Hermes():
 		from fuzzer_lib import FuzzServer
 
 		# DEBUG - set the server to only take 10 requests or run for 1 minute
-		fuzz_algorithm = CVG_Max(FuzzServer(10, 1))
+		# Normal execution: 100 requests, or 10 minutes
+		fuzz_algorithm = CVG_Max(FuzzServer(100, 10))
 		fuzz_algorithm.run_algorithm()
 
 
@@ -103,6 +104,7 @@ class Hermes():
 			pd = PDef_Creator()
 			prot = pd.genAdvancedHTML([1,1,1,1,1,1,1])
 			pd.save_protocol(prot)
+			print 'Fuzz Server Reset.'
 		except Exception as e:
 			print 'An unexpected exception has occurred while trying to reset Hermes: ' + str(e)
 

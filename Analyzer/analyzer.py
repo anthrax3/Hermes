@@ -186,7 +186,7 @@ class FBAnalyzer(object):
 
 			# calculate the severity of the bugs in the class (avg bug rank and most severe bug rank)
 			for bug in bugs_of_cname_list:
-				ranktotal += bug.rank
+				ranktotal = ranktotal + bug.rank
 				if most_severe_bugrank > bug.rank:
 					most_severe_bugrank = bug.rank
 

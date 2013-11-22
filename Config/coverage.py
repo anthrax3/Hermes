@@ -17,6 +17,7 @@ class DETAILS:
 	CVG_ADDRESS 	= "127.0.0.1"
 
 	LIST_XML_DUMP_PATH = "GA" + str(os.sep) + "Reports" + str(os.sep)
+	CVG_LOG_PATH = "GA" + str(os.sep) + "Logs" + str(os.sep)
 	
 
 
