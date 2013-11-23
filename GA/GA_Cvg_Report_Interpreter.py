@@ -28,7 +28,14 @@ from Config.fuzzserver import DETAILS as FUZZCONFIG
 
 class CVG_Max():
 
-	def __init__(self, fuzz_server):
+	def __init__(self, fuzz_server, CX=0.5, MPB=0.2, NG=30, PS=10, simple=False):
+
+		# probability of crossing two individuals (mate), mutation probability, number of generations
+		self.CXPB = CX
+		self.MUTPB = MPB
+		self.NGEN = NG
+		self.POP_SIZE = PS
+		self.SIMPLE = simple
 
 		# The fuzz server and all its functions (/Fuzz_Server/fuzzer_lib.py)
 		self.Fuzz_Server = fuzz_server
@@ -120,6 +127,7 @@ class CVG_Max():
 			self.pd_creator.reset()
 			pdef = self.pd_creator.genAdvancedHTML(individual)
 			#pdef = self.pd_creator.genStaticHTMLPageWithOneAnchor()
+			#pdef = self.pd_creator.genStaticHTMLPage()
 		except Exception as ex:
 			print 'An unexpected exception occurred while generating the protocol definition.\n%s\n' % (str(ex))
 
@@ -141,7 +149,10 @@ class CVG_Max():
 
 		# Get the latest coverage report from EMMA
 		report_file = self.get_latest_cvg_report()
-		report_created = datetime.fromtimestamp(os.stat(report_file).st_mtime)
+		if report_file:
+			report_created = datetime.fromtimestamp(os.stat(report_file).st_mtime)
+		else:
+			report_created = datetime(2010, 1, 1, 1, 1)
 
 		# If the report was NOT created after the 'started_at' timestamp, wait for the new results to show up
 		# This might take a while since it is transferred to the coverage listener which saves it to file
@@ -153,7 +164,8 @@ class CVG_Max():
 			time.sleep(1)
 			print '.',
 			report_file = self.get_latest_cvg_report()
-			report_created = datetime.fromtimestamp(os.stat(report_file).st_mtime)
+			if report_file:
+				report_created = datetime.fromtimestamp(os.stat(report_file).st_mtime)
 
 		# Now we have the proper coverage report for the evaluation we just did
 		# Now extract the selected coverage metrics and return them
@@ -216,7 +228,7 @@ class CVG_Max():
 
 
 
-		return return_value
+		return (return_value,)
 
 
 
@@ -271,70 +283,78 @@ class CVG_Max():
 		# Reason:
 		#		What if there are multiple files from the same test run?
 
-		newest = max(filelist, key=lambda x: os.stat(path + str(x)).st_mtime)
-		return path + newest
+		if filelist:
+			newest = max(filelist, key=lambda x: os.stat(path + str(x)).st_mtime)
+			return path + newest
+		else:
+			return ""
 
 
 
 	# -------------------------------------------------------------------------------------------------------------------
 	def run_algorithm(self):
-		# probability of crossing two individuals (mate), mutation probability, number of generations
-		CXPB, MUTPB, NGEN = 0.5, 0.2, 30
-
-		# was 50 before
-		POP_SIZE = 10
 		random.seed(64)
 
-		# Set the population size (number of individuals per generation) - each will have to be evaluated
-		pop = self.toolbox.population(n=POP_SIZE)
 
-		print 'Starting Evolution Algorithm...'
+		if self.SIMPLE:
+			pop = [[1,1,1,1,1,1,1]]
+			fitnesses = map(self.toolbox.evaluate, pop)
+		else:
+			# Set the population size (number of individuals per generation) - each will have to be evaluated
+			pop = self.toolbox.population(n=self.POP_SIZE)
 
-		fitnesses = map(self.toolbox.evaluate, pop)
-		for ind, fit in zip(pop, fitnesses):
-			ind.fitness.values = fit
+			print 'Starting Evolution Algorithm...'
 
-		for g in range(NGEN):
-			# Select the next generation of individuals
-			offspring = self.toolbox.select(pop, len(pop))
-			offspring = map(self.tool.clone, offspring)
-
-			# Apply the crossover function (mate) to the new generation and reset the parents' fitness values
-			for child1, child2 in zip(offspring[::2], offspring[1::2]):
-				if random.random() < CXPB:
-					self.toolbox.mate(child1, child2)
-					del child1.fitness.values
-					del child2.fitness.values
-
-			# Apply mutation function - reset any mutant's fitness values
-			for mutant in offspring:
-				if random.random() < MUTPB:
-					self.toolbox.mutate(mutant)
-					del mutant.fitness.values
-
-			# Only evaluate the individuals who have invalid fitness values
-			invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-			fitnesses = map(self.toolbox.evaluate, invalid_ind)
-			for ind, fit in zip(invalid_ind, fitnesses):
+			fitnesses = map(self.toolbox.evaluate, pop)
+			for ind, fit in zip(pop, fitnesses):
+				# DEBUG------------------------------------------------------------
+				print 'fit: ' + str(fit)
+				print 'ind: ' + str(ind)
+				# END DEBUG -------------------------------------------------------
 				ind.fitness.values = fit
 
-			# The new population is the generated offspring and mutants
-			pop[:] = offspring
+			for g in range(self.NGEN):
+				# Select the next generation of individuals
+				offspring = self.toolbox.select(pop, len(pop))
+				offspring = map(self.toolbox.clone, offspring)
+
+				# Apply the crossover function (mate) to the new generation and reset the parents' fitness values
+				for child1, child2 in zip(offspring[::2], offspring[1::2]):
+					if random.random() < self.CXPB:
+						self.toolbox.mate(child1, child2)
+						del child1.fitness.values
+						del child2.fitness.values
+
+				# Apply mutation function - reset any mutant's fitness values
+				for mutant in offspring:
+					if random.random() < self.MUTPB:
+						self.toolbox.mutate(mutant)
+						del mutant.fitness.values
+
+				# Only evaluate the individuals who have invalid fitness values
+				invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+				fitnesses = map(self.toolbox.evaluate, invalid_ind)
+				for ind, fit in zip(invalid_ind, fitnesses):
+					ind.fitness.values = fit
+
+				# The new population is the generated offspring and mutants
+				pop[:] = offspring
 
 
-		# Run some numbers to see the stats
-		fits = [ind.fitness.values[0] for ind in pop]
+			# Run some numbers to see the stats
+			fits = [ind.fitness.values[0] for ind in pop]
 
-		length = len(pop)
-		mean = sum(fits) / length
-		sum2 = sum(x*x for x in fits)
-		std = abs(sum2 / length - mean**2)**0.5
+			length = len(pop)
+			mean = sum(fits) / length
+			sum2 = sum(x*x for x in fits)
+			std = abs(sum2 / length - mean**2)**0.5
 
-		print 'Algorithm Execution Final Population Results'
-		print 'Max: ' + str(max(fits))
-		print 'Min: ' + str(min(fits))
-		print 'Avg: ' + str(mean)
-		print 'StD: ' + str(std)
+			print 'Algorithm Execution Final Population Results'
+			print 'Max: ' + str(max(fits))
+			print 'Min: ' + str(min(fits))
+			print 'Avg: ' + str(mean)
+			print 'StD: ' + str(std)
+
 
 		return pop
 

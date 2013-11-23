@@ -69,6 +69,10 @@ class EMMAXMLParser:
 	# Takes an xml file as a string then parses and extracts the required information
 	def extractEMMAData(self, xmlfile):
 
+		self.listofoverallresults = []
+		self.listofstatsresults = []
+		self.listoftargetresults = []
+
 		if not xmlfile:
 			print 'Error:\tXML file passed to EMMAXMLParser is not defined.'
 			return ''

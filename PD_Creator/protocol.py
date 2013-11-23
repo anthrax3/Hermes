@@ -11,23 +11,10 @@ s_initialize("Protocol Definition")
 
 if s_block_start("All HTML"):
     s_static("<html><head><title>Sulley Says Hello!</title></head><body>")
-    if s_block_start("t1_block"):
-        # Start of html img code
-        s_static("<img src=\"http://127.0.0.1/")
-        s_string("0.623322967477")
-        s_static("\" alt=\"")
-        s_string("alt img text")
-        s_static("\" />")
-        # End of html img code
-
-
-    s_block_end("t1_block")
-
-    s_static("<a href=\"http://127.0.0.1/")
-    s_checksum("t1_block", algorithm="sha1")
+    s_static("<applet code=\"")
+    s_string("0.296957800207")
     s_static("\">")
-    s_checksum("t1_block", algorithm="sha1")
-    s_static("</a>")
+    s_static("</applet>")
     # Start of html div lnk_and_img div
     s_static("<div")
     s_static(" class=\"")
@@ -37,14 +24,6 @@ if s_block_start("All HTML"):
     s_string("lnk_and_img div")
     s_static("\"")
     s_static(">")
-    # Start of html img code
-    s_static("<img src=\"http://127.0.0.1/")
-    s_string("0.128113768037")
-    s_static("\" alt=\"")
-    s_string("alt img text")
-    s_static("\" />")
-    # End of html img code
-
 
     s_static("</div>")
     # End of html div lnk_and_img div
@@ -97,6 +76,10 @@ if s_block_start("All HTML"):
     s_string("t5_applet div")
     s_static("\"")
     s_static(">")
+    s_static("<applet code=\"")
+    s_string("0.296957800207")
+    s_static("\">")
+    s_static("</applet>")
 
     s_static("</div>")
     # End of html div t5_applet div

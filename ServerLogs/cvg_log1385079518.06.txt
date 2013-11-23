@@ -1,9 +1,0 @@
-Coverage Value (line coverage, package granularity): 0.621666666667
-
-Other Values:
-
-Number of Values (nov): 6
-Class CVG (cc): 6.0
-Method CVG (mc): 4.55
-Block CVG (bc): 3.61
-Line CVG (lc): 3.73

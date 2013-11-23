@@ -84,6 +84,14 @@ class Hermes():
 		fuzz_algorithm.run_algorithm()
 
 
+# ---------------------------------------------------------------------------------------------------------
+	def runBasicFuzzServer(self, address="localhost", port=80):
+		from GA_Cvg_Report_Interpreter import CVG_Max
+		from fuzzer_lib import FuzzServer
+
+		fuzz_algorithm = CVG_Max(FuzzServer(100, 10), CX=0.5, MPB=0.2, NG=1, PS=1, simple=True)
+		fuzz_algorithm.run_algorithm()
+
 
 
 # ---------------------------------------------------------------------------------------------------------
@@ -199,7 +207,7 @@ if __name__ == "__main__":
 
 	arguments = sys.argv[1:]
 	try:
-		opts, args = getopt.getopt(arguments, "fcr", ["FuzzServer", "CVGListen", "reset"])
+		opts, args = getopt.getopt(arguments, "fcrb", ["FuzzServer", "CVGListen", "reset", "BasicFuzzServer"])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
@@ -211,6 +219,8 @@ if __name__ == "__main__":
 			command = "CVGListen"
 		elif opt in ("-r", "--reset"):
 			command = "reset"
+		elif opt in ("-b", "--basic"):
+			command = "basic"
 
 
 	if command and command == "FuzzServer":
@@ -222,6 +232,9 @@ if __name__ == "__main__":
 	elif command and command == "reset":
 		hermes = Hermes()
 		hermes.reset()
+	elif command and command == "basic":
+		hermes = Hermes()
+		hermes.runBasicFuzzServer()
 	else:
 		usage()
 		sys.exit(2)
