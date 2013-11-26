@@ -183,13 +183,15 @@ class CVG_Max():
 		target_data = self.emma_xml_parser.getTargetResults()
 
 		nov = 0
-		cc = 0.0
-		mc = 0.0
-		bc = 0.0
-		lc = 0.0
+		cc = []
+		mc = []
+		bc = []
+		lc = []
 		for data in target_data:
 			(tmp_nov, tmp_cc, tmp_mc, tmp_bc, tmp_lc) = self.getTargetCoverageValues(data)
 			nov = nov + tmp_nov
+
+			# Merge Lists
 			cc = cc + tmp_cc
 			mc = mc + tmp_mc
 			bc = bc + tmp_bc
@@ -203,26 +205,28 @@ class CVG_Max():
 
 		return_value = 0.0
 		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_CLASS_CVG:
-			return_value = cc/nov
+			return_value = sum(cc)/nov
 		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_METHOD_CVG:
-			return_value = mc/nov
+			return_value = sum(mc)/nov
 		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_BLOCK_CVG:
-			return_value = bc/nov
+			return_value = sum(bc)/nov
 		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_LINE_CVG:
-			return_value = lc/nov
+			return_value = sum(lc)/nov
 
 		# DEBUG ---------------------------------------------
 		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
 
 		logfile = "%scvg_log%s.txt" % (FUZZCONFIG.SERVER_LOG_PATH, time.time())
 		with open(logfile, 'w') as f:
-			txt = "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
+			txt = "Individual: " + str(individual) + '\n\n'
+			txt = txt + "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
 			txt = txt + '\n\nOther Values:\n\n'
 			txt = txt + 'Number of Values (nov): ' + str(nov) + '\n'
 			txt = txt + 'Class CVG (cc): ' + str(cc) + '\n'
 			txt = txt + 'Method CVG (mc): ' + str(mc) + '\n'
 			txt = txt + 'Block CVG (bc): ' + str(bc) + '\n'
 			txt = txt + 'Line CVG (lc): ' + str(lc) + '\n'
+			txt = txt + '\nEquation used: sum(cvg)/nov = returned number\n'
 			f.write(txt)
 			print 'Coverage log saved to %s' % (logfile)
 
@@ -239,27 +243,37 @@ class CVG_Max():
 	# returned data format: (<num_of_values>, <class cvg>, <method cvg>, <block cvg>, <line cvg>)
 	def getTargetCoverageValues(self, target_data):
 		num_of_values = 0
-		class_cvg = 0.0
-		method_cvg = 0.0
-		block_cvg = 0.0
-		line_cvg = 0.0
+		class_cvg = []
+		method_cvg = []
+		block_cvg = []
+		line_cvg = []
 
 		#print 'Type: ' + target_data.type + ', target type: ' + self.CVG_GRANULARITY_LIST[self.GRANULARITY] + ', ' + str(target_data.type == self.CVG_GRANULARITY_LIST[self.GRANULARITY])
 
 		if target_data.type == self.CVG_GRANULARITY_LIST[self.GRANULARITY]:
-			class_cvg = target_data.class_coverage
-			method_cvg = target_data.method_coverage
-			block_cvg = target_data.block_coverage
-			line_cvg = target_data.line_coverage
+			class_cvg.append(target_data.class_coverage)
+			method_cvg.append(target_data.method_coverage)
+			block_cvg.append(target_data.block_coverage)
+			line_cvg.append(target_data.line_coverage)
 			num_of_values = 1
 
 		for child in target_data.children:
 			(tmp_nov, tmp_cc, tmp_mc, tmp_bc, tmp_lc) = self.getTargetCoverageValues(child)
 			num_of_values = num_of_values + tmp_nov
-			class_cvg = class_cvg + tmp_cc
-			method_cvg = method_cvg + tmp_mc
-			block_cvg = block_cvg + tmp_bc
-			line_cvg = line_cvg + tmp_lc
+			#class_cvg = class_cvg + tmp_cc
+			#method_cvg = method_cvg + tmp_mc
+			#block_cvg = block_cvg + tmp_bc
+			#line_cvg = line_cvg + tmp_lc
+			if tmp_cc:
+				class_cvg.append(tmp_cc[0])
+			if tmp_mc:
+				method_cvg.append(tmp_mc[0])
+			if tmp_bc:
+				block_cvg.append(tmp_bc[0])
+			if tmp_lc:
+				line_cvg.append(tmp_lc[0])
+
+
 
 		return (num_of_values, class_cvg, method_cvg, block_cvg, line_cvg)
 
