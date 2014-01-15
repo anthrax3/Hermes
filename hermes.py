@@ -113,7 +113,7 @@ class Hermes():
 		try:
 			from PD_Creator.Protocol_Definition_Creator import PDef_Creator
 			pd = PDef_Creator()
-			prot = pd.genAdvancedHTML([1,1,1,1,1,1,1])
+			prot = pd.generate_html([1,1,1,1,1,1,1])
 			pd.save_protocol(prot)
 			print 'Fuzz Server Reset.'
 		except Exception as e:

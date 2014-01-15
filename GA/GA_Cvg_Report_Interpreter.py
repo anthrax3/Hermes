@@ -14,10 +14,15 @@
 #  			Caleb Shortt, 2013
 
 
-from deap import creator, base, tools
-import random, os, imp, time
-from datetime import datetime, timedelta
+
+import random
+import os
+import imp
+import time
 import traceback
+
+from datetime import datetime, timedelta
+from deap import creator, base, tools
 
 from PD_Creator.Protocol_Definition_Creator import PDef_Creator
 from PD_Creator.PD_Helpers import HelperFunctions
@@ -79,9 +84,9 @@ class CVG_Max():
 		# Change this variable to change the coverage focus (index of above list)
 		self.CVG_FOCUS = 3
 
-		# -------------------------------------------------------------------------------------------------------------------
+		# --------------------------------------------------------------------
 		#		Start of Genetic Algorithm Code (Still in Constructor)
-		# -------------------------------------------------------------------------------------------------------------------
+		# --------------------------------------------------------------------
 
 		# Create a maximizing fitness parameter for coverage
 		creator.create("FitnessMax", base.Fitness, weights=(1.0,))
@@ -94,12 +99,6 @@ class CVG_Max():
 		INDIVIDUAL_SIZE = 7
 
 		# Create a population of individuals with random init values
-
-		# The random.random is creating predictable results ... tested the random.random calling and not getting the same
-		#	thing in test ... might be in the tools.initRepeat function in the DEAP library:
-		#	DEAP -> base.py:	https://code.google.com/p/deap/source/browse/deap/base.py
-		#	DEAP -> tools.py:	https://code.google.com/p/deap/source/browse/deap/tools.py
-
 		self.toolbox = base.Toolbox()
 		self.toolbox.register("attr_bool", random.randint, 0, 1)
 		self.toolbox.register("individual", tools.initRepeat, creator.Individual, self.toolbox.attr_bool, n=INDIVIDUAL_SIZE)
@@ -113,7 +112,7 @@ class CVG_Max():
 
 
 
-	# -------------------------------------------------------------------------------------------------------------------
+	# ------------------------------------------------------------------------
 	# This function evaluates the given individual (list of flags) based on its performance in the fuzz server
 	def evaluate(self, individual):
 		# note the date and time
@@ -135,9 +134,7 @@ class CVG_Max():
 		try:
 			self.pd_creator.reset()
 			pdef = self.pd_creator.generate_html(individual)
-			#pdef = self.pd_creator.genAdvancedHTML(individual)
-			#pdef = self.pd_creator.genStaticHTMLPageWithOneAnchor()
-			#pdef = self.pd_creator.genStaticHTMLPage()
+
 		except Exception as ex:
 			print 'An unexpected exception occurred while generating the protocol definition.\n%s\n' % (str(ex))
 
@@ -206,12 +203,6 @@ class CVG_Max():
 			bc.append(data.block_coverage)
 			lc.append(data.line_coverage)
 
-			# DEBUG --------------------------------------------------------------------------
-			#print "-"*40
-			#print "NOV: " + str(nov) + ", cc: " + str(cc) + ", mc: " + str(mc) + ", bc: " + str(bc) + ", lc: " + str(lc)
-			#print "-"*40
-
-
 
 		return_value = 0.0
 		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_CLASS_CVG:
@@ -223,7 +214,7 @@ class CVG_Max():
 		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_LINE_CVG:
 			return_value = sum(lc)/nov
 
-		# DEBUG ---------------------------------------------
+		# DEBUG ------------------------------------------------------------------------------------------------------
 		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
 
 		logfile = "%scvg_log%s.txt" % (FUZZCONFIG.SERVER_LOG_PATH, time.time())
@@ -259,13 +250,13 @@ class CVG_Max():
 
 
 
-	# -------------------------------------------------------------------------------------------------------------------
+	# ------------------------------------------------------------------------
 	# Calculates the average coverage of the given targets at the set granularity level
 	# granularity is set by the self.GRANULARITY variable
 	# returns the sum of the coverages and the number of calculated values. the avg is easily calculated from this
 	# returned data format: (<num_of_values>, <class cvg>, <method cvg>, <block cvg>, <line cvg>)
 
-	# DEPRECATED--------------------------------------------
+	# DEPRECATED--------------------------------------------------------------
 	def getTargetCoverageValues(self, target_data):
 		num_of_values = 0
 		class_cvg = []
@@ -307,7 +298,7 @@ class CVG_Max():
 
 
 
-	# -------------------------------------------------------------------------------------------------------------------
+	# ------------------------------------------------------------------------
 	# Find the latest coverage report in the specified directory
 	# from http://ubuntuforums.org/showthread.php?t=1526010
 	def get_latest_cvg_report(self, path="GA/Reports/"):
@@ -330,7 +321,7 @@ class CVG_Max():
 
 
 
-	# -------------------------------------------------------------------------------------------------------------------
+	# ------------------------------------------------------------------------
 	def run_algorithm(self):
 
 		if self.SIMPLE:
@@ -344,10 +335,10 @@ class CVG_Max():
 
 			fitnesses = map(self.toolbox.evaluate, pop)
 			for ind, fit in zip(pop, fitnesses):
-				# DEBUG------------------------------------------------------------
+				# DEBUG-------------------------------------------------------
 				print 'fit: ' + str(fit)
 				print 'ind: ' + str(ind)
-				# END DEBUG -------------------------------------------------------
+				# END DEBUG --------------------------------------------------
 				ind.fitness.values = fit
 
 			for g in range(self.NGEN):

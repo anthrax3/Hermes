@@ -19,6 +19,25 @@ s_static("<head>")
 s_static("<title>")
 s_string("Sulley Says Hello!")
 s_static("</title>")
+
+# Begin <script> tag
+
+s_static("<script ")
+s_static("language=\"")
+s_string("JavaScript")
+s_static("\" ")
+s_static(">")
+
+# JavaScript Code
+
+s_static("document.getElementById(\"")
+s_string("test")
+s_static("\").innerHTML=\"")
+s_string("test")
+s_static("\"")
+s_static("</script>")
+# End <script> tag
+
 s_static("</head>")
 s_static("<body>")
 
@@ -32,16 +51,20 @@ if s_block_start("body_block"):
     s_block_end("body_block_a1_block")
 
 
-    # Begin <object> tag
+    # Begin <iframe> tag
 
-    s_static("<object>")
-    s_static("</object>")
-    # End <object> tag
+    s_static("<iframe ")
+    s_static("src=\"127.0.0.1/")
+    s_string("testpath")
+    s_static("\" ")
+    s_static(">")
+    s_static("</iframe>")
+    # End <iframe> tag
 
 
-    # Beginning of block: 0.691682228212
-    if s_block_start("0.691682228212"):
-        s_string("0.691682228212+assurance")
+    # Beginning of block: 0.548487546764
+    if s_block_start("0.548487546764"):
+        s_string("0.548487546764+assurance")
 
         # Begin <div> tag
 
@@ -57,16 +80,20 @@ if s_block_start("body_block"):
         s_block_end("body_block_div_a1_block")
 
 
-        # Begin <object> tag
+        # Begin <iframe> tag
 
-        s_static("<object>")
-        s_static("</object>")
-        # End <object> tag
+        s_static("<iframe ")
+        s_static("src=\"127.0.0.1/")
+        s_string("testpath")
+        s_static("\" ")
+        s_static(">")
+        s_static("</iframe>")
+        # End <iframe> tag
 
 
-        # Beginning of block: 0.240156320417
-        if s_block_start("0.240156320417"):
-            s_string("0.240156320417+assurance")
+        # Beginning of block: 0.276126337338
+        if s_block_start("0.276126337338"):
+            s_string("0.276126337338+assurance")
 
             # Begin <div> tag
 
@@ -82,16 +109,20 @@ if s_block_start("body_block"):
             s_block_end("body_block_div_div_a1_block")
 
 
-            # Begin <object> tag
+            # Begin <iframe> tag
 
-            s_static("<object>")
-            s_static("</object>")
-            # End <object> tag
+            s_static("<iframe ")
+            s_static("src=\"127.0.0.1/")
+            s_string("testpath")
+            s_static("\" ")
+            s_static(">")
+            s_static("</iframe>")
+            # End <iframe> tag
 
 
-            # Beginning of block: 0.387564652202
-            if s_block_start("0.387564652202"):
-                s_string("0.387564652202+assurance")
+            # Beginning of block: 0.334247908623
+            if s_block_start("0.334247908623"):
+                s_string("0.334247908623+assurance")
 
                 # Begin <div> tag
 
@@ -103,17 +134,17 @@ if s_block_start("body_block"):
                 s_static("</div>")
                 # End <div> tag
 
-            s_block_end("0.387564652202")
+            s_block_end("0.334247908623")
 
             s_static("</div>")
             # End <div> tag
 
-        s_block_end("0.240156320417")
+        s_block_end("0.276126337338")
 
         s_static("</div>")
         # End <div> tag
 
-    s_block_end("0.691682228212")
+    s_block_end("0.548487546764")
 
 s_block_end("body_block")
 
