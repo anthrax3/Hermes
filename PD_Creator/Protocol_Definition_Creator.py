@@ -1,47 +1,135 @@
+'''
 
-#
-#	Protocol Definition Creator for the sulley framework.
-#	
-#	This program takes the output from the genetic algorithm analysis, and the 
-#	target information from the analyzer, and attempts to dynamically create a
-#	protocol definition (for the Sulley framework) that maximizes coverage of the
-#	target code within a target java application.
-#	
-#	Template -----------> 
-#	Target Information ->	Protocol Definition Creator.py
-#	GA Analysiz Data --->
+	Author:	Caleb Shortt
+
+	Protocol Definition Creator for the sulley framework.
+	
+	This program takes the output from the genetic algorithm analysis, and the 
+	target information from the analyzer, and attempts to dynamically create a
+	protocol definition (for the Sulley framework) that maximizes coverage of the
+	target code within a target java application.
+	
+	Template -----------> 
+	Target Information ->	Protocol Definition Creator.py
+	GA Analysiz Data --->
+
+'''
 
 
-from PD_Helpers import SulleyHelpers, HelperFunctions
 
-import imp, os
+import imp
+import os
 
 from Config.analysis import DETAILS
-#from Analyzer.analyzer_helpers import FB_Bug, FB_PackageDefectDensity
-
-'''
-aconf = imp.load_source('DETAILS', '../Config/analysis.py')
-Bug = imp.load_source('FB_Bug', '../Analyzer/analyzer_helpers.py')
-FB_DD = imp.load_source('FB_PackageDefectDensity', '../Analyzer/analyzer_helpers.py')
-'''
+from PD_Helpers import SulleyHelpers, HelperFunctions, HTMLTreeConstructor
 
 
 class PDef_Creator(object):
 
-
-	# ------------------------------------------------------------------------------------------------------------------------
 	def __init__(self):
 		self.generator = SulleyHelpers("Protocol Definition")
+		self.html_tree = HTMLTreeConstructor("Protocol Definition")
 		#self.helper_functions = HelperFunctions()
 		#self.target_list = self.helper_functions.loadPickledFile(DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME)
 
 
-
-
-	# ------------------------------------------------------------------------------------------------------------------------
 	def reset(self):
 		self.generator = SulleyHelpers("Protocol Definition")
+		self.html_tree = HTMLTreeConstructor("Protocol Definition")
 		#self.helper_functions = HelperFunctions()
+
+
+
+	def generate_html(self, chromosome=[1, 1, 1, 1, 1, 1, 1], nesting_levels=3):
+		'''
+
+			Generate the structure of the tree based on the given chromosome
+
+			The HTML tree is already initialized with a basic html structure: 
+			html, head, title, and body nodes. Child nodes are added to these
+			to create a protocol definition.
+
+			Once the tree structure is created, a call to the traverse 
+			function returns the protocol definition in string format (in 
+			Sulley notation)
+
+		'''
+
+		#self.add_checksum_anchor_node("first_cs_a", "body", "checksumthis!")
+
+		# <img> nested in a <a> nested in a <div>
+		#self.add_div_node("first_div", "body")
+		#self.add_anchor_node("first_a", "first_div")
+		#self.add_img_node("first_img", "first_a")
+
+		# <img> nested in an <a>
+		#self.add_anchor_node("another_a", "body")
+		#self.add_text_node("first_txt", "another_a", "This is just text")
+
+		#self.add_div_node("io_div", "body")
+		#self.add_iframe_node("first_iframe", "io_div")
+		#self.add_object_node("first_object", "first_iframe")
+		#self.add_script_node("first_script", "body")
+		#self.add_applet_node("first_applet", "body")
+
+		# Define what is allowed - and what is not
+		self.html_tree.set_chromosome(chromosome)
+
+		self.html_tree.add_script_node("basic_js", "head")
+
+		# Create a Sulley block with checksum to put all content
+		self.html_tree.add_block_node("body_block", "body")
+		self.html_tree.add_checksum_anchor_node(
+			"body_block_cs", 
+			"body", 
+			"body_block")
+
+		curr_p = "body_block"
+
+		for i in range(nesting_levels):
+
+			# Create an <img> tag inside an <a> tag - wrap in block + checksum
+			self.html_tree.add_block_node(curr_p + "_a1_block", curr_p)
+			self.html_tree.add_anchor_node(curr_p + "_a1", curr_p + "_a1_block")
+			self.html_tree.add_img_node(curr_p + "_img1", curr_p + "_a1")
+			self.html_tree.add_checksum_anchor_node(
+				curr_p + "_a1_block_cs", 
+				curr_p, 
+				curr_p + "_a1_block")
+
+			# Create nested <a><img></img></a> in an iframe
+			self.html_tree.add_iframe_node(curr_p + "_if1", curr_p)
+			self.html_tree.add_anchor_node(curr_p + "_if1_a1", curr_p + "_if1")
+			self.html_tree.add_img_node(curr_p + "_if1_img1", curr_p + "_if1_a1")
+
+			self.html_tree.add_object_node(curr_p + "_obj1", curr_p)
+			self.html_tree.add_anchor_node(curr_p + "_obj1_a1", curr_p + "_obj1")
+			self.html_tree.add_img_node(curr_p + "_obj1_img1", curr_p + "_obj1")
+
+			self.html_tree.add_applet_node(curr_p + "_app1", curr_p)
+			self.html_tree.add_anchor_node(curr_p + "_app1_a1", curr_p + "_app1")
+			self.html_tree.add_img_node(curr_p + "_app1_img1", curr_p + "_app1")
+
+			self.html_tree.add_div_node(curr_p + "_div", curr_p)
+			curr_p = curr_p + "_div"
+
+		return self.html_tree.getTraversal()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -194,7 +282,7 @@ class PDef_Creator(object):
 	def genSelfPointingChecksumLink(self, block_name="test_block", indent_level=0):
 		return self.generator.addSulleyStatic("<a href=\\\"http://127.0.0.1/", indent_level) + \
 			self.generator.addSulleyChecksum("sha1", block_name, indent_level) + \
-			self.generator.addSulleyStatic("\\\">", indent_level) + \
+			self.generator.addSulleyStatic("\\\">SP CS ", indent_level) + \
 			self.generator.addSulleyChecksum("sha1", block_name, indent_level) + \
 			self.generator.addSulleyStatic("</a>", indent_level)
 
@@ -320,7 +408,9 @@ if __name__ == "__main__":
 	d = PDef_Creator()
 	#code = d.genHTMLAnchors()
 	#code = d.genAdvancedHTMLAnchors()
-	code = d.genAdvancedHTML([1,1,1,1,1,1,1])
+	#code = d.genAdvancedHTML([1,1,1,1,1,1,1])
+
+	code = d.generate_html()
 	filename = "protocol.py"
 
 	with open(filename, "w") as f:

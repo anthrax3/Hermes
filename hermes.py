@@ -46,8 +46,10 @@
 #	python hermes.py [-FuzzServer|-CVGListen]
 #
 #	Commands:
-#		-f, --FuzzServer			Starts the fuzz server. The server will initialize by default on localhost:80.
+#		-f, --FuzzServer		Starts the fuzz server. The server will initialize by default on localhost:80.
 #		-c, --CVGListen			Starts the coverage listener
+#		-b, --basic 			Starts the basic fuzz server - no genetic algorithm
+#		-r, --reset 			Resets the fuzz server
 #	
 #		A command (specified above) is required to be specified for Hermes to execute.
 #
@@ -80,7 +82,8 @@ class Hermes():
 
 		# DEBUG - set the server to only take 10 requests or run for 1 minute
 		# Normal execution: 100 requests, or 10 minutes
-		fuzz_algorithm = CVG_Max(FuzzServer(1000, 10))
+		#fuzz_algorithm = CVG_Max(FuzzServer(1000, 10))
+		fuzz_algorithm = CVG_Max(FuzzServer(1000, 30))
 		fuzz_algorithm.run_algorithm()
 
 
@@ -89,7 +92,7 @@ class Hermes():
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
 
-		fuzz_algorithm = CVG_Max(FuzzServer(1000, 10), CX=0.5, MPB=0.2, NG=1, PS=1, simple=True)
+		fuzz_algorithm = CVG_Max(FuzzServer(1000, 30), CX=0.5, MPB=0.2, NG=1, PS=1, simple=True)
 		fuzz_algorithm.run_algorithm()
 
 

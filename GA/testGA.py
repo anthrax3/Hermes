@@ -1,5 +1,5 @@
 
-import random
+import random, sys
 from deap import creator, base, tools
 
 class Max():
@@ -8,7 +8,7 @@ class Max():
 		creator.create("FitnessMax", base.Fitness, weights=(1.0,))
 		creator.create("Individual", list, fitness=creator.FitnessMax)
 
-		INDIVIDUAL_SIZE = 100
+		INDIVIDUAL_SIZE = 10
 
 		self.toolbox = base.Toolbox()
 		self.toolbox.register("attr_bool", random.randint, 0, 1)
@@ -24,19 +24,24 @@ class Max():
 
 
 	def evaluate(self, individual):
+		# Some debug code
+		print 'Evaluating Individual: ' + str(individual)
 		return sum(individual),
 
 	def main(self):
 
 		CXPB, MUTPB, NGEN = 0.5, 0.2, 40
-		random.seed(64)
-		pop = self.toolbox.population(n=300)
+		pop = self.toolbox.population(n=10)
 
 		print "Starting the Evolution Algorithm..."
 
 		fitnesses = list(map(self.toolbox.evaluate, pop))
 		for ind, fit in zip(pop, fitnesses):
 			ind.fitness.values = fit
+
+		# ----------------------------------------------------------
+		# Killing the program here - just want to see the population created
+		sys.exit()
 
 		print "Evaluated %i individuals" % (len(pop))
 
@@ -157,9 +162,14 @@ class Knapsack():
 
 
 
+class R_Test:
+	def __init__(self):
 
+		print str([random.randint(0, 1) for i in range(10)])
 
 
 if __name__ == '__main__':
-	#mx = Max()
+	#random.seed()
+	#rt = R_Test()
+	mx = Max()
 	#mti = Multi()

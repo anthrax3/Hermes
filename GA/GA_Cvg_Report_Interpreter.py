@@ -28,7 +28,7 @@ from Config.fuzzserver import DETAILS as FUZZCONFIG
 
 class CVG_Max():
 
-	def __init__(self, fuzz_server, CX=0.5, MPB=0.2, NG=30, PS=10, simple=False):
+	def __init__(self, fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, simple=False):
 
 		# probability of crossing two individuals (mate), mutation probability, number of generations
 		self.CXPB = CX
@@ -47,11 +47,14 @@ class CVG_Max():
 		self.pd_creator = PDef_Creator()
 
 		# Initialize the helper functions and get the list of targets from the analyzer
+		# The analyzer has been changed (December 6, 2013) to save a list of FB_Bug objects instead
+		#		of the xml
 		self.helper_functions = HelperFunctions()
 		self.target_list = self.helper_functions.loadPickledFile(DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME)
 
 		# Initialize an EMMA XML Parser and give it the targets we want
-		self.emma_xml_parser = EMMAXMLParser([target.name for target in self.target_list])
+		#self.emma_xml_parser = EMMAXMLParser([target.name for target in self.target_list])
+		self.emma_xml_parser = EMMAXMLParser(self.target_list)
 
 		# Granularity of analysis: 0=Package Level, 1=Source File Level, 2=Class Level, 3=Method Level
 		self.PACKAGE_LEVEL	= "package"
@@ -62,7 +65,7 @@ class CVG_Max():
 		self.CVG_GRANULARITY_LIST = [self.PACKAGE_LEVEL, self.SRCFILE_LEVEL, self.CLASS_LEVEL, self.METHOD_LEVEL]
 
 		# Change this variable to change the chosen granularity (index of above list)
-		self.GRANULARITY = 0
+		self.GRANULARITY = 3
 
 
 		# Coverage Focus
@@ -91,6 +94,12 @@ class CVG_Max():
 		INDIVIDUAL_SIZE = 7
 
 		# Create a population of individuals with random init values
+
+		# The random.random is creating predictable results ... tested the random.random calling and not getting the same
+		#	thing in test ... might be in the tools.initRepeat function in the DEAP library:
+		#	DEAP -> base.py:	https://code.google.com/p/deap/source/browse/deap/base.py
+		#	DEAP -> tools.py:	https://code.google.com/p/deap/source/browse/deap/tools.py
+
 		self.toolbox = base.Toolbox()
 		self.toolbox.register("attr_bool", random.randint, 0, 1)
 		self.toolbox.register("individual", tools.initRepeat, creator.Individual, self.toolbox.attr_bool, n=INDIVIDUAL_SIZE)
@@ -125,7 +134,8 @@ class CVG_Max():
 		# try to get the protocol definition for the given individual
 		try:
 			self.pd_creator.reset()
-			pdef = self.pd_creator.genAdvancedHTML(individual)
+			pdef = self.pd_creator.generate_html(individual)
+			#pdef = self.pd_creator.genAdvancedHTML(individual)
 			#pdef = self.pd_creator.genStaticHTMLPageWithOneAnchor()
 			#pdef = self.pd_creator.genStaticHTMLPage()
 		except Exception as ex:
@@ -142,6 +152,7 @@ class CVG_Max():
 			self.Fuzz_Server.reset()
 			self.Fuzz_Server.reloadSulleyRequest()
 			self.Fuzz_Server.run()
+			(num_responses, fsvr_start, fsvr_end) = self.Fuzz_Server.getStats()
 		except Exception as e:
 			print 'An unexpected error has occurred while evaluating the fuzz server.\n%s\n' % (str(e))
 			traceback.print_exc()
@@ -182,25 +193,24 @@ class CVG_Max():
 		self.emma_xml_parser.extractEMMAData(report_xml)
 		target_data = self.emma_xml_parser.getTargetResults()
 
-		nov = 0
+		
+		nov = len(target_data)
 		cc = []
 		mc = []
 		bc = []
 		lc = []
 		for data in target_data:
-			(tmp_nov, tmp_cc, tmp_mc, tmp_bc, tmp_lc) = self.getTargetCoverageValues(data)
-			nov = nov + tmp_nov
-
 			# Merge Lists
-			cc = cc + tmp_cc
-			mc = mc + tmp_mc
-			bc = bc + tmp_bc
-			lc = lc + tmp_lc
+			cc.append(data.class_coverage)
+			mc.append(data.method_coverage)
+			bc.append(data.block_coverage)
+			lc.append(data.line_coverage)
 
 			# DEBUG --------------------------------------------------------------------------
 			#print "-"*40
 			#print "NOV: " + str(nov) + ", cc: " + str(cc) + ", mc: " + str(mc) + ", bc: " + str(bc) + ", lc: " + str(lc)
 			#print "-"*40
+
 
 
 		return_value = 0.0
@@ -219,14 +229,27 @@ class CVG_Max():
 		logfile = "%scvg_log%s.txt" % (FUZZCONFIG.SERVER_LOG_PATH, time.time())
 		with open(logfile, 'w') as f:
 			txt = "Individual: " + str(individual) + '\n\n'
-			txt = txt + "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
+
+			# (num_responses, fsvr_start, fsvr_end)
+
+			txt = txt + "Number of responses from Fuzz Server: " + str(num_responses) + '\n'
+			txt = txt + "Start Time of Fuzz Server:\t\t" + str(fsvr_start) + '\n'
+			txt = txt + "End Time of Fuzz Server:\t\t" + str(fsvr_end) + '\n\n'
+			txt = txt + "Average Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
+			txt = txt + '\nEquation used: sum(cvg)/nov = returned number\n'
+			txt = txt + '\nTargets:'
+
+			for target in target_data:
+				txt = txt + '\n\t' + str(target.name) + '\n\tBug Type:\t' + str(target.type)
+				txt = txt + '\n\t' + '-'*30
+
 			txt = txt + '\n\nOther Values:\n\n'
 			txt = txt + 'Number of Values (nov): ' + str(nov) + '\n'
-			txt = txt + 'Class CVG (cc): ' + str(cc) + '\n'
-			txt = txt + 'Method CVG (mc): ' + str(mc) + '\n'
-			txt = txt + 'Block CVG (bc): ' + str(bc) + '\n'
-			txt = txt + 'Line CVG (lc): ' + str(lc) + '\n'
-			txt = txt + '\nEquation used: sum(cvg)/nov = returned number\n'
+			txt = txt + 'Class CVG (cc):\t\t' + str(cc) + '\n'
+			txt = txt + 'Methd CVG (mc):\t\t' + str(mc) + '\n'
+			txt = txt + '\tBlock CVG (bc):\t' + str(bc) + '\n'
+			txt = txt + '\tLine CVG (lc):\t' + str(lc) + '\n'
+			
 			f.write(txt)
 			print 'Coverage log saved to %s' % (logfile)
 
@@ -241,6 +264,8 @@ class CVG_Max():
 	# granularity is set by the self.GRANULARITY variable
 	# returns the sum of the coverages and the number of calculated values. the avg is easily calculated from this
 	# returned data format: (<num_of_values>, <class cvg>, <method cvg>, <block cvg>, <line cvg>)
+
+	# DEPRECATED--------------------------------------------
 	def getTargetCoverageValues(self, target_data):
 		num_of_values = 0
 		class_cvg = []
@@ -307,8 +332,6 @@ class CVG_Max():
 
 	# -------------------------------------------------------------------------------------------------------------------
 	def run_algorithm(self):
-		random.seed(64)
-
 
 		if self.SIMPLE:
 			pop = [[1,1,1,1,1,1,1]]

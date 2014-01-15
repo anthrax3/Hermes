@@ -57,8 +57,13 @@ class EMMAXMLParser:
 
 	# ---------------------------------------------------------------------------------------------------
 	def __init__(self, targets=[]):
+		# Stores the overall coverage for the entire project (all packages)
 		self.listofoverallresults = []
+
+		# Stores the statistics (num pkgs, lines, classes, etc) for the project
 		self.listofstatsresults = []
+
+		# Stores the XML structure of ONLY the packages of our targets
 		self.listoftargetresults = []
 
 		self.target_list = targets
@@ -66,16 +71,21 @@ class EMMAXMLParser:
 
 
 	# ---------------------------------------------------------------------------------------------------
-	# Takes an xml file as a string then parses and extracts the required information
+	# Takes an xml file (generated from EMMA) as a string then parses and extracts the required information
+	# that pertains to the targets specified in self.target_list (All of the coverage data for only the 
+	# targets)
+	#
+	# Returns the success of the process: True, False
 	def extractEMMAData(self, xmlfile):
 
+		
 		self.listofoverallresults = []
 		self.listofstatsresults = []
 		self.listoftargetresults = []
 
 		if not xmlfile:
 			print 'Error:\tXML file passed to EMMAXMLParser is not defined.'
-			return ''
+			return False
 
 		xmltree = et.fromstring(xmlfile)
 
@@ -105,10 +115,46 @@ class EMMAXMLParser:
 		# 	Get target's results (Only if a target list has been specified)
 		# -----------------------------------------------------------------------------------------------
 		if self.target_list:
-			for item in xmltree.findall('data/all/package'):
-				if item.get("name") in self.target_list:
-					target_data = self.constructTargetTree(item)
-					self.listoftargetresults.append(target_data)
+
+			for bug in self.target_list:
+				pkg = bug.classname.rsplit('.', 1)[0]
+				match_str = "data/all/package[@name='" + str(pkg) + \
+								"']/srcfile[@name='" + str(bug.src_file) + \
+								"']/class[@name='" + str(bug.getClass()) + \
+								"']"
+
+				targetdata = TargetData()
+				targetdata.name = str(bug.classname) + " -> " + str(bug.methodname) + "()"
+				targetdata.type = str(bug.bugtype)
+
+				class_el = xmltree.find(match_str)
+				if class_el:
+					cc_el = class_el.find("coverage[@type='class, %']")
+					match = re.findall(r'[0-9]+', cc_el.get("value"))
+					targetdata.class_coverage = float(match[0]) / 100
+
+
+				for mthd_el in xmltree.findall(match_str + "/method"):
+					if mthd_el.get("name").startswith(bug.methodname):
+						for cvg_el in mthd_el.findall('coverage'):
+							match = re.findall(r'[0-9]+', cvg_el.get("value"))
+							if cvg_el.get("type") == "class, %":
+								targetdata.class_coverage = float(match[0]) / 100
+							elif cvg_el.get("type") == "method, %":
+								targetdata.method_coverage = float(match[0]) / 100
+							elif cvg_el.get("type") == "block, %":
+								targetdata.block_coverage = float(match[0]) / 100
+							elif cvg_el.get("type") == "line, %":
+								targetdata.line_coverage = float(match[0]) / 100
+
+
+				self.listoftargetresults.append(targetdata)
+
+		return True
+
+
+
+
 
 
 
@@ -162,6 +208,10 @@ class EMMAXMLParser:
 	# ---------------------------------------------------------------------------------------------------
 	def getTargetResults(self):
 		return self.listoftargetresults
+
+
+	def getTargets(self):
+		return self.target_list
 
 
 

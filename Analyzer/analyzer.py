@@ -4,11 +4,12 @@ import pickle
 import sys, getopt
 
 from analyzer_helpers import FB_PackageDefectDensity, FB_Bug
+import math
 import bugranks
 
 import imp
-
-cvg = imp.load_source('DETAILS', '../Config/analysis.py')
+from Config.analysis import DETAILS
+#cvg = imp.load_source('DETAILS', '../Config/analysis.py')
 
 
 #
@@ -33,7 +34,7 @@ class FBAnalyzer(object):
 	parser_results_list = []
 	parser_defdens_list = []
 
-	SAVE_FILENAME = cvg.DETAILS.TARGET_FILENAME
+	SAVE_FILENAME = DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME
 
 
 	def __init__(self, tmpPR='parse_results.txt', tmpDD='parse_densities.txt'):
@@ -112,12 +113,79 @@ class FBAnalyzer(object):
 
 			# Check child data for info
 			for child in bugdata:
+
+
+				tag_find_list = [item for item in child if item[0] == 'tag']
+				tag = ''
+				if tag_find_list and len(tag_find_list) > 0:
+					tag = tag_find_list.pop()[1]
+
+				#print 'Child: ' + str(child) + '\n'
+
+
+				# ----------------------------------------------------------------------
+				# NEW CODE
+
+				# Get the classname
+				if tag == 'Class':
+					cname_list = [item for item in child if item[0] == 'classname']
+					if cname_list and len(cname_list) > 0:
+						# cname_list is a list of tuples - get the second element in the tuple
+						#Ex: [('classname', 'package.module.Class'), ...]
+						tempBug.classname = str(cname_list.pop()[1])
+
+				# Get the method name, classname, context, context name, and role
+				elif tag == 'Method':
+					# The method that doesn't have a role is the method in the actual class
+					# The method that has a role is the method called (a system call)
+
+					mthd_cname_list = [item for item in child if item[0] == 'classname']
+					mname_list = [item for item in child if item[0] == 'name']
+
+					role_list = [item for item in child if item[0] == 'role']
+					if role_list and len(role_list) > 0:
+						tempBug.methodrole = str(role_list.pop()[1])
+
+						# If this is the role method, the classname will provide the method context
+						if mthd_cname_list and len(mthd_cname_list) > 0:
+							tempBug.methodcontext = str(mthd_cname_list.pop()[1])
+
+						if mname_list and len(mname_list) > 0:
+							tempBug.methodcontextname = str(mname_list.pop()[1])
+
+					else:
+						if mthd_cname_list and len(mthd_cname_list) > 0:
+							tempBug.methodclassname = str(mthd_cname_list.pop()[1])
+
+						if mname_list and len(mname_list) > 0:
+							tempBug.methodname = str(mname_list.pop()[1])
+
+				# Get the line numbers that the bug is found on (might be multiple: start - end)
+				elif tag == 'SourceLine':
+					start_list = [item for item in child if item[0] == 'start']
+					end_list = [item for item in child if item[0] == 'end']
+					src_list = [item for item in child if item[0] == 'sourcefile']
+
+
+					if start_list and len(start_list) > 0:
+						tempBug.start_line = int(start_list.pop()[1])
+
+					if end_list and len(end_list) > 0:
+						tempBug.end_line = int(end_list.pop()[1])
+					if src_list and len(src_list) > 0:
+						tempBug.src_file = str(src_list.pop()[1])
+
+
+				# END OF NEW CODE
+				# ----------------------------------------------------------------------
+				'''
 				classname_list = [item for item in child if item[0] == 'classname']
 				methodrole_list = [item for item in child if item[0] == 'role']
 
 				# If it is the classname tag (will ONLY have the classname in it)
 				if len(child) == 1:
 					if len(classname_list) > 0:
+						# Take the first classname - as they will all be the same
 						tempBug.classname = str(classname_list.pop()[1])
 
 				elif len(methodrole_list) > 0:
@@ -125,8 +193,12 @@ class FBAnalyzer(object):
 
 					if len(classname_list) > 0:
 						tempBug.methodclassname = str(classname_list.pop()[1])
+				'''
 
 			self.buglist.append(tempBug)
+
+			#print '-------------------------------------------------------------'
+
 
 
 		labels = self.parser_defdens_list.pop(0)
@@ -173,6 +245,22 @@ class FBAnalyzer(object):
 
 			bug.rank = tmp_rank
 
+
+
+		num_bugs_total = len(self.buglist)
+		num_bugs_keep = int(math.ceil(DETAILS.PERCENT_CODE_TO_KEEP * num_bugs_total))
+
+		print 'Total Bugs: ' + str(num_bugs_total) + ', keeping: ' + str(num_bugs_keep) + \
+				' (Top ' + str(DETAILS.PERCENT_CODE_TO_KEEP * 100) + '% of offending code)'
+
+		self.buglist.sort(key = lambda x: x.rank)
+
+		target_list = self.buglist[:num_bugs_keep]
+
+
+
+
+		'''
 
 		# Calculate the average severity of the bugs in each class
 		for dd in self.defectdensitieslist:
@@ -224,6 +312,8 @@ class FBAnalyzer(object):
 			# Just in case there are not enough results to hit the max target
 			iterations = iterations + 1
 
+		'''
+
 
 		# At this point, we have a target package that contains the most severe bugs from static analysis and a list of those bugs
 		# along with the defect density metrics to prove it and all of the data that describes the bug types and context
@@ -244,6 +334,7 @@ class FBAnalyzer(object):
 		# Save the information to a file somehow (pickle?)
 		#--------------------------------------------------------------------------------------------------
 
+		#print 'saving ' + str(len(target_list)) + ' bugs. : ' + str(target_list) + '\n\nTo: ' + self.SAVE_FILENAME
 		self.saveThis(target_list, self.SAVE_FILENAME)
 
 

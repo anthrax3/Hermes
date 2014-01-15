@@ -1,7 +1,12 @@
+'''
 
+    Author: HTMLTreeConstructor
 
-# Auto Generated Protocol Definition
-# SulleyHelpers.py
+    Description:
+        Auto Generated Protocol Definition
+        Source: PDHelpers.py
+
+'''
 
 
 from sulley import *
@@ -9,61 +14,108 @@ import random
 
 s_initialize("Protocol Definition")
 
-if s_block_start("All HTML"):
-    s_static("<html><head><title>Sulley Says Hello!</title></head><body>")
-    if s_block_start("t1_block"):
-        # Start of html anchor code
-        s_static("<a href=\"http://127.0.0.1/")
-        s_string("0.501348634673")
-        s_static("\">test 1</a>")
-        # End of html anchor code
+s_static("<html>")
+s_static("<head>")
+s_static("<title>")
+s_string("Sulley Says Hello!")
+s_static("</title>")
+s_static("</head>")
+s_static("<body>")
+
+# Beginning of block: body_block
+if s_block_start("body_block"):
+    s_string("body_block+assurance")
+
+    # Beginning of block: body_block_a1_block
+    if s_block_start("body_block_a1_block"):
+        s_string("body_block_a1_block+assurance")
+    s_block_end("body_block_a1_block")
 
 
-    s_block_end("t1_block")
+    # Begin <object> tag
 
-    s_static("<a href=\"http://127.0.0.1/")
-    s_checksum("t1_block", algorithm="sha1")
-    s_static("\">")
-    s_checksum("t1_block", algorithm="sha1")
-    s_static("</a>")
-    # Start of html iFrame test 2
-    s_static("<iframe")
-    s_static(" name=\"")
-    s_string("test 2")
-    s_static("\"")
-    s_static(" src=\"")
-    s_string("test 2 source")
-    s_static("\"")
-    s_static(" onload=\"")
-    s_string("test")
-    s_static("\"")
-    s_static(">")
-    # Start of html anchor code
-    s_static("<a href=\"http://127.0.0.1/")
-    s_string("0.381066116326")
-    s_static("\">test 1</a>")
-    # End of html anchor code
+    s_static("<object>")
+    s_static("</object>")
+    # End <object> tag
 
 
-    s_static("</iframe>")
-    # End of html iFrame test 2
+    # Beginning of block: 0.691682228212
+    if s_block_start("0.691682228212"):
+        s_string("0.691682228212+assurance")
 
-    s_static("<applet code=\"")
-    s_string("0.939222960705")
-    s_static("\">")
-    # Start of html anchor code
-    s_static("<a href=\"http://127.0.0.1/")
-    s_string("0.381066116326")
-    s_static("\">test 1</a>")
-    # End of html anchor code
+        # Begin <div> tag
 
-    s_static("</applet>")
+        s_static("<div ")
+        s_static("id=\"")
+        s_string("body_block_div")
+        s_static("\" ")
+        s_static(">")
 
-s_block_end("All HTML")
+        # Beginning of block: body_block_div_a1_block
+        if s_block_start("body_block_div_a1_block"):
+            s_string("body_block_div_a1_block+assurance")
+        s_block_end("body_block_div_a1_block")
 
-s_static("<a href=\"http://127.0.0.1/")
-s_checksum("All HTML", algorithm="sha1")
-s_static("\">")
-s_checksum("All HTML", algorithm="sha1")
-s_static("</a>")
-s_static("</body></html>")
+
+        # Begin <object> tag
+
+        s_static("<object>")
+        s_static("</object>")
+        # End <object> tag
+
+
+        # Beginning of block: 0.240156320417
+        if s_block_start("0.240156320417"):
+            s_string("0.240156320417+assurance")
+
+            # Begin <div> tag
+
+            s_static("<div ")
+            s_static("id=\"")
+            s_string("body_block_div_div")
+            s_static("\" ")
+            s_static(">")
+
+            # Beginning of block: body_block_div_div_a1_block
+            if s_block_start("body_block_div_div_a1_block"):
+                s_string("body_block_div_div_a1_block+assurance")
+            s_block_end("body_block_div_div_a1_block")
+
+
+            # Begin <object> tag
+
+            s_static("<object>")
+            s_static("</object>")
+            # End <object> tag
+
+
+            # Beginning of block: 0.387564652202
+            if s_block_start("0.387564652202"):
+                s_string("0.387564652202+assurance")
+
+                # Begin <div> tag
+
+                s_static("<div ")
+                s_static("id=\"")
+                s_string("body_block_div_div_div")
+                s_static("\" ")
+                s_static(">")
+                s_static("</div>")
+                # End <div> tag
+
+            s_block_end("0.387564652202")
+
+            s_static("</div>")
+            # End <div> tag
+
+        s_block_end("0.240156320417")
+
+        s_static("</div>")
+        # End <div> tag
+
+    s_block_end("0.691682228212")
+
+s_block_end("body_block")
+
+s_static("</body>")
+s_static("</html>")

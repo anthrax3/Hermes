@@ -80,10 +80,16 @@ class FBParser(object):
 			listOfResults = []
 			for el in xmltree.findall('BugInstance'):
 				tempList = []
-				tempList.append(el.items())
+
+				list_items = el.items()
+				list_items.append( ('tag', el.tag) )
+
+				tempList.append(list_items)
 
 				for ch in el.getchildren():
-					tempList.append(ch.items())
+					tmp = ch.items()
+					tmp.append( ('tag', ch.tag) )
+					tempList.append(tmp)
 
 				listOfResults.append(tempList)
 

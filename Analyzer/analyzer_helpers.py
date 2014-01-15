@@ -31,9 +31,18 @@ class FB_Bug(object):
 		self._isstatic = ''
 		self._abbrev = ''
 
+		self.clabel = ''
+
+		self._src_file = ''
+		self._start_line = 0
+		self._end_line = 0
+
 		# Method Information
 		self._methodrole = ''
+		self._methodcontext = ''
+		self._methodcontextname = ''
 		self._methodclassname = ''
+		self._methodname = ''
 
 		# Calculated Bug Rank
 		self._rank = 0
@@ -43,7 +52,28 @@ class FB_Bug(object):
 		print "FindBug Bug (" + str(self._category) + ")"
 		print "\tType:\t\t" + str(self._bugtype) + " (Priority " + str(self._priority) + ")" 
 		print "\tClass:\t\t" + str(self._classname)
+		print "\tSrc File:\t" + str(self._src_file)
 		print "\tBug Rank:\t" + str(self._rank)
+		print '\tStart Line:\t' + str(self._start_line)
+		print '\tEnd Line:\t' + str(self._end_line)
+		print '\tMethod Name:\t' + str(self._methodname)
+		print '\tMethod Class:\t' + str(self._methodclassname)
+		print '\tMethod Role:\t' + str(self._methodrole)
+		print '\tMethod Context:\t' + str(self._methodcontext)
+		print '\tMethod Ctx Name:\t' + str(self._methodcontextname)
+
+
+	def getClass(self):
+		if self.clabel and len(self.clabel) > 0:
+			return self.clabel
+		else:
+			if self._classname and len(self._classname) > 0:
+				self.clabel = self._classname.split('.')[-1]
+				return self.clabel
+			return ''
+
+		
+	# ------------------------------------------------------
 
 
 	@property
@@ -110,6 +140,44 @@ class FB_Bug(object):
 
 
 	@property
+	def rank(self):
+		return self._rank
+
+	@rank.setter
+	def rank(self, value):
+		self._rank = value
+		
+
+	@property
+	def start_line(self):
+		return self._start_line
+
+	@start_line.setter
+	def start_line(self, value):
+		self._start_line = value
+
+
+	@property
+	def end_line(self):
+		return self._end_line
+
+	@end_line.setter
+	def end_line(self, value):
+		self._end_line = value
+
+
+	@property
+	def src_file(self):
+		return self._src_file
+
+	@src_file.setter
+	def src_file(self, value):
+		self._src_file = value
+
+
+	# ------------------------------------------------------
+
+	@property
 	def methodrole(self):
 		return self._methodrole
 
@@ -128,12 +196,32 @@ class FB_Bug(object):
 
 
 	@property
-	def rank(self):
-		return self._rank
+	def methodname(self):
+		return self._methodname
 
-	@rank.setter
-	def rank(self, value):
-		self._rank = value
+	@methodname.setter
+	def methodname(self, value):
+		self._methodname = value
+
+
+	@property
+	def methodcontext(self):
+		return self._methodcontext
+
+	@methodcontext.setter
+	def methodcontext(self, value):
+		self._methodcontext = value
+
+
+	@property
+	def methodcontextname(self):
+		return self._methodcontextname
+
+	@methodcontextname.setter
+	def methodcontextname(self, value):
+		self._methodcontextname = value
+
+	# ------------------------------------------------------
 
 
 

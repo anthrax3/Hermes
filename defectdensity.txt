@@ -1,0 +1,15 @@
+kind	name	density/KNCSS	bugs	NCSS	
+project		5.0	98	19778	
+package	org.lobobrowser.context	12.5	6	479	
+package	org.lobobrowser.gui	6.0	13	2174	
+package	org.lobobrowser.main	10.6	10	942	
+class	org.lobobrowser.main.ReuseManager	58.8	5	85	
+package	org.lobobrowser.request	9.5	19	1993	
+package	org.lobobrowser.store	26.6	25	941	
+class	org.lobobrowser.store.CacheManager	36.6	6	164	
+class	org.lobobrowser.store.StorageManager	50.8	6	118	
+class	org.lobobrowser.store.TempFileManager	61.7	5	81	
+package	org.lobobrowser.util	8.4	15	1795	
+class	org.lobobrowser.util.History$TimedEntry	156.3	5	32	
+package	org.lobobrowser.util.io	24.4	6	246	
+class	org.lobobrowser.util.io.IORoutines	49.6	6	121	

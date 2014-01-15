@@ -35,6 +35,10 @@ class StopServerException(Exception):
 # ------------------------------------------------------------------------------------------------
 class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 
+	def setup(self):
+		BaseHTTPRequestHandler.setup(self)
+		self.request.settimeout(10)
+
 	def __init__(self, context, *args):
 		self.context = context
 
@@ -45,7 +49,7 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 		self.Request = self.context["S_REQ"]
 
 		BaseHTTPRequestHandler.__init__(self, *args)
-
+		
 
 	def do_HEAD(self):
 		s.send_response(200)
@@ -53,9 +57,7 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 		s.end_headers()
 
 	def do_GET(self):
-		#print '%s\tGET request received.' % (datetime.now())
-
-		# Each request has 60 seconds to finish, else it times out
+		# Each request has x seconds to finish, else it times out
 		self.rfile._sock.settimeout(10)
 		self.wfile._sock.settimeout(10)
 
@@ -110,6 +112,7 @@ class FuzzServer():
 		self.Sulley_Request = s_get('Protocol Definition')
 
 
+	# --------------------------------------------------------------------------------------------
 	# Overriding function that wipes a given request from the sulley framework
 	# Allows for the same request name to be re-initialized and used multiple times
 	def un_initialize_sulley_request(self, name):
@@ -131,26 +134,39 @@ class FuzzServer():
 		port = 80
 
 		server_address = (host, port)
-		httpd = HTTPServer(server_address, self.argHandler)
+		self.httpd = HTTPServer(server_address, self.argHandler)
+		self.httpd.timeout = 10
+		self.httpd.handle_timeout = self.server_off
 
 		print 'http server is running on %s:%s ...\n\n' % (host, port)
 
 		try:
-			START_TIME = datetime.now()
+			self.START_TIME = datetime.now()
 
 			while self.server_running:
-				httpd.handle_request()
+				print 'Waiting To Handle Request...'
+				self.httpd.handle_request()
 
 		except KeyboardInterrupt:
 			pass
-		httpd.server_close()
+		self.server_off
 		print 'Server stopped on %s:%s' % (host, port)
+
+
+	def server_off(self):
+		self.server_running = False
+		self.httpd.server_close()
 
 
 	def reset(self):
 		self.server_running = True
 		self.CURRENT_RESPONSES = 0
+		self.END_TIME = None
 		self.START_TIME = None
+
+
+	def getStats(self):
+		return (self.CURRENT_RESPONSES, self.START_TIME, self.END_TIME)
 
 
 	def argHandler(self, *args):
@@ -159,21 +175,24 @@ class FuzzServer():
 			endtime = self.START_TIME + timedelta(minutes=self.MAX_TIME_MINS)
 			if datetime.now() > endtime:
 				self.server_running = False
+				self.END_TIME = datetime.now()
 		else:
 			self.START_TIME = datetime.now()
 
 		if self.CURRENT_RESPONSES >= self.MAX_RESPONSES:
 			self.server_running = False
+			self.END_TIME = datetime.now()
 
-		self.CURRENT_RESPONSES = self.CURRENT_RESPONSES + 1
+		if self.server_running:
+			self.CURRENT_RESPONSES = self.CURRENT_RESPONSES + 1
 
-		FuzzHTTPRequestHandler({
-			"MAX_R": self.MAX_RESPONSES, 
-			"MAX_T": self.MAX_TIME_MINS, 
-			"CUR_R": self.CURRENT_RESPONSES, 
-			"SRT_T": self.START_TIME,
-			"S_REQ": self.Sulley_Request}, 
-			*args)
+			FuzzHTTPRequestHandler({
+				"MAX_R": self.MAX_RESPONSES, 
+				"MAX_T": self.MAX_TIME_MINS, 
+				"CUR_R": self.CURRENT_RESPONSES, 
+				"SRT_T": self.START_TIME,
+				"S_REQ": self.Sulley_Request}, 
+				*args)
 		
 
 # DEBUG
