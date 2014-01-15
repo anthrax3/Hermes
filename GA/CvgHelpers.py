@@ -82,6 +82,7 @@ class EMMAXMLParser:
 		self.listofoverallresults = []
 		self.listofstatsresults = []
 		self.listoftargetresults = []
+		self.list_target_complement = []
 
 		if not xmlfile:
 			print 'Error:\tXML file passed to EMMAXMLParser is not defined.'
@@ -93,7 +94,6 @@ class EMMAXMLParser:
 		# 	Get Overall Results
 		# -----------------------------------------------------------------------------------------------
 		# total packages, classes, methods, executable files, executable lines
-		self.listofstatsresults = []
 		for el in xmltree.findall('stats'):
 			for ch in el.getchildren():
 				self.listofstatsresults.append( ch.get("value") )
@@ -114,7 +114,14 @@ class EMMAXMLParser:
 		# -----------------------------------------------------------------------------------------------
 		# 	Get target's results (Only if a target list has been specified)
 		# -----------------------------------------------------------------------------------------------
+		'''
+			Gets class cvg, mthd cvg, line cvg, and block cvg for the 
+			target (at the method level - class cvg is one level up)
+		'''
+
+		'''
 		if self.target_list:
+			
 
 			for bug in self.target_list:
 				pkg = bug.classname.rsplit('.', 1)[0]
@@ -149,8 +156,84 @@ class EMMAXMLParser:
 
 
 				self.listoftargetresults.append(targetdata)
+		'''
+
+		self.extract_coverage_values(xmltree)
 
 		return True
+
+
+
+	def extract_coverage_values(self, xmltree):
+		'''
+			Traverses the xml structure and populates the 
+			'listoftargetresults' and 'list_target_complement' variables
+		'''
+
+		if not xmltree:
+			return False
+
+		for pkg in xmltree.findall("data/all/package"):
+			for src_file in pkg.findall("srcfile"):
+				for clss in src_file.findall("class"):
+					for mthd in clss.findall("method"):
+
+						data = TargetData()
+						data.name = clss.get("name") + "->" + mthd.get("name")
+						data.class_coverage = self.get_class_coverage(clss)
+						self.extract_coverage_values(mthd, data)
+
+						bug = get_associated_bug(src_file, clss, mthd)
+						if bug:
+							data.type = bug.bugtype
+							self.listoftargetresults.append(data)
+						else:
+							self.list_target_complement.append(data)
+						
+
+	def get_associated_bug(self, src_file, clss, mthd):
+		'''
+			Returns the bug associated with the path specified (xml nodes).
+			If no bug exists, None is returned
+		'''
+
+		str_src = src_file.get("name")
+		str_class = clss.get("name")
+		str_mthd = mthd.get("name")
+
+		for bug in self.target_list:
+			if (str_src == bug.src_file and str_class == bug.classname and 
+				str_mthd == bug.methodname):
+				return bug
+		return None
+
+
+	def get_class_coverage(self, xml_node):
+		el = xml_node.find("coverage[@type='class, %']")
+		match = re.findall(r'[0-9]+', el.get("value"))
+		if match:
+			return float(match[0]) / 100
+		else:
+			return 0.0
+
+
+	def extract_coverage_values(self, xml_node, data):
+		'''
+			Get all coverage values from the specified xml_node.
+			Store the values in the specified data element (TargetData)
+		'''
+
+		for cvg_el in xml_node.findall('coverage'):
+			match = re.findall(r'[0-9]+', cvg_el.get("value"))
+			if cvg_el.get("type") == "class, %":
+				data.class_coverage = float(match[0]) / 100
+			elif cvg_el.get("type") == "method, %":
+				data.method_coverage = float(match[0]) / 100
+			elif cvg_el.get("type") == "block, %":
+				data.block_coverage = float(match[0]) / 100
+			elif cvg_el.get("type") == "line, %":
+				data.line_coverage = float(match[0]) / 100
+
 
 
 
@@ -195,19 +278,20 @@ class EMMAXMLParser:
 
 
 
-	# ---------------------------------------------------------------------------------------------------
 	def getOverallResults(self):
 		return self.listofoverallresults
 
 
-	# ---------------------------------------------------------------------------------------------------
 	def getStatsResults(self):
 		return self.listofstatsresults
 
 
-	# ---------------------------------------------------------------------------------------------------
 	def getTargetResults(self):
 		return self.listoftargetresults
+
+
+	def getTargetComplement(self):
+		return self.list_target_complement
 
 
 	def getTargets(self):

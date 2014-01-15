@@ -88,11 +88,19 @@ class CVG_Max():
 		#		Start of Genetic Algorithm Code (Still in Constructor)
 		# --------------------------------------------------------------------
 
-		# Create a maximizing fitness parameter for coverage
-		creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+		'''
+			Create a maximizing fitness parameter for mean coverage of target 
+			code, minimizing parameter for the target cvg standard deviation, 
+			and a minimizing parameter for non-target code coverage (target 
+			complement)
 
-		# Each individual will be a list of flags that say which attribute is added, and which is not
-		creator.create("Individual", list, fitness=creator.FitnessMax)
+			Goal:
+				Max target cvg while minimizing std deviation, and other cvg
+		'''
+		creator.create("CvgMaxMin", base.Fitness, weights=(1.0, -1.0, -1.0))
+
+		# Each individual will be a list of flags that say which attribute is added, and which is not of target code 
+		creator.create("Individual", list, fitness=creator.CvgMaxMin)
 
 		# Right now there are 7 features for each individual (In this order):
 		# [Links Enabled, imgs enabled, divs enabled, iframes enabled, objects enabled, js enabled, applets enabled]
@@ -186,11 +194,12 @@ class CVG_Max():
 
 
 		# Extract the target information, parse the results, and format them in a TargetData tree structure
-		# NOTE: target_data is a list of TargetData objects
+		# NOTE: tgt_data and tgt_comp are lists of TargetData objects
 		self.emma_xml_parser.extractEMMAData(report_xml)
-		target_data = self.emma_xml_parser.getTargetResults()
+		tgt_data = self.emma_xml_parser.getTargetResults()
+		tgt_comp = self.emma_xml_parser.getTargetComplement()
 
-		
+		'''
 		nov = len(target_data)
 		cc = []
 		mc = []
@@ -203,7 +212,6 @@ class CVG_Max():
 			bc.append(data.block_coverage)
 			lc.append(data.line_coverage)
 
-
 		return_value = 0.0
 		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_CLASS_CVG:
 			return_value = sum(cc)/nov
@@ -214,9 +222,16 @@ class CVG_Max():
 		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_LINE_CVG:
 			return_value = sum(lc)/nov
 
+		'''
+
+		(tgt_rv, tgt_std, tgt_cvg_values) = self.crunch_cvg_data(tgt_data)
+		(comp_rv, comp_std, comp_cvg_values) = self.crunch_cvg_data(tgt_comp)
+
 		# DEBUG ------------------------------------------------------------------------------------------------------
 		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
 
+
+		'''
 		logfile = "%scvg_log%s.txt" % (FUZZCONFIG.SERVER_LOG_PATH, time.time())
 		with open(logfile, 'w') as f:
 			txt = "Individual: " + str(individual) + '\n\n'
@@ -230,7 +245,7 @@ class CVG_Max():
 			txt = txt + '\nEquation used: sum(cvg)/nov = returned number\n'
 			txt = txt + '\nTargets:'
 
-			for target in target_data:
+			for target in tgt_data:
 				txt = txt + '\n\t' + str(target.name) + '\n\tBug Type:\t' + str(target.type)
 				txt = txt + '\n\t' + '-'*30
 
@@ -243,10 +258,124 @@ class CVG_Max():
 			
 			f.write(txt)
 			print 'Coverage log saved to %s' % (logfile)
+		'''
+
+		self.save_cvg_log(
+			tgt_data, 
+			(tgt_rv, tgt_std), 
+			tgt_cvg_values, 
+			(comp_rv, comp_std), 
+			(num_responses, fsvr_start, fsvr_end))
+
+
+		return (tgt_rv, tgt_std, comp_rv)
+
+
+	def save_cvg_log(self, tgt_data, tgt_cvg, tgt_values, comp_cvg, svr_data):
+		'''
+			Saves the given data to a log file.
+			'tgt_data' contains a list of FB_Bug objects (the targets)
+			'tgt_cvg' is a tuple: (tgt_rv, tgt_std)
+			'tgt_values' is a tuple: (cc, mc, bc, lc)
+			'comp_cvg' is a tuple: (comp_rv, comp_std)
+			'svr_data' is a tuple: (num_responses, fsvr_start, fsvr_end)
+		'''
+
+		(tgt_rv, tgt_std) = tgt_cvg
+		(cc, mc, bc, lc) = tgt_values
+		(comp_rv, comp_std) = comp_cvg
+		(num_responses, fsvr_start, fsvr_end) = svr_data
+
+		log_f = "%scvg_log%s.txt" % (FUZZCONFIG.SERVER_LOG_PATH, time.time())
+
+		with open(log_f, 'w') as f:
+			txt = "Individual: " + str(individual) + '\n\n'
+
+			txt += "Number of responses from Fuzz Server: " + \
+					str(num_responses) + '\n'
+
+			txt += "Start Time of Fuzz Server:\t\t" + str(fsvr_start) + '\n'
+			txt += "End Time of Fuzz Server:\t\t" + str(fsvr_end) + '\n\n'
+
+			txt += "-"*30 + "\n"
+			txt += "TARGET INFORMATION\n\n"
+
+			txt += "Settings:\t\t(" + str(self.CVG_FOCUSES[self.CVG_FOCUS])+ \
+					" coverage, " + \
+					self.CVG_GRANULARITY_LIST[self.GRANULARITY] + \
+					" granularity)\n\n"
+
+			txt += "Mean Coverage Value:\t" + str(tgt_rv) + "\n"
+			txt += "Standard Deviation:\t" + str(tgt_std) + "\n\n"
+
+			txt += 'Number of Values (nov): ' + str(nov) + '\n'
+			txt += 'Class CVG (cc):\t\t' + str(cc) + '\n'
+			txt += 'Methd CVG (mc):\t\t' + str(mc) + '\n'
+			txt += '\tBlock CVG (bc):\t' + str(bc) + '\n'
+			txt += '\tLine CVG (lc):\t' + str(lc) + '\n\n'
+
+			txt += "-"*30 + "\n"
+			txt += "TARGET COMPLEMENT INFORMATION\n\n"
+
+			txt += "Mean Coverage Value:\t" + str(comp_rv) + "\n"
+			txt += "Standard Deviation:\t" + str(comp_std) + "\n\n"
+
+			txt += "\nTARGETS:"
+
+			for target in tgt_data:
+				txt += "\n\t" + str(target.name) + "\n\tBug Type:\t" + str(target.type)
+				txt += "\n\t" + "-"*30
+
+			
+			f.write(txt)
+			print 'Coverage log saved to %s' % (log_f)
 
 
 
-		return (return_value,)
+	def crunch_cvg_data(self, data_list):
+		'''
+			Calcuates the average code coverage of the given values and 
+			the standard deviation of the values
+		'''
+
+		nov = len(data_list)
+		cc, mc, bc, lc = [], [], [], []
+		
+		for data in data_list:
+			cc.append(data.class_coverage)
+			mc.append(data.method_coverage)
+			bc.append(data.block_coverage)
+			lc.append(data.line_coverage)
+
+		mean_cvg = 0.0
+		std_deviation = 0.0
+
+		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_CLASS_CVG:
+			mean_cvg = sum(cc)/nov
+			sum2 = sum(x*x for x in cc)
+			std_deviation = abs(sum2 / nov - mean_cvg**2)**0.5
+
+		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_METHOD_CVG:
+			mean_cvg = sum(mc)/nov
+			sum2 = sum(x*x for x in mc)
+			std_deviation = abs(sum2 / nov - mean_cvg**2)**0.5
+
+		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_BLOCK_CVG:
+			mean_cvg = sum(bc)/nov
+			sum2 = sum(x*x for x in bc)
+			std_deviation = abs(sum2 / nov - mean_cvg**2)**0.5
+
+		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_LINE_CVG:
+			mean_cvg = sum(lc)/nov
+			sum2 = sum(x*x for x in lc)
+			std_deviation = abs(sum2 / nov - mean_cvg**2)**0.5
+
+		'''
+		sum2 = sum(x*x for x in cc)
+		std_deviation = abs(sum2 / nov - mean_cvg**2)**0.5
+		'''
+
+		return (mean_cvg, std_deviation, (cc, mc, bc, lc))
 
 
 
