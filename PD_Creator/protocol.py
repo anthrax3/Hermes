@@ -62,89 +62,44 @@ if s_block_start("body_block"):
     # End <iframe> tag
 
 
-    # Beginning of block: 0.548487546764
-    if s_block_start("0.548487546764"):
-        s_string("0.548487546764+assurance")
+    # Begin <object> tag
 
-        # Begin <div> tag
+    s_static("<object>")
 
-        s_static("<div ")
-        s_static("id=\"")
-        s_string("body_block_div")
-        s_static("\" ")
-        s_static(">")
+    # Begin <img> tag
 
-        # Beginning of block: body_block_div_a1_block
-        if s_block_start("body_block_div_a1_block"):
-            s_string("body_block_div_a1_block+assurance")
-        s_block_end("body_block_div_a1_block")
+    s_static("<img ")
+    s_static("src=\"127.0.0.1/")
+    s_string("somepath")
+    s_static("\" ")
+    s_static(">")
+    s_static("</img>")
+    # End <img> tag
 
-
-        # Begin <iframe> tag
-
-        s_static("<iframe ")
-        s_static("src=\"127.0.0.1/")
-        s_string("testpath")
-        s_static("\" ")
-        s_static(">")
-        s_static("</iframe>")
-        # End <iframe> tag
+    s_static("</object>")
+    # End <object> tag
 
 
-        # Beginning of block: 0.276126337338
-        if s_block_start("0.276126337338"):
-            s_string("0.276126337338+assurance")
+    # Begin <applet> tag
 
-            # Begin <div> tag
+    s_static("<applet ")
+    s_static("code=\"127.0.0.1/")
+    s_string("sulleylikesapples")
+    s_static("\" ")
+    s_static(">")
 
-            s_static("<div ")
-            s_static("id=\"")
-            s_string("body_block_div_div")
-            s_static("\" ")
-            s_static(">")
+    # Begin <img> tag
 
-            # Beginning of block: body_block_div_div_a1_block
-            if s_block_start("body_block_div_div_a1_block"):
-                s_string("body_block_div_div_a1_block+assurance")
-            s_block_end("body_block_div_div_a1_block")
+    s_static("<img ")
+    s_static("src=\"127.0.0.1/")
+    s_string("somepath")
+    s_static("\" ")
+    s_static(">")
+    s_static("</img>")
+    # End <img> tag
 
-
-            # Begin <iframe> tag
-
-            s_static("<iframe ")
-            s_static("src=\"127.0.0.1/")
-            s_string("testpath")
-            s_static("\" ")
-            s_static(">")
-            s_static("</iframe>")
-            # End <iframe> tag
-
-
-            # Beginning of block: 0.334247908623
-            if s_block_start("0.334247908623"):
-                s_string("0.334247908623+assurance")
-
-                # Begin <div> tag
-
-                s_static("<div ")
-                s_static("id=\"")
-                s_string("body_block_div_div_div")
-                s_static("\" ")
-                s_static(">")
-                s_static("</div>")
-                # End <div> tag
-
-            s_block_end("0.334247908623")
-
-            s_static("</div>")
-            # End <div> tag
-
-        s_block_end("0.276126337338")
-
-        s_static("</div>")
-        # End <div> tag
-
-    s_block_end("0.548487546764")
+    s_static("</applet>")
+    # End <applet> tag
 
 s_block_end("body_block")
 

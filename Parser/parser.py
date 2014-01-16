@@ -81,15 +81,35 @@ class FBParser(object):
 			for el in xmltree.findall('BugInstance'):
 				tempList = []
 
+				# tempList format:	[[attributes from list_items], ..., [child], [child]]
+
+				# ----------------------------------------------------------------------------------------------DEBUG
+				#print '\n[DEBUG]\tBug Instance: ' + str(el.get("type"))
+
 				list_items = el.items()
+
+				# ----------------------------------------------------------------------------------------------DEBUG
+				print '\n[DEBUG]\tAttributes:\n' + str(list_items)
+
 				list_items.append( ('tag', el.tag) )
 
 				tempList.append(list_items)
 
+				# ----------------------------------------------------------------------------------------------DEBUG
+				print '\n[DEBUG]\tChildren:\n' + str( [x.tag for x in el.getchildren()] )
+
 				for ch in el.getchildren():
 					tmp = ch.items()
 					tmp.append( ('tag', ch.tag) )
+
+					# ----------------------------------------------------------------------------------------------DEBUG
+					if ch.tag == "SourceLine":
+						print '\n[DEBUG]\tSourceLine: ' + str(ch.items())
+
 					tempList.append(tmp)
+
+				# ----------------------------------------------------------------------------------------------DEBUG
+				print 30*'-' + '\n'
 
 				listOfResults.append(tempList)
 

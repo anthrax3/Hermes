@@ -59,6 +59,11 @@ class CVG_Max():
 
 		# Initialize an EMMA XML Parser and give it the targets we want
 		#self.emma_xml_parser = EMMAXMLParser([target.name for target in self.target_list])
+
+		# --------------------------------------------------------------------------------------------------------DEBUG
+		#for bug in self.target_list:
+		#	bug.printNicely()
+
 		self.emma_xml_parser = EMMAXMLParser(self.target_list)
 
 		# Granularity of analysis: 0=Package Level, 1=Source File Level, 2=Class Level, 3=Method Level
@@ -224,11 +229,13 @@ class CVG_Max():
 
 		'''
 
+		#print '\n[DEBUG]\ttgt_data: ' + str(tgt_data)
+
 		(tgt_rv, tgt_std, tgt_cvg_values) = self.crunch_cvg_data(tgt_data)
 		(comp_rv, comp_std, comp_cvg_values) = self.crunch_cvg_data(tgt_comp)
 
-		# DEBUG ------------------------------------------------------------------------------------------------------
-		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
+		# --------------------------------------------------------------------------------------------------------DEBUG
+		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(tgt_rv)
 
 
 		'''
@@ -265,13 +272,14 @@ class CVG_Max():
 			(tgt_rv, tgt_std), 
 			tgt_cvg_values, 
 			(comp_rv, comp_std), 
-			(num_responses, fsvr_start, fsvr_end))
+			(num_responses, fsvr_start, fsvr_end),
+			individual)
 
 
 		return (tgt_rv, tgt_std, comp_rv)
 
 
-	def save_cvg_log(self, tgt_data, tgt_cvg, tgt_values, comp_cvg, svr_data):
+	def save_cvg_log(self, tgt_data, tgt_cvg, tgt_values, comp_cvg, svr_data, individual):
 		'''
 			Saves the given data to a log file.
 			'tgt_data' contains a list of FB_Bug objects (the targets)
@@ -308,7 +316,6 @@ class CVG_Max():
 			txt += "Mean Coverage Value:\t" + str(tgt_rv) + "\n"
 			txt += "Standard Deviation:\t" + str(tgt_std) + "\n\n"
 
-			txt += 'Number of Values (nov): ' + str(nov) + '\n'
 			txt += 'Class CVG (cc):\t\t' + str(cc) + '\n'
 			txt += 'Methd CVG (mc):\t\t' + str(mc) + '\n'
 			txt += '\tBlock CVG (bc):\t' + str(bc) + '\n'

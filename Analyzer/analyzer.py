@@ -85,6 +85,10 @@ class FBAnalyzer(object):
 
 		for bugdata in self.parser_results_list:
 
+			# ----------------------------------------------------------------------------------------------------DEBUG
+			#print '\n[DEBUG]\tBUGDATA:'
+			#print '\n[DEBUG]\t\t' + str(bugdata) + "\n"			
+
 			# Bug information is always first index in element list (set that way in the parser when pickled)
 			bug_info = bugdata.pop(0)
 

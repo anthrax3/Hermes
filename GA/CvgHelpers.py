@@ -158,13 +158,14 @@ class EMMAXMLParser:
 				self.listoftargetresults.append(targetdata)
 		'''
 
-		self.extract_coverage_values(xmltree)
+		if self.target_list:
+			self.extract_coverage(xmltree)
 
 		return True
 
 
 
-	def extract_coverage_values(self, xmltree):
+	def extract_coverage(self, xmltree):
 		'''
 			Traverses the xml structure and populates the 
 			'listoftargetresults' and 'list_target_complement' variables
@@ -183,12 +184,18 @@ class EMMAXMLParser:
 						data.class_coverage = self.get_class_coverage(clss)
 						self.extract_coverage_values(mthd, data)
 
-						bug = get_associated_bug(src_file, clss, mthd)
+						bug = self.get_associated_bug(src_file, clss, mthd)
 						if bug:
 							data.type = bug.bugtype
 							self.listoftargetresults.append(data)
 						else:
 							self.list_target_complement.append(data)
+
+
+	def parse_class_from_path(self, c_path):
+		if c_path and len(c_path) > 0:
+			return c_path.split('.')[-1]
+		return ''
 						
 
 	def get_associated_bug(self, src_file, clss, mthd):
@@ -202,9 +209,9 @@ class EMMAXMLParser:
 		str_mthd = mthd.get("name")
 
 		for bug in self.target_list:
-			if (str_src == bug.src_file and str_class == bug.classname and 
-				str_mthd == bug.methodname):
+			if (str_src == bug.src_file and str_class == bug.getClass() and str_mthd.startswith(bug.methodname)):
 				return bug
+
 		return None
 
 
