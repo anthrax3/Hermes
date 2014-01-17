@@ -1,18 +1,17 @@
 
-# 
-# Genetic Algorithm Coverage Report Interpreter
-# 
-# Description:
-#
-# This program takes the latest coverage report from the 'Reports' directory and uses the coverage metrics 
-# contained within to determine the format of the next sulley protocol definition.
-# 
-# The protocol definition creator is initialized and used to construct the templates
-# 
-# 
-# Author:
-#  			Caleb Shortt, 2013
+'''
+	Genetic Algorithm Coverage Report Interpreter
 
+	Author:	Caleb Shortt, 2013
+
+	Description:
+		This program takes the latest coverage report from the 'Reports' 
+		directory and uses the coverage metrics contained within to determine 
+		the format of the next sulley protocol definition.
+
+		The protocol definition creator is initialized and used to construct 
+		the templates.
+'''
 
 
 import random
@@ -33,50 +32,45 @@ from Config.fuzzserver import DETAILS as FUZZCONFIG
 
 class CVG_Max():
 
-	def __init__(self, fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, simple=False):
+	def __init__(self, fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, 
+				simple=False):
 
-		# probability of crossing two individuals (mate), mutation probability, number of generations
+		# Probabilities and values for genetic algorithm
 		self.CXPB = CX
 		self.MUTPB = MPB
 		self.NGEN = NG
 		self.POP_SIZE = PS
 		self.SIMPLE = simple
 
-		# The fuzz server and all its functions (/Fuzz_Server/fuzzer_lib.py)
+		# From (/Fuzz_Server/fuzzer_lib.py)
 		self.Fuzz_Server = fuzz_server
 
 		# Server timeout in seconds
 		self.TIMEOUT = 60
 
-		# Initialize a protocol definition creator
+		
 		self.pd_creator = PDef_Creator()
-
-		# Initialize the helper functions and get the list of targets from the analyzer
-		# The analyzer has been changed (December 6, 2013) to save a list of FB_Bug objects instead
-		#		of the xml
 		self.helper_functions = HelperFunctions()
-		self.target_list = self.helper_functions.loadPickledFile(DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME)
 
-		# Initialize an EMMA XML Parser and give it the targets we want
-		#self.emma_xml_parser = EMMAXMLParser([target.name for target in self.target_list])
+		self.target_list = self.helper_functions.loadPickledFile(
+					DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME)
 
-		# --------------------------------------------------------------------------------------------------------DEBUG
-		#for bug in self.target_list:
-		#	bug.printNicely()
 
 		self.emma_xml_parser = EMMAXMLParser(self.target_list)
 
-		# Granularity of analysis: 0=Package Level, 1=Source File Level, 2=Class Level, 3=Method Level
+
 		self.PACKAGE_LEVEL	= "package"
 		self.SRCFILE_LEVEL	= "srcfile"
 		self.CLASS_LEVEL	= "class"
 		self.METHOD_LEVEL	= "method"
 
-		self.CVG_GRANULARITY_LIST = [self.PACKAGE_LEVEL, self.SRCFILE_LEVEL, self.CLASS_LEVEL, self.METHOD_LEVEL]
+		self.CVG_GRANULARITY_LIST = [self.PACKAGE_LEVEL, 
+									self.SRCFILE_LEVEL, 
+									self.CLASS_LEVEL, 
+									self.METHOD_LEVEL]
 
-		# Change this variable to change the chosen granularity (index of above list)
+		# Chosen granularity (index of above list)
 		self.GRANULARITY = 3
-
 
 		# Coverage Focus
 		self.FOCUS_CLASS_CVG = "class"
@@ -84,16 +78,18 @@ class CVG_Max():
 		self.FOCUS_BLOCK_CVG = "block"
 		self.FOCUS_LINE_CVG = "line"
 
-		self.CVG_FOCUSES = [self.FOCUS_CLASS_CVG, self.FOCUS_METHOD_CVG, self.FOCUS_BLOCK_CVG, self.FOCUS_LINE_CVG]
+		self.CVG_FOCUSES = [self.FOCUS_CLASS_CVG, 
+							self.FOCUS_METHOD_CVG, 
+							self.FOCUS_BLOCK_CVG, 
+							self.FOCUS_LINE_CVG]
 
-		# Change this variable to change the coverage focus (index of above list)
+		# Coverage focus (index of above list)
 		self.CVG_FOCUS = 3
 
-		# --------------------------------------------------------------------
-		#		Start of Genetic Algorithm Code (Still in Constructor)
-		# --------------------------------------------------------------------
 
 		'''
+			Start of Genetic Algorithm-Specific Code
+
 			Create a maximizing fitness parameter for mean coverage of target 
 			code, minimizing parameter for the target cvg standard deviation, 
 			and a minimizing parameter for non-target code coverage (target 
@@ -103,19 +99,24 @@ class CVG_Max():
 				Max target cvg while minimizing std deviation, and other cvg
 		'''
 		creator.create("CvgMaxMin", base.Fitness, weights=(1.0, -1.0, -1.0))
-
-		# Each individual will be a list of flags that say which attribute is added, and which is not of target code 
 		creator.create("Individual", list, fitness=creator.CvgMaxMin)
 
-		# Right now there are 7 features for each individual (In this order):
-		# [Links Enabled, imgs enabled, divs enabled, iframes enabled, objects enabled, js enabled, applets enabled]
+		'''
+			As of January 2014, There are 7 features for each individual
+			(In this order):
+
+			[Links Enabled, imgs enabled, divs enabled, iframes enabled, 
+			objects enabled, js enabled, applets enabled]
+		'''
 		INDIVIDUAL_SIZE = 7
 
-		# Create a population of individuals with random init values
 		self.toolbox = base.Toolbox()
 		self.toolbox.register("attr_bool", random.randint, 0, 1)
-		self.toolbox.register("individual", tools.initRepeat, creator.Individual, self.toolbox.attr_bool, n=INDIVIDUAL_SIZE)
-		self.toolbox.register("population", tools.initRepeat, list, self.toolbox.individual)
+		self.toolbox.register("individual", tools.initRepeat, 
+			creator.Individual, self.toolbox.attr_bool, n=INDIVIDUAL_SIZE)
+
+		self.toolbox.register("population", tools.initRepeat, list, 
+			self.toolbox.individual)
 
 		self.toolbox.register("mate", tools.cxTwoPoints)
 		self.toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
@@ -124,32 +125,27 @@ class CVG_Max():
 
 
 
-
-	# ------------------------------------------------------------------------
-	# This function evaluates the given individual (list of flags) based on its performance in the fuzz server
 	def evaluate(self, individual):
-		# note the date and time
-		# Get protocol definition from PD_Creator given the individual
-		# Initialize and run the fuzz server - server will run for x amount of mutations (or some time limit)
-		# wait for a file to be created in the Coverage/Reports directory that was created after the noted date and time
-		# load that coverage (EMMA) file
-		# 		Note that there are different types of coverage: class, method, block, and line coverage
-		#		Might be able to target a different coverage given the type of bug we're looking for
-		# extract the desired coverage type
-		# return the number (%) coverage as an int
+		'''
+			Evaluate the given individual.
+			This means running the fuzz server until it has hit its specified 
+			number of responses (with the individual dictating the protocol 
+			used).
+		'''
 
 		print 'Individual: ' + str(individual)
 
-		# Get the current time, this will be used to find the latest coverage report
+		# Time evaulation started - used to find latest eval report.
 		started_at = datetime.now()
 
-		# try to get the protocol definition for the given individual
+		# try to get the protocol definition for the given individual.
 		try:
 			self.pd_creator.reset()
 			pdef = self.pd_creator.generate_html(individual)
 
 		except Exception as ex:
-			print 'An unexpected exception occurred while generating the protocol definition.\n%s\n' % (str(ex))
+			print 'An unexpected exception occurred while generating the ' + \
+					'protocol definition.\n%s\n' % (str(ex))
 
 		# try to save the generated protocol definition
 		if pdef:
@@ -157,129 +153,84 @@ class CVG_Max():
 		else:
 			raise Exception("No Protocol Definition Created")
 
-		# Attempt to load the auto-generated protocol definition into sulley and run the fuzz server
+		'''
+			Attempt to load the auto-generated protocol definition into 
+			sulley and run the fuzz server
+		'''
 		try:
 			self.Fuzz_Server.reset()
 			self.Fuzz_Server.reloadSulleyRequest()
 			self.Fuzz_Server.run()
-			(num_responses, fsvr_start, fsvr_end) = self.Fuzz_Server.getStats()
+			(num_resps, fsvr_start, fsvr_end) = self.Fuzz_Server.getStats()
 		except Exception as e:
-			print 'An unexpected error has occurred while evaluating the fuzz server.\n%s\n' % (str(e))
+			print 'An unexpected error has occurred while evaluating the ' + \
+					'fuzz server.\n%s\n' % (str(e))
 			traceback.print_exc()
 
 
 		# Get the latest coverage report from EMMA
 		report_file = self.get_latest_cvg_report()
 		if report_file:
-			report_created = datetime.fromtimestamp(os.stat(report_file).st_mtime)
+			report_created = datetime.fromtimestamp(
+								os.stat(report_file).st_mtime)
 		else:
 			report_created = datetime(2010, 1, 1, 1, 1)
 
-		# If the report was NOT created after the 'started_at' timestamp, wait for the new results to show up
-		# This might take a while since it is transferred to the coverage listener which saves it to file
+		'''
+			If the report was NOT created after the 'started_at' timestamp, 
+			wait for the new results to show up. This might take a while 
+			since it is transferred to the coverage listener which saves it 
+			to file.
+		'''
 		if started_at > report_created:
 			print 'Waiting for coverage report to finish writing'
 
 		timeout_time = datetime.now() + timedelta(minutes=self.TIMEOUT)
-		while (started_at > report_created) and (datetime.now() < timeout_time):
+		while (started_at > report_created) and 
+				(datetime.now() < timeout_time):
+
 			time.sleep(1)
 			print '.',
 			report_file = self.get_latest_cvg_report()
 			if report_file:
-				report_created = datetime.fromtimestamp(os.stat(report_file).st_mtime)
+				report_created = datetime.fromtimestamp(
+									os.stat(report_file).st_mtime)
 
-		# Now we have the proper coverage report for the evaluation we just did
-		# Now extract the selected coverage metrics and return them
 
-		print '\nAnalyzing Coverage Report.'
+		print '\nAnalyzing Coverage XML Report.'
 
 		report_xml = ""
 		with open(report_file, "r") as f:
 			report_xml = f.read()
 
 
-		# Extract the target information, parse the results, and format them in a TargetData tree structure
 		# NOTE: tgt_data and tgt_comp are lists of TargetData objects
 		self.emma_xml_parser.extractEMMAData(report_xml)
 		tgt_data = self.emma_xml_parser.getTargetResults()
 		tgt_comp = self.emma_xml_parser.getTargetComplement()
 
-		'''
-		nov = len(target_data)
-		cc = []
-		mc = []
-		bc = []
-		lc = []
-		for data in target_data:
-			# Merge Lists
-			cc.append(data.class_coverage)
-			mc.append(data.method_coverage)
-			bc.append(data.block_coverage)
-			lc.append(data.line_coverage)
-
-		return_value = 0.0
-		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_CLASS_CVG:
-			return_value = sum(cc)/nov
-		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_METHOD_CVG:
-			return_value = sum(mc)/nov
-		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_BLOCK_CVG:
-			return_value = sum(bc)/nov
-		if self.CVG_FOCUSES[self.CVG_FOCUS] == self.FOCUS_LINE_CVG:
-			return_value = sum(lc)/nov
-
-		'''
-
-		#print '\n[DEBUG]\ttgt_data: ' + str(tgt_data)
-
 		(tgt_rv, tgt_std, tgt_cvg_values) = self.crunch_cvg_data(tgt_data)
 		(comp_rv, comp_std, comp_cvg_values) = self.crunch_cvg_data(tgt_comp)
 
 		# --------------------------------------------------------------------------------------------------------DEBUG
-		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(tgt_rv)
-
-
-		'''
-		logfile = "%scvg_log%s.txt" % (FUZZCONFIG.SERVER_LOG_PATH, time.time())
-		with open(logfile, 'w') as f:
-			txt = "Individual: " + str(individual) + '\n\n'
-
-			# (num_responses, fsvr_start, fsvr_end)
-
-			txt = txt + "Number of responses from Fuzz Server: " + str(num_responses) + '\n'
-			txt = txt + "Start Time of Fuzz Server:\t\t" + str(fsvr_start) + '\n'
-			txt = txt + "End Time of Fuzz Server:\t\t" + str(fsvr_end) + '\n\n'
-			txt = txt + "Average Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + " coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  " granularity): " + str(return_value)
-			txt = txt + '\nEquation used: sum(cvg)/nov = returned number\n'
-			txt = txt + '\nTargets:'
-
-			for target in tgt_data:
-				txt = txt + '\n\t' + str(target.name) + '\n\tBug Type:\t' + str(target.type)
-				txt = txt + '\n\t' + '-'*30
-
-			txt = txt + '\n\nOther Values:\n\n'
-			txt = txt + 'Number of Values (nov): ' + str(nov) + '\n'
-			txt = txt + 'Class CVG (cc):\t\t' + str(cc) + '\n'
-			txt = txt + 'Methd CVG (mc):\t\t' + str(mc) + '\n'
-			txt = txt + '\tBlock CVG (bc):\t' + str(bc) + '\n'
-			txt = txt + '\tLine CVG (lc):\t' + str(lc) + '\n'
-			
-			f.write(txt)
-			print 'Coverage log saved to %s' % (logfile)
-		'''
+		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + \
+			" coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  \
+			" granularity): " + str(tgt_rv)
 
 		self.save_cvg_log(
 			tgt_data, 
 			(tgt_rv, tgt_std), 
 			tgt_cvg_values, 
 			(comp_rv, comp_std), 
-			(num_responses, fsvr_start, fsvr_end),
+			(num_resps, fsvr_start, fsvr_end),
 			individual)
 
 
 		return (tgt_rv, tgt_std, comp_rv)
 
 
-	def save_cvg_log(self, tgt_data, tgt_cvg, tgt_values, comp_cvg, svr_data, individual):
+	def save_cvg_log(self, tgt_data, tgt_cvg, tgt_values, comp_cvg, svr_data, 
+					individual):
 		'''
 			Saves the given data to a log file.
 			'tgt_data' contains a list of FB_Bug objects (the targets)
@@ -330,7 +281,9 @@ class CVG_Max():
 			txt += "\nTARGETS:"
 
 			for target in tgt_data:
-				txt += "\n\t" + str(target.name) + "\n\tBug Type:\t" + str(target.type)
+				txt += "\n\t" + str(target.name) + "\n\tBug Type:\t" + \
+						str(target.type)
+
 				txt += "\n\t" + "-"*30
 
 			
@@ -377,11 +330,6 @@ class CVG_Max():
 			sum2 = sum(x*x for x in lc)
 			std_deviation = abs(sum2 / nov - mean_cvg**2)**0.5
 
-		'''
-		sum2 = sum(x*x for x in cc)
-		std_deviation = abs(sum2 / nov - mean_cvg**2)**0.5
-		'''
-
 		return (mean_cvg, std_deviation, (cc, mc, bc, lc))
 
 
@@ -392,6 +340,11 @@ class CVG_Max():
 	# returns the sum of the coverages and the number of calculated values. the avg is easily calculated from this
 	# returned data format: (<num_of_values>, <class cvg>, <method cvg>, <block cvg>, <line cvg>)
 
+	'''
+		TODO: Test that this function is not used anywhere thoroughly before completely removing
+	'''
+
+	'''
 	# DEPRECATED--------------------------------------------------------------
 	def getTargetCoverageValues(self, target_data):
 		num_of_values = 0
@@ -428,53 +381,64 @@ class CVG_Max():
 
 
 		return (num_of_values, class_cvg, method_cvg, block_cvg, line_cvg)
+	'''
 
 
 
 
-
-
-	# ------------------------------------------------------------------------
-	# Find the latest coverage report in the specified directory
-	# from http://ubuntuforums.org/showthread.php?t=1526010
 	def get_latest_cvg_report(self, path="GA/Reports/"):
+		'''
+			Finds the latest coverage report in the specified directory
+			Used from: 
+				http://ubuntuforums.org/showthread.php?t=1526010
+		'''
+
 		filelist = os.listdir(path)
-		filelist = filter(lambda x: not os.path.isdir(path + str(x)), filelist)
+		filelist = filter(lambda x: not os.path.isdir(path+str(x)), filelist)
 
+		'''
+			TODO:
+				Might want to make it so that the coverage reports (xml) are 
+				stored in their own directory for each run, then we can just 
+				grab all of the files, parse them, and average the results.
 
-		# TODO: Might want to make it so that the coverage reports (xml) are stored in their own
-		#		directory for each run, then we can just grab all of the files, parse them, and average 
-		#		the results
-
-		# Reason:
-		#		What if there are multiple files from the same test run?
+				Reason:
+					What if there are multiple files from the same test run?
+		'''
 
 		if filelist:
-			newest = max(filelist, key=lambda x: os.stat(path + str(x)).st_mtime)
+			newest = max(filelist, 
+						key=lambda x: os.stat(path + str(x)).st_mtime)
 			return path + newest
 		else:
 			return ""
 
 
 
-	# ------------------------------------------------------------------------
 	def run_algorithm(self):
+		'''
+			Initiate the genetic algorithm.
+
+			This function takes the population, evaluates each individual 
+			and then creates the new generation based on the performance 
+			of the previous generation's individuals (via mutation, 
+			selection, )
+		'''
 
 		if self.SIMPLE:
 			pop = [[1,1,1,1,1,1,1]]
 			fitnesses = map(self.toolbox.evaluate, pop)
 		else:
-			# Set the population size (number of individuals per generation) - each will have to be evaluated
 			pop = self.toolbox.population(n=self.POP_SIZE)
 
 			print 'Starting Evolution Algorithm...'
 
 			fitnesses = map(self.toolbox.evaluate, pop)
 			for ind, fit in zip(pop, fitnesses):
-				# DEBUG-------------------------------------------------------
+				# DEBUG--------------------------------------------------------------------------------DEBUG
 				print 'fit: ' + str(fit)
 				print 'ind: ' + str(ind)
-				# END DEBUG --------------------------------------------------
+				# END DEBUG ---------------------------------------------------------------------------DEBUG
 				ind.fitness.values = fit
 
 			for g in range(self.NGEN):
@@ -482,7 +446,7 @@ class CVG_Max():
 				offspring = self.toolbox.select(pop, len(pop))
 				offspring = map(self.toolbox.clone, offspring)
 
-				# Apply the crossover function (mate) to the new generation and reset the parents' fitness values
+				# Apply the crossover function (mate)
 				for child1, child2 in zip(offspring[::2], offspring[1::2]):
 					if random.random() < self.CXPB:
 						self.toolbox.mate(child1, child2)
