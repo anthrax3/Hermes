@@ -83,7 +83,7 @@ class Hermes():
 		# DEBUG - set the server to only take 10 requests or run for 1 minute
 		# Normal execution: 100 requests, or 10 minutes
 		#fuzz_algorithm = CVG_Max(FuzzServer(1000, 10))
-		fuzz_algorithm = CVG_Max(FuzzServer(1000, 30))
+		fuzz_algorithm = CVG_Max(FuzzServer(100, 30))
 		fuzz_algorithm.run_algorithm()
 
 
@@ -92,7 +92,7 @@ class Hermes():
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
 
-		fuzz_algorithm = CVG_Max(FuzzServer(1000, 30), CX=0.5, MPB=0.2, NG=1, PS=1, simple=True)
+		fuzz_algorithm = CVG_Max(FuzzServer(100, 30), CX=0.5, MPB=0.2, NG=1, PS=1, simple=True)
 		fuzz_algorithm.run_algorithm()
 
 
