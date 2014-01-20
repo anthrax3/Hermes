@@ -1,32 +1,103 @@
 
 
-				Thesis Code
+Hermes Targeted Fuzz Testing System: README
 
-=========================================================================
+------------------------------------------------------------------------------
+==============================================================================
+------------------------------------------------------------------------------
 
 Contents:
 
-<dir>	Analyzer
-<dir>	Config
-<dir>	Coverage
-<dir>	<findbugs directory>
-<dir>	Fuzz_Server
-<dir>	GA
-<dir>	Parser
-<dir>	Target_Projects
-<dir>	test
+	Configuration and Usage
+	Parser
+	Analyzer
+	Coverage
+	Fuzz Test Server
+	Server Logs
+	Genetic Algorithm
+	Protocol Definition Creator
+	Target Projects
 
-	README.txt
-	uni_findbugrun.sh
-	win_client.bat
-	win_findbugrun.bat
-
+------------------------------------------------------------------------------
+==============================================================================
+------------------------------------------------------------------------------
 
 
+Configuration and Usage
+==============================================================================
+
+Usage:
+
+	Some scripts have been written to simplify the excution of Hermes:
+
+	uni_findbugrun.sh 	[Unix: Executes FindBugs on the target]
+	win_client.bat 		[Windows: Execute a single run of the client]
+	win_evaluation.bat 	[Windows: Execute client infinitely]
+	win_findbugrun.bat 	[Windows: Executes FindBugs on the target]
+	win_server.bat 		[Windows: Execute the server (hermes.py)]
+
+	--------------------------------------------------------------------------
+
+	> python hermes.py [options]
+
+	OPTIONS:
+
+		-r
+			reset:	Reset the fuzz server on Hermes to completely start over.
+					This will delete any generated protocol definitions.
+
+		-f
+			fuzz:	Activate the fuzz server and start the testing.
+					This also activates the genetic algorithm to start 
+					generating protocol definitions.
+
+		-c
+			cvg:	Activate the coverage listener server. This is used to 
+					listen for coverage reports sent from the client-side 
+					of Hermes (Coverage wrapper for EMMA).
+
+------------------------------------------------------------------------------
+
+Configuration:
+	
+	Dependencies:
+
+		Python 2.7 (With PATH set)		[Untested on Python 3.0+]
+		Java 1.6.2+ (With PATH set)
+		DEAP (Python genetic algorithm library)
+
+
+	Set the target for Hermes in the win_findbugrun.bat and uni_findbugrun.sh 
+	scripts. The win_client.bat and win_evaluation.bat will also have to be 
+	modified to exeute the target application.
+
+
+------------------------------------------------------------------------------
+==============================================================================
+------------------------------------------------------------------------------
+
+
+Analyzer
+------------------------------------------------------------------------------
+
+The analyzer takes the results from FindBugs (*_findbugrun.[sh|bat], which 
+produces an xml file) and  
 
 
 
--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------
 General Flow
 
 
@@ -53,10 +124,12 @@ NOTE:
 -------------------------------------------------------------------------
 Assumptions
 
--> FindBugs is installed on the current system
--> Python is installed and configured on the current system
+-> Python is installed and configured on the current system (Including in, 
+	Windows, the PATH variable)
 -> Java is installed and configured on the current system
--> DEAP (Python genetic algorithm library) is installed
+-> DEAP (Python genetic algorithm library) is installed as a Python library
+
+
 
 
 
