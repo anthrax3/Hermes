@@ -50,6 +50,7 @@
 #		-c, --CVGListen			Starts the coverage listener
 #		-b, --basic 			Starts the basic fuzz server - no genetic algorithm
 #		-r, --reset 			Resets the fuzz server
+#		-p, --protocol 			(Optional to -b only) Adds a specific protocol definition to be used
 #	
 #		A command (specified above) is required to be specified for Hermes to execute.
 #
@@ -72,9 +73,11 @@ class Hermes():
 
 	def __init__(self):
 		self.addSysPaths()
+		self.NUM_REQUESTS = 70000
+		self.TIMEOUT = 70000
 
 
-# ---------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 	def runFuzzServer(self, address="localhost", port=80):
 
 		from GA_Cvg_Report_Interpreter import CVG_Max
@@ -83,17 +86,31 @@ class Hermes():
 		# DEBUG - set the server to only take 10 requests or run for 1 minute
 		# Normal execution: 100 requests, or 10 minutes
 		#fuzz_algorithm = CVG_Max(FuzzServer(1000, 10))
-		fuzz_algorithm = CVG_Max(FuzzServer(100, 30))
+		fuzz_algorithm = CVG_Max(FuzzServer(self.NUM_REQUESTS, self.TIMEOUT))
 		fuzz_algorithm.run_algorithm()
 
 
-# ---------------------------------------------------------------------------------------------------------
-	def runBasicFuzzServer(self, address="localhost", port=80):
+# ----------------------------------------------------------------------------
+	def runBasicFuzzServer(self, address="localhost", port=80, prot_def="PD_Creator/protocol"):
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
 
-		fuzz_algorithm = CVG_Max(FuzzServer(100, 30), CX=0.5, MPB=0.2, NG=1, PS=1, simple=True)
-		fuzz_algorithm.run_algorithm()
+		fuzz_svr = FuzzServer(self.NUM_REQUESTS, self.TIMEOUT, prot_def)
+
+		fuzz_alg = CVG_Max(fuzz_svr, 
+							CX=0.5, 
+							MPB=0.2, 
+							NG=1, 
+							PS=1, 
+							simple=True
+							)
+
+		fuzz_alg.mark_server_start()
+		fuzz_svr.run()
+		print fuzz_alg.generate_results(prot_def)
+
+
+
 
 
 
@@ -197,9 +214,11 @@ def usage():
 	print '\nHERMES SECURITY TESTING FRAMEWORK'
 	print 'Usage: > python hermes.py [--FuzzServer|--CVGListen|--reset]'
 	print 'Commands:'
-	print '\t-f, --FuzzServer\n\t\tStarts the fuzz server. Default address is localhost:80'
+	print '\t-f, --FuzzServer\n\t\tStarts the fuzz server. Default is localhost:80'
 	print '\t-c, --CVGListen\n\t\tStarts the coverage listener'
 	print '\t-r, --reset\n\t\tResets the protocol definition to default'
+	print '\t-b, --basic\n\t\tStarts the basic fuzz server - no genetic algorithm'
+	print '\t-p, --protocol\n\t\t(Optional to -b only) Adds a specific protocol definition to be used'
 	print '\n'
 	print '\tThe user MUST specify a command (above) for Hermes to execute'
 
@@ -207,10 +226,11 @@ def usage():
 if __name__ == "__main__":
 
 	command = ""
+	prot_def = ""
 
 	arguments = sys.argv[1:]
 	try:
-		opts, args = getopt.getopt(arguments, "fcrb", ["FuzzServer", "CVGListen", "reset", "BasicFuzzServer"])
+		opts, args = getopt.getopt(arguments, "fcrbp:", ["FuzzServer", "CVGListen", "reset", "basic", "protocol="])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
@@ -224,6 +244,8 @@ if __name__ == "__main__":
 			command = "reset"
 		elif opt in ("-b", "--basic"):
 			command = "basic"
+		elif opt in ("-p", "--protocol"):
+			prot_def = arg
 
 
 	if command and command == "FuzzServer":
@@ -236,8 +258,12 @@ if __name__ == "__main__":
 		hermes = Hermes()
 		hermes.reset()
 	elif command and command == "basic":
-		hermes = Hermes()
-		hermes.runBasicFuzzServer()
+		if prot_def and len(prot_def) > 0:
+			hermes = Hermes()
+			hermes.runBasicFuzzServer(prot_def=prot_def)
+		else:
+			hermes = Hermes()
+			hermes.runBasicFuzzServer()
 	else:
 		usage()
 		sys.exit(2)

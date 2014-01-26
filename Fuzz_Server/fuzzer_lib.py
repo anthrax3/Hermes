@@ -1,7 +1,11 @@
 
 
 
-import sys, os, time, imp
+import sys
+import os
+import time
+import imp
+
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from datetime import datetime, timedelta
 
@@ -9,30 +13,17 @@ from sulley import *
 import PD_Creator.protocol
 
 
-# load the auto-generated protocol definition
-#prot = imp.load_source('*', '../PD_Creator/protocol.py')
 
-
-#request = s_get('HTML Total')
-#request = s_get('Protocol Definition')
-#mutations = request.num_mutations()
-
-#MAX_RESPONSES = 9999
-#MAX_TIME_MINS = 30
-
-#CURRENT_RESPONSES = 0
-#START_TIME = datetime.now()
-
-# ------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Custom Exception class - thrown them max responses or time limit reached
-# ------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 class StopServerException(Exception):
 	pass
 
 
-# ------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Request handler class
-# ------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def setup(self):
@@ -67,10 +58,7 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 
 		mutation = self.Request.render()
 
-		#print '\n========================================================='
-		#print 'Sending mutation: \n\n%s\n' % (mutation)
 		print 'Sending mutation #' + str(self.Current_Response)
-		#print '=========================================================\n'
 
 		# Send the fuzzed html to the client
 		self.wfile.write(mutation)
@@ -79,26 +67,30 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 
 
 
-# ------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Main class - is the server for the fuzzer
-# ------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 class FuzzServer():
 
 
-	def __init__(self, max_responses=9999, max_time_mins=30):
+	def __init__(self, max_responses=9999, max_time_mins=30, prot_def_path="PD_Creator.protocol"):
 		self.MAX_RESPONSES = max_responses
 		self.MAX_TIME_MINS = max_time_mins
 
 		self.CURRENT_RESPONSES = 0
 		self.START_TIME = None
+		self.END_TIME = None
 
 		self.server_running = True
 		self.Sulley_Request = None
+
+		self.prot_def_module = None
 
 		# Try to load the existing protocol into sulley - if it fails, generate a new one on init
 		try:
 			self.reloadSulleyRequest()
 		except:
+			print 'Error: Reloading the Sulley request failed. Moving to new default protocol.'
 			pd = PDef_Creator()
 			prot = pd.genAdvancedHTML([1,1,1,1,1,1,1])
 			pd.save_protocol(prot)
@@ -110,6 +102,8 @@ class FuzzServer():
 		self.un_initialize_sulley_request('Protocol Definition')
 		imp.reload(PD_Creator.protocol)
 		self.Sulley_Request = s_get('Protocol Definition')
+
+		print 'Sulley request loaded. Number of mutations: ' + str(self.Sulley_Request.num_mutations())
 
 
 	# --------------------------------------------------------------------------------------------
@@ -155,6 +149,7 @@ class FuzzServer():
 
 	def server_off(self):
 		self.server_running = False
+		self.END_TIME = datetime.now()
 		self.httpd.server_close()
 
 

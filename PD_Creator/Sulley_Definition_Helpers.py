@@ -14,6 +14,8 @@
 import random
 import os
 
+from datetime import datetime
+
 
 class Sulley_Code_Helper(object):
 	'''
@@ -31,7 +33,9 @@ class Sulley_Code_Helper(object):
 			self.TAB + "Description:" + os.linesep + \
 			2*self.TAB + str(description) + \
 			os.linesep + \
-			2*self.TAB + "Source: " + str(source) + 2*os.linesep + \
+			self.TAB + "Source: " + str(source) + 2*os.linesep + \
+			os.linesep + \
+			self.TAB + "Created: " + str(datetime.now()) + os.linesep + \
 			"'''" + 3*os.linesep + \
 			"from sulley import *" + os.linesep + \
 			"import random" + 2*os.linesep + \

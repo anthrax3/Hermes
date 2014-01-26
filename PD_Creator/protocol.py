@@ -4,8 +4,10 @@
 
     Description:
         Auto Generated Protocol Definition
-        Source: PDHelpers.py
+    Source: PDHelpers.py
 
+
+    Created: 2014-01-25 08:47:19.927000
 '''
 
 
@@ -19,6 +21,25 @@ s_static("<head>")
 s_static("<title>")
 s_string("Sulley Says Hello!")
 s_static("</title>")
+
+# Begin <script> tag
+
+s_static("<script ")
+s_static("language=\"")
+s_string("JavaScript")
+s_static("\" ")
+s_static(">")
+
+# JavaScript Code
+
+s_static("document.getElementById(\"")
+s_string("test")
+s_static("\").innerHTML=\"")
+s_string("test")
+s_static("\"")
+s_static("</script>")
+# End <script> tag
+
 s_static("</head>")
 s_static("<body>")
 
@@ -107,6 +128,38 @@ if s_block_start("body_block"):
     # End <iframe> tag
 
 
+    # Begin <object> tag
+
+    s_static("<object>")
+
+    # Begin <a> tag
+
+    s_static("<a ")
+    s_static("alt=\"")
+    s_string("body_block_obj1_a1")
+    s_static("\" ")
+    s_static("href=\"127.0.0.1/")
+    s_string("body_block_obj1_a1")
+    s_static("\" ")
+    s_static(">")
+    s_static("</a>")
+    # End <a> tag
+
+
+    # Begin <img> tag
+
+    s_static("<img ")
+    s_static("src=\"127.0.0.1/")
+    s_string("somepath")
+    s_static("\" ")
+    s_static(">")
+    s_static("</img>")
+    # End <img> tag
+
+    s_static("</object>")
+    # End <object> tag
+
+
     # Begin <applet> tag
 
     s_static("<applet ")
@@ -143,9 +196,9 @@ if s_block_start("body_block"):
     # End <applet> tag
 
 
-    # Beginning of block: 0.885348742269
-    if s_block_start("0.885348742269"):
-        s_string("0.885348742269+assurance")
+    # Beginning of block: 0.148440510533
+    if s_block_start("0.148440510533"):
+        s_string("0.148440510533+assurance")
 
         # Begin <div> tag
 
@@ -236,6 +289,38 @@ if s_block_start("body_block"):
         # End <iframe> tag
 
 
+        # Begin <object> tag
+
+        s_static("<object>")
+
+        # Begin <a> tag
+
+        s_static("<a ")
+        s_static("alt=\"")
+        s_string("body_block_div_obj1_a1")
+        s_static("\" ")
+        s_static("href=\"127.0.0.1/")
+        s_string("body_block_div_obj1_a1")
+        s_static("\" ")
+        s_static(">")
+        s_static("</a>")
+        # End <a> tag
+
+
+        # Begin <img> tag
+
+        s_static("<img ")
+        s_static("src=\"127.0.0.1/")
+        s_string("somepath")
+        s_static("\" ")
+        s_static(">")
+        s_static("</img>")
+        # End <img> tag
+
+        s_static("</object>")
+        # End <object> tag
+
+
         # Begin <applet> tag
 
         s_static("<applet ")
@@ -272,9 +357,9 @@ if s_block_start("body_block"):
         # End <applet> tag
 
 
-        # Beginning of block: 0.355873264729
-        if s_block_start("0.355873264729"):
-            s_string("0.355873264729+assurance")
+        # Beginning of block: 0.417615236466
+        if s_block_start("0.417615236466"):
+            s_string("0.417615236466+assurance")
 
             # Begin <div> tag
 
@@ -365,6 +450,38 @@ if s_block_start("body_block"):
             # End <iframe> tag
 
 
+            # Begin <object> tag
+
+            s_static("<object>")
+
+            # Begin <a> tag
+
+            s_static("<a ")
+            s_static("alt=\"")
+            s_string("body_block_div_div_obj1_a1")
+            s_static("\" ")
+            s_static("href=\"127.0.0.1/")
+            s_string("body_block_div_div_obj1_a1")
+            s_static("\" ")
+            s_static(">")
+            s_static("</a>")
+            # End <a> tag
+
+
+            # Begin <img> tag
+
+            s_static("<img ")
+            s_static("src=\"127.0.0.1/")
+            s_string("somepath")
+            s_static("\" ")
+            s_static(">")
+            s_static("</img>")
+            # End <img> tag
+
+            s_static("</object>")
+            # End <object> tag
+
+
             # Begin <applet> tag
 
             s_static("<applet ")
@@ -401,9 +518,9 @@ if s_block_start("body_block"):
             # End <applet> tag
 
 
-            # Beginning of block: 0.600624462261
-            if s_block_start("0.600624462261"):
-                s_string("0.600624462261+assurance")
+            # Beginning of block: 0.930348665028
+            if s_block_start("0.930348665028"):
+                s_string("0.930348665028+assurance")
 
                 # Begin <div> tag
 
@@ -415,17 +532,17 @@ if s_block_start("body_block"):
                 s_static("</div>")
                 # End <div> tag
 
-            s_block_end("0.600624462261")
+            s_block_end("0.930348665028")
 
 
             # Begin <a> tag
 
             s_static("<a ")
             s_static("alt=\"")
-            s_string("0.600624462261")
+            s_string("0.930348665028")
             s_static("\" ")
             s_static("href=\"")
-            s_checksum("0.600624462261", algorithm="sha1")
+            s_checksum("0.930348665028", algorithm="sha1")
             s_static("\" ")
             s_static(">")
             s_static("</a>")
@@ -434,17 +551,17 @@ if s_block_start("body_block"):
             s_static("</div>")
             # End <div> tag
 
-        s_block_end("0.355873264729")
+        s_block_end("0.417615236466")
 
 
         # Begin <a> tag
 
         s_static("<a ")
         s_static("alt=\"")
-        s_string("0.355873264729")
+        s_string("0.417615236466")
         s_static("\" ")
         s_static("href=\"")
-        s_checksum("0.355873264729", algorithm="sha1")
+        s_checksum("0.417615236466", algorithm="sha1")
         s_static("\" ")
         s_static(">")
         s_static("</a>")
@@ -453,17 +570,17 @@ if s_block_start("body_block"):
         s_static("</div>")
         # End <div> tag
 
-    s_block_end("0.885348742269")
+    s_block_end("0.148440510533")
 
 
     # Begin <a> tag
 
     s_static("<a ")
     s_static("alt=\"")
-    s_string("0.885348742269")
+    s_string("0.148440510533")
     s_static("\" ")
     s_static("href=\"")
-    s_checksum("0.885348742269", algorithm="sha1")
+    s_checksum("0.148440510533", algorithm="sha1")
     s_static("\" ")
     s_static(">")
     s_static("</a>")

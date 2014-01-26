@@ -45,8 +45,10 @@ class CVG_Max():
 		# From (/Fuzz_Server/fuzzer_lib.py)
 		self.Fuzz_Server = fuzz_server
 
+		self.start_time = None
+
 		# Server timeout in seconds
-		self.TIMEOUT = 60
+		self.TIMEOUT = 3600
 
 		
 		self.pd_creator = PDef_Creator()
@@ -136,7 +138,8 @@ class CVG_Max():
 		print 'Individual: ' + str(individual)
 
 		# Time evaulation started - used to find latest eval report.
-		started_at = datetime.now()
+		#self.start_time = datetime.now()
+		self.mark_server_start()
 
 		# try to get the protocol definition for the given individual.
 		try:
@@ -161,13 +164,20 @@ class CVG_Max():
 			self.Fuzz_Server.reset()
 			self.Fuzz_Server.reloadSulleyRequest()
 			self.Fuzz_Server.run()
-			(num_resps, fsvr_start, fsvr_end) = self.Fuzz_Server.getStats()
+
+
+
+			# now in generate_report()
+			#(num_resps, fsvr_start, fsvr_end) = self.Fuzz_Server.getStats()
 		except Exception as e:
 			print 'An unexpected error has occurred while evaluating the ' + \
 					'fuzz server.\n%s\n' % (str(e))
 			traceback.print_exc()
 
+		return self.generate_results(individual)
 
+
+		'''
 		# Get the latest coverage report from EMMA
 		report_file = self.get_latest_cvg_report()
 		if report_file:
@@ -175,18 +185,21 @@ class CVG_Max():
 								os.stat(report_file).st_mtime)
 		else:
 			report_created = datetime(2010, 1, 1, 1, 1)
+		'''
 
 		'''
-			If the report was NOT created after the 'started_at' timestamp, 
-			wait for the new results to show up. This might take a while 
-			since it is transferred to the coverage listener which saves it 
-			to file.
+			If the report was NOT created after the 'self.start_time' 
+			timestamp, wait for the new results to show up. This might 
+			take a while since it is transferred to the coverage listener 
+			which saves it to file.
 		'''
-		if started_at > report_created:
+
+		'''
+		if self.start_time > report_created:
 			print 'Waiting for coverage report to finish writing'
 
 		timeout_time = datetime.now() + timedelta(minutes=self.TIMEOUT)
-		while (started_at > report_created) and 
+		while (self.start_time > report_created) and \
 				(datetime.now() < timeout_time):
 
 			time.sleep(1)
@@ -227,6 +240,76 @@ class CVG_Max():
 
 
 		return (tgt_rv, tgt_std, comp_rv)
+		'''
+
+
+	def mark_server_start(self):
+		self.start_time = datetime.now()
+
+
+	def generate_results(self, individual):
+		(num_resps, fsvr_start, fsvr_end) = self.Fuzz_Server.getStats()
+
+		# Get the latest coverage report from EMMA
+		report_file = self.get_latest_cvg_report()
+		if report_file:
+			report_created = datetime.fromtimestamp(
+								os.stat(report_file).st_mtime)
+		else:
+			report_created = datetime(2010, 1, 1, 1, 1)
+
+
+		'''
+			If the report was NOT created after the 'self.start_time' 
+			timestamp, wait for the new results to show up. This might 
+			take a while since it is transferred to the coverage listener 
+			which saves it to file.
+		'''
+		if self.start_time > report_created:
+			print 'Waiting for coverage report to finish writing'
+
+		timeout_time = datetime.now() + timedelta(minutes=self.TIMEOUT)
+		while (self.start_time > report_created) and \
+				(datetime.now() < timeout_time):
+
+			time.sleep(1)
+			print '.',
+			report_file = self.get_latest_cvg_report()
+			if report_file:
+				report_created = datetime.fromtimestamp(
+									os.stat(report_file).st_mtime)
+
+
+		print '\nAnalyzing Coverage XML Report.'
+
+		report_xml = ""
+		with open(report_file, "r") as f:
+			report_xml = f.read()
+
+
+		# NOTE: tgt_data and tgt_comp are lists of TargetData objects
+		self.emma_xml_parser.extractEMMAData(report_xml)
+		tgt_data = self.emma_xml_parser.getTargetResults()
+		tgt_comp = self.emma_xml_parser.getTargetComplement()
+
+		(tgt_rv, tgt_std, tgt_cvg_values) = self.crunch_cvg_data(tgt_data)
+		(comp_rv, comp_std, comp_cvg_values) = self.crunch_cvg_data(tgt_comp)
+
+		# --------------------------------------------------------------------------------------------------------DEBUG
+		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + \
+			" coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  \
+			" granularity): " + str(tgt_rv)
+
+		self.save_cvg_log(
+			tgt_data, 
+			(tgt_rv, tgt_std), 
+			tgt_cvg_values, 
+			(comp_rv, comp_std), 
+			(num_resps, fsvr_start, fsvr_end),
+			individual)
+
+		return (tgt_rv, tgt_std, comp_rv)
+
 
 
 	def save_cvg_log(self, tgt_data, tgt_cvg, tgt_values, comp_cvg, svr_data, 
