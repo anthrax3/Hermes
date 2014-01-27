@@ -3,11 +3,11 @@
     Author: HTMLTreeConstructor
 
     Description:
-        Auto Generated Protocol Definition
+        Auto Generated Protocol Definition: Chromosome: [1, 1, 1, 1, 1, 1, 1]
     Source: PDHelpers.py
 
 
-    Created: 2014-01-25 08:47:19.927000
+    Created: 2014-01-26 21:05:09.062000
 '''
 
 
@@ -196,9 +196,9 @@ if s_block_start("body_block"):
     # End <applet> tag
 
 
-    # Beginning of block: 0.148440510533
-    if s_block_start("0.148440510533"):
-        s_string("0.148440510533+assurance")
+    # Beginning of block: 0.837556986695
+    if s_block_start("0.837556986695"):
+        s_string("0.837556986695+assurance")
 
         # Begin <div> tag
 
@@ -357,9 +357,9 @@ if s_block_start("body_block"):
         # End <applet> tag
 
 
-        # Beginning of block: 0.417615236466
-        if s_block_start("0.417615236466"):
-            s_string("0.417615236466+assurance")
+        # Beginning of block: 0.838802063168
+        if s_block_start("0.838802063168"):
+            s_string("0.838802063168+assurance")
 
             # Begin <div> tag
 
@@ -518,9 +518,9 @@ if s_block_start("body_block"):
             # End <applet> tag
 
 
-            # Beginning of block: 0.930348665028
-            if s_block_start("0.930348665028"):
-                s_string("0.930348665028+assurance")
+            # Beginning of block: 0.869084212976
+            if s_block_start("0.869084212976"):
+                s_string("0.869084212976+assurance")
 
                 # Begin <div> tag
 
@@ -532,17 +532,17 @@ if s_block_start("body_block"):
                 s_static("</div>")
                 # End <div> tag
 
-            s_block_end("0.930348665028")
+            s_block_end("0.869084212976")
 
 
             # Begin <a> tag
 
             s_static("<a ")
             s_static("alt=\"")
-            s_string("0.930348665028")
+            s_string("0.869084212976")
             s_static("\" ")
             s_static("href=\"")
-            s_checksum("0.930348665028", algorithm="sha1")
+            s_checksum("0.869084212976", algorithm="sha1")
             s_static("\" ")
             s_static(">")
             s_static("</a>")
@@ -551,17 +551,17 @@ if s_block_start("body_block"):
             s_static("</div>")
             # End <div> tag
 
-        s_block_end("0.417615236466")
+        s_block_end("0.838802063168")
 
 
         # Begin <a> tag
 
         s_static("<a ")
         s_static("alt=\"")
-        s_string("0.417615236466")
+        s_string("0.838802063168")
         s_static("\" ")
         s_static("href=\"")
-        s_checksum("0.417615236466", algorithm="sha1")
+        s_checksum("0.838802063168", algorithm="sha1")
         s_static("\" ")
         s_static(">")
         s_static("</a>")
@@ -570,17 +570,17 @@ if s_block_start("body_block"):
         s_static("</div>")
         # End <div> tag
 
-    s_block_end("0.148440510533")
+    s_block_end("0.837556986695")
 
 
     # Begin <a> tag
 
     s_static("<a ")
     s_static("alt=\"")
-    s_string("0.148440510533")
+    s_string("0.837556986695")
     s_static("\" ")
     s_static("href=\"")
-    s_checksum("0.148440510533", algorithm="sha1")
+    s_checksum("0.837556986695", algorithm="sha1")
     s_static("\" ")
     s_static(">")
     s_static("</a>")

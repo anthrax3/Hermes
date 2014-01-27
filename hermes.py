@@ -91,11 +91,11 @@ class Hermes():
 
 
 # ----------------------------------------------------------------------------
-	def runBasicFuzzServer(self, address="localhost", port=80, prot_def="PD_Creator/protocol"):
+	def runBasicFuzzServer(self, address="localhost", port=80, prot_def="PD_Creator/protocol.py", module="PD_Creator.protocol"):
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
 
-		fuzz_svr = FuzzServer(self.NUM_REQUESTS, self.TIMEOUT, prot_def)
+		fuzz_svr = FuzzServer(self.NUM_REQUESTS, self.TIMEOUT, prot_def, module)
 
 		fuzz_alg = CVG_Max(fuzz_svr, 
 							CX=0.5, 
@@ -260,7 +260,8 @@ if __name__ == "__main__":
 	elif command and command == "basic":
 		if prot_def and len(prot_def) > 0:
 			hermes = Hermes()
-			hermes.runBasicFuzzServer(prot_def=prot_def)
+			module = prot_def.replace("/", ".").replace(".py", "").replace("\\", ".")
+			hermes.runBasicFuzzServer(prot_def=prot_def, module=module)
 		else:
 			hermes = Hermes()
 			hermes.runBasicFuzzServer()

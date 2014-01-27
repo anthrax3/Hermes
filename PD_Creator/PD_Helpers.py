@@ -36,6 +36,8 @@ class HTMLTreeConstructor(object):
 		self.TAB_SPACE = "    "
 		self.NEW_LINE = os.linesep
 
+		self.defn_name = defn_name
+
 		self.has_links = True
 		self.has_imgs = True
 		self.has_divs = True
@@ -44,21 +46,27 @@ class HTMLTreeConstructor(object):
 		self.has_js = True
 		self.has_applets = True
 
+		self.chromosome = [1, 1, 1, 1, 1, 1, 1]
+
 		self.sulley_helper = Sulley_Code_Helper()
 
 		self.tree = None
-		self.init_tree(defn_name)
+		self.init_tree(self.defn_name)
 
 
 
 	def init_tree(self, defn_name):
+
+		desc = "Auto Generated Protocol Definition: Chromosome: " + \
+				str(self.chromosome)
+
 		root = DefTreeNode(
 			"init_code", 
 			HTML_Tags.HTML_Empty_tag(), 
 			self.sulley_helper.generateInitCode(
 				defn_name, 
 				"HTMLTreeConstructor",
-				"Auto Generated Protocol Definition", 
+				desc, 
 				"PDHelpers.py"
 				))
 
@@ -131,6 +139,7 @@ class HTMLTreeConstructor(object):
 
 
 	def set_chromosome(self, chromosome=[1, 1, 1, 1, 1, 1, 1]):
+		self.chromosome = chromosome
 		self.has_links = (chromosome[0] == 1)
 		self.has_imgs = (chromosome[1] == 1)
 		self.has_divs = (chromosome[2] == 1)
@@ -138,6 +147,7 @@ class HTMLTreeConstructor(object):
 		self.has_objects = (chromosome[4] == 1)
 		self.has_js	 = (chromosome[5] == 1)
 		self.has_applets = (chromosome[6] == 1)
+		self.init_tree(self.defn_name)
 
 
 	'''

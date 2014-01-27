@@ -5,6 +5,7 @@ import sys
 import os
 import time
 import imp
+import inspect
 
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from datetime import datetime, timedelta
@@ -73,7 +74,7 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 class FuzzServer():
 
 
-	def __init__(self, max_responses=9999, max_time_mins=30, prot_def_path="PD_Creator.protocol"):
+	def __init__(self, max_responses=9999, max_time_mins=30, prot_def_path="PD_Creator/protocol.py", module="PD_Creator.protocol"):
 		self.MAX_RESPONSES = max_responses
 		self.MAX_TIME_MINS = max_time_mins
 
@@ -85,10 +86,11 @@ class FuzzServer():
 		self.Sulley_Request = None
 
 		self.prot_def_module = None
+		self.prot_def_path = prot_def_path
 
 		# Try to load the existing protocol into sulley - if it fails, generate a new one on init
 		try:
-			self.reloadSulleyRequest()
+			self.reloadSulleyRequest(self.prot_def_path, module)
 		except:
 			print 'Error: Reloading the Sulley request failed. Moving to new default protocol.'
 			pd = PDef_Creator()
@@ -98,9 +100,15 @@ class FuzzServer():
 
 
 	# Reload the sulley protocol definition (request) this will change so it needs to be reloaded
-	def reloadSulleyRequest(self, path='PD_Creator/protocol.py'):
+	def reloadSulleyRequest(self, path='PD_Creator/protocol.py', module='PD_Creator.protocol'):
 		self.un_initialize_sulley_request('Protocol Definition')
-		imp.reload(PD_Creator.protocol)
+		#imp.reload(PD_Creator.protocol)
+		try:
+			print 'Loading path: ' + str(path) + ', module: ' + str(module)
+			self.prot_def_module = imp.load_source(module, path)
+		except Exception as e:
+			print str(e)
+
 		self.Sulley_Request = s_get('Protocol Definition')
 
 		print 'Sulley request loaded. Number of mutations: ' + str(self.Sulley_Request.num_mutations())
@@ -129,7 +137,9 @@ class FuzzServer():
 
 		server_address = (host, port)
 		self.httpd = HTTPServer(server_address, self.argHandler)
-		self.httpd.timeout = 10
+		# Timeout of each request thread
+		self.httpd.timeout = 20
+		# If no requests in "timeout" minutes then turn server off
 		self.httpd.handle_timeout = self.server_off
 
 		print 'http server is running on %s:%s ...\n\n' % (host, port)
@@ -143,7 +153,7 @@ class FuzzServer():
 
 		except KeyboardInterrupt:
 			pass
-		self.server_off
+		self.server_off()
 		print 'Server stopped on %s:%s' % (host, port)
 
 
@@ -151,6 +161,7 @@ class FuzzServer():
 		self.server_running = False
 		self.END_TIME = datetime.now()
 		self.httpd.server_close()
+		print 'Server shutdown triggered by ' + str(inspect.stack()[1][3])
 
 
 	def reset(self):
@@ -171,12 +182,17 @@ class FuzzServer():
 			if datetime.now() > endtime:
 				self.server_running = False
 				self.END_TIME = datetime.now()
+				print 'Max Server Timeout Hit: Timeout = ' + \
+						str(self.MAX_TIME_MINS) + ' minutes (Projected ' + \
+						'end time: ' + str(endtime) + ')'
+
 		else:
 			self.START_TIME = datetime.now()
 
 		if self.CURRENT_RESPONSES >= self.MAX_RESPONSES:
 			self.server_running = False
 			self.END_TIME = datetime.now()
+			print 'Max Server Responses Hit: Max = ' + str(self.MAX_RESPONSES)
 
 		if self.server_running:
 			self.CURRENT_RESPONSES = self.CURRENT_RESPONSES + 1
