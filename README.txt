@@ -24,7 +24,7 @@ Contents:
 
 
 Configuration and Usage
-==============================================================================
+------------------------------------------------------------------------------
 
 Usage:
 
@@ -77,11 +77,23 @@ Configuration:
 ------------------------------------------------------------------------------
 
 
+Parser
+------------------------------------------------------------------------------
+
+The parser takes the results from FindBugs (*_findbugrun.[sh|bat], which 
+produces an xml file) and converts the information into an intermediate 
+list format with only the information desired (general filtering).
+
+
+------------------------------------------------------------------------------
+==============================================================================
+------------------------------------------------------------------------------
+
+
 Analyzer
 ------------------------------------------------------------------------------
 
-The analyzer takes the results from FindBugs (*_findbugrun.[sh|bat], which 
-produces an xml file) and  
+The ananlyzer takes the results from the parser and e
 
 
 
