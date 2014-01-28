@@ -1,3 +1,5 @@
 *.pyc
 hermes_f_dump.txt
 hermes_c_dump.txt
+PD_Creator/protocol.py
+coverage.xml
