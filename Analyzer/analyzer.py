@@ -1,15 +1,15 @@
 
 
 import pickle
-import sys, getopt
-
-from analyzer_helpers import FB_PackageDefectDensity, FB_Bug
-import math
-import bugranks
-
+import sys
+import getopt
 import imp
+import math
+
+import bugranks
+from analyzer_helpers import FB_PackageDefectDensity, FB_Bug
 from Config.analysis import DETAILS
-#cvg = imp.load_source('DETAILS', '../Config/analysis.py')
+
 
 
 #
@@ -262,63 +262,6 @@ class FBAnalyzer(object):
 		target_list = self.buglist[:num_bugs_keep]
 
 
-
-
-		'''
-
-		# Calculate the average severity of the bugs in each class
-		for dd in self.defectdensitieslist:
-
-			ranktotal = 0
-			most_severe_bugrank = 40
-
-			# Get a list of all of the bugs with the same classname as the current defect density package name
-			bugs_of_cname_list = [item for item in self.buglist if dd.name in item.classname]
-			dd.buglist = bugs_of_cname_list
-
-			# calculate the severity of the bugs in the class (avg bug rank and most severe bug rank)
-			for bug in bugs_of_cname_list:
-				ranktotal = ranktotal + bug.rank
-				if most_severe_bugrank > bug.rank:
-					most_severe_bugrank = bug.rank
-
-			if len(bugs_of_cname_list) > 0:
-				dd.avgbugrank = ranktotal / len(bugs_of_cname_list)
-			else:
-				dd.avgbugrank = 0
-			dd.mostseverebugrank = most_severe_bugrank
-
-
-		# find the package with the worst average severity. If there is a tie, take the one with the most severe bug.
-		target_list = []
-		max_targets = 4
-		iterations = 0
-
-		while len(target_list) < max_targets and iterations <= len(self.defectdensitieslist):
-
-			target = None
-			target_avgbugrank = 999
-
-			for dd in self.defectdensitieslist:
-				# Do not include classes with no name (edge?), project details, or previously added targets
-				if dd in target_list or dd.name == "" or dd.kind == "project":
-					continue
-				if dd.avgbugrank < target_avgbugrank:
-					target = dd
-					target_avgbugrank = dd.avgbugrank
-				if dd.avgbugrank == target_avgbugrank:
-					if dd.mostseverebugrank < target.mostseverebugrank:
-						target = dd
-
-			if target:
-				target_list.append(target)
-
-			# Just in case there are not enough results to hit the max target
-			iterations = iterations + 1
-
-		'''
-
-
 		# At this point, we have a target package that contains the most severe bugs from static analysis and a list of those bugs
 		# along with the defect density metrics to prove it and all of the data that describes the bug types and context
 
@@ -332,13 +275,6 @@ class FBAnalyzer(object):
 		print '\n'
 		#--------------------------------------------------------------------------------------------------
 
-
-		#--------------------------------------------------------------------------------------------------		
-		#TODO
-		# Save the information to a file somehow (pickle?)
-		#--------------------------------------------------------------------------------------------------
-
-		#print 'saving ' + str(len(target_list)) + ' bugs. : ' + str(target_list) + '\n\nTo: ' + self.SAVE_FILENAME
 		self.saveThis(target_list, self.SAVE_FILENAME)
 
 

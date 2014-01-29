@@ -1,12 +1,9 @@
+
+
 import xml.etree.cElementTree as et
-
-#from elementtree.ElementTree import parse
-
-
-import sys, getopt
+import sys
+import getopt
 import pickle
-
-
 
 
 
@@ -41,23 +38,17 @@ class FBParser(object):
 			self.logThis('Opening FB defect density file...', False)
 			with open(self.FB_DefDensityFile, 'r') as f:
 				self.logThis('Reading FB defect density file...', False)
-				#print "========================================"
-				#print 'DEFECT DENSITIES'
-				#print "========================================"
 				for line in f:
-					#print line.strip().split('\t')
-					#print "----------------------------------------"
 					density_list.append(line.strip().split('\t'))
 		except:
-			print 'An unexpected error has occurred while opening and reading the defect density file.'
+			print 'An unexpected error has occurred while opening and ' + \
+					'reading the defect density file.'
 
 		print '\n\n'
 		self.saveThisList(density_list, self.DENSITIES)
 
 
 
-
-	# Get the XML from the FindBugs result file
 	def parseBugFile(self):
 		try:
 			self.logThis("Opening FB result file...", False)
@@ -68,58 +59,34 @@ class FBParser(object):
 			self.logThis("FB result file read", False)
 		except IOError as e:
 			print 'I/O error ({0}): {1}'.format(e.errno, e.strerror)
-			self.logThis('I/O error ({0}): {1}'.format(e.errno, e.strerror), True)
+			self.logThis(
+				'I/O error ({0}): {1}'.format(e.errno, e.strerror), 
+				True)
 		except:
-			print 'An Unexpected error occurred while opening and reading: {0}'.format(self.FB_OutputFile)
-			self.logThis('An Unexpected error occurred while opening and reading: {0}'.format(self.FB_OutputFile), True)
+			print 'An Unexpected error occurred while opening and ' + \
+					'reading: {0}'.format(self.FB_OutputFile)
+			self.logThis('An Unexpected error occurred while opening ' + \
+					'and reading: {0}'.format(self.FB_OutputFile), True)
 
 		if self.fileXML_str:
-			# Read the XML into a usable format
 			xmltree = et.fromstring(self.fileXML_str)
 
 			listOfResults = []
 			for el in xmltree.findall('BugInstance'):
 				tempList = []
-
-				# tempList format:	[[attributes from list_items], ..., [child], [child]]
-
-				# ----------------------------------------------------------------------------------------------DEBUG
-				#print '\n[DEBUG]\tBug Instance: ' + str(el.get("type"))
-
 				list_items = el.items()
-
-				# ----------------------------------------------------------------------------------------------DEBUG
-				print '\n[DEBUG]\tAttributes:\n' + str(list_items)
-
 				list_items.append( ('tag', el.tag) )
 
 				tempList.append(list_items)
-
-				# ----------------------------------------------------------------------------------------------DEBUG
-				print '\n[DEBUG]\tChildren:\n' + str( [x.tag for x in el.getchildren()] )
 
 				for ch in el.getchildren():
 					tmp = ch.items()
 					tmp.append( ('tag', ch.tag) )
 
-					# ----------------------------------------------------------------------------------------------DEBUG
-					if ch.tag == "SourceLine":
-						print '\n[DEBUG]\tSourceLine: ' + str(ch.items())
-
 					tempList.append(tmp)
-
-				# ----------------------------------------------------------------------------------------------DEBUG
-				print 30*'-' + '\n'
 
 				listOfResults.append(tempList)
 
-
-			# DEBUG -- Print entire list of results
-			#for element in listOfResults:
-			#	print "========================================"
-			#	print element
-
-			# Save list of results to file
 			self.saveThisList(listOfResults, self.RESULTS)
 			
 		else:
@@ -127,9 +94,9 @@ class FBParser(object):
 			self.logThis("No XML Found", True)
 
 
-	# ---------------------- HELPER FUNCTIONS ----------------------------------------
+	# ---------------------- HELPER FUNCTIONS --------------------------------
 
-	# Logging function
+
 	def logThis(self, data, error):
 		if self.logfile is None:
 			try:
@@ -165,7 +132,8 @@ class FBParser(object):
 			try:
 				self.logfile.close()
 			except:
-				print 'An Unexpected error occurred while closing log file: %s' % self.PARSELOG
+				print 'An Unexpected error occurred while closing log ' + \
+						'file: %s' % self.PARSELOG
 
 
 
@@ -187,7 +155,6 @@ def usage():
 
 
 
-# Run
 if __name__ == "__main__":
 
 	tmpDD = ""
@@ -195,8 +162,11 @@ if __name__ == "__main__":
 
 	arguments = sys.argv[1:]
 	try:
-		#dd=defect density file, b=bug file    BOTH REQUIRED
-		opts, args = getopt.getopt(arguments, "d:b:", ["defectdensityfile", "bugfile"])
+		opts, args = getopt.getopt(
+						arguments, 
+						"d:b:", 
+						["defectdensityfile", "bugfile"])
+
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
