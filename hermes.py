@@ -91,11 +91,16 @@ class Hermes():
 
 
 # ----------------------------------------------------------------------------
-	def runBasicFuzzServer(self, address="localhost", port=80, prot_def="PD_Creator/protocol.py", module="PD_Creator.protocol"):
+	def runBasicFuzzServer(self, address="localhost", port=80, 
+			prot_def="PD_Creator/protocol.py", module="PD_Creator.protocol"):
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
 
-		fuzz_svr = FuzzServer(self.NUM_REQUESTS, self.TIMEOUT, prot_def, module)
+		fuzz_svr = FuzzServer(
+			self.NUM_REQUESTS, 
+			self.TIMEOUT, 
+			prot_def, 
+			module)
 
 		fuzz_alg = CVG_Max(fuzz_svr, 
 							CX=0.5, 
@@ -134,7 +139,8 @@ class Hermes():
 			pd.save_protocol(prot)
 			print 'Fuzz Server Reset.'
 		except Exception as e:
-			print 'An unexpected exception has occurred while trying to reset Hermes: ' + str(e)
+			print 'An unexpected exception has occurred while trying to ' + \
+					'reset Hermes: ' + str(e)
 
 
 
