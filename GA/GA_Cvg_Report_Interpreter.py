@@ -98,9 +98,10 @@ class CVG_Max():
 			complement)
 
 			Goal:
-				Max target cvg while minimizing std deviation, and other cvg
+				Max target cvg
+				Minimize std deviation, other code cvg, and number of 'genes' used
 		'''
-		creator.create("CvgMaxMin", base.Fitness, weights=(1.0, -1.0, -1.0))
+		creator.create("CvgMaxMin", base.Fitness, weights=(1.0, -1.0, -1.0, -1.0))
 		creator.create("Individual", list, fitness=creator.CvgMaxMin)
 
 		'''
@@ -231,6 +232,7 @@ class CVG_Max():
 		(comp_rv, comp_std, comp_cvg_values) = self.crunch_cvg_data(tgt_comp)
 
 		# --------------------------------------------------------------------------------------------------------DEBUG
+		# use 'logging' module from now on
 		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + \
 			" coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  \
 			" granularity): " + str(tgt_rv)
@@ -243,7 +245,13 @@ class CVG_Max():
 			(num_resps, fsvr_start, fsvr_end),
 			individual)
 
-		return (tgt_rv, tgt_std, comp_rv)
+		gene_count = self.get_gene_count(individual)
+
+		return (tgt_rv, tgt_std, comp_rv, gene_count)
+
+
+	def get_gene_count(self, individual):
+		return sum(individual)
 
 
 
