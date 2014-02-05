@@ -223,8 +223,15 @@ class CVG_Max():
 			report_xml = f.read()
 
 
+		try:
+			self.emma_xml_parser.extractEMMAData(report_xml)
+		except Exception as e:
+			print "%s" % (str(e))
+			print 'Parse Error: Skipping test.'
+			return (0, 1, 1, 100)
+
+
 		# NOTE: tgt_data and tgt_comp are lists of TargetData objects
-		self.emma_xml_parser.extractEMMAData(report_xml)
 		tgt_data = self.emma_xml_parser.getTargetResults()
 		tgt_comp = self.emma_xml_parser.getTargetComplement()
 
