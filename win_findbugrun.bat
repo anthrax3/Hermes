@@ -31,18 +31,22 @@ if NOT "%1"=="" (
 		echo.
 		echo -fbhelp
 		echo      get the options for the FindBugs script
+		goto :eof
 	)
-) ELSE (
-	echo Running Findbugs...
-	%CD%\findbugs-2.0.2\bin\findbugs.bat -textui -xml -auxclasspath %classpath% -output fb_results.xml %targetjar%
-	echo Done.
-	echo Calculating Defect Densities...
-	%CD%\findbugs-2.0.2\bin\findbugs.bat -defectDensity fb_results.xml > defectdensity.txt
-	echo Done.
-	echo Running Parser...
-	python Parser\parser.py -d defectdensity.txt -b fb_results.xml
-	echo Done.
-	echo Running Analyzer...
-	python Analyzer\analyzer.py -r parse_results.txt -d parse_densities.txt
-	echo Done.
 )
+
+echo Updating Hermes config and modules...
+python setup.py install
+echo Done.
+echo Running Findbugs...
+call %CD%\findbugs-2.0.2\bin\findbugs.bat -textui -xml -auxclasspath %classpath% -output fb_results.xml %targetjar%
+echo Done.
+echo Calculating Defect Densities...
+call %CD%\findbugs-2.0.2\bin\findbugs.bat -defectDensity fb_results.xml > defectdensity.txt
+echo Done.
+echo Running Parser...
+python Parser\parser.py -d defectdensity.txt -b fb_results.xml
+echo Done.
+echo Running Analyzer...
+python Analyzer\analyzer.py -r parse_results.txt
+echo Done.
