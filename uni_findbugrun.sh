@@ -8,7 +8,8 @@ fbddfile=defectdensity.txt
 
 classpathjars=""
 
-
+echo "Updating Hermes config and modules..."
+sudo python setup.py install
 echo "Running FindBugs..."
 ./findbugs-2.0.2/bin/findbugs -textui -xml -auxclasspath $classpath -output $fboutputfile $fbtargetjar
 echo "Done."
