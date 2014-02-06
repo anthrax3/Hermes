@@ -73,8 +73,8 @@ class Hermes():
 
 	def __init__(self):
 		self.addSysPaths()
-		self.NUM_REQUESTS = 70000
-		self.TIMEOUT = 70000
+		self.NUM_REQUESTS = 3600
+		self.TIMEOUT = 3600
 
 
 # ----------------------------------------------------------------------------
