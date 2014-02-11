@@ -127,10 +127,6 @@ class Hermes():
 		self.logger.info('Basic Server Results: ' + str(results))
 
 
-
-
-
-
 # ----------------------------------------------------------------------------
 	def runCoverageListener(self):
 		
@@ -138,8 +134,6 @@ class Hermes():
 
 		cvg_listener = Listener()
 		cvg_listener.run()
-
-
 
 
 # ----------------------------------------------------------------------------
@@ -155,6 +149,35 @@ class Hermes():
 			self.logger.error(
 				'An unexpected exception has occurred while trying to ' + \
 				'reset Hermes: ' + str(e))
+
+
+# ----------------------------------------------------------------------------
+	def generate_protocol_file(self, individual="1,1,1,1,1,1,1", 
+								filename="gen_prot.py"):
+		'''
+			Given the individual (in string form), generate a protocol
+			definition and save it to the file specified.
+			Path is set to save all files to 'Generated_Protocols'.
+		'''
+
+		from PD_Creator.Protocol_Definition_Creator import PDef_Creator
+		pd = PDef_Creator()
+
+		try:
+			self.logger.info("Attempting to extract individual from " + str(individual))
+			ind_list = [int(x) for x in individual.replace(" ", "").split(",")]
+		except:
+			self.logger.error("Could not generate protocol file " + \
+				"from individual. Could not parse individual specified.")
+			ind_list = [1,1,1,1,1,1,1]
+
+		self.logger.info("Using individual: " + str(ind_list))
+
+		prot = pd.generate_html(ind_list)
+		f_path = "Generated_Protocols" + os.sep + filename
+		pd.save_protocol(prot, f_path)
+
+		self.logger.info("Generated protocol saved to " + str(f_path))
 
 
 
@@ -239,6 +262,9 @@ def usage():
 	print '\t-r, --reset\n\t\tResets the protocol definition to default'
 	print '\t-b, --basic\n\t\tStarts the basic fuzz server - no genetic algorithm'
 	print '\t-p, --protocol\n\t\t(Optional to -b only) Adds a specific protocol definition to be used'
+	print '\t-g, --generate\n\t\tGenerates a protocol definition (requires -i and -n)'
+	print '\t-i, --individual\n\t\tSpecify the individual as a comma-separated string'
+	print '\t-n, --name\n\t\tSpecify the protocol name string'
 	print '\n'
 	print '\tThe user MUST specify a command (above) for Hermes to execute'
 
@@ -247,10 +273,12 @@ if __name__ == "__main__":
 
 	command = ""
 	prot_def = ""
+	ind = ""
+	p_name = ""
 
 	arguments = sys.argv[1:]
 	try:
-		opts, args = getopt.getopt(arguments, "fcrbp:", ["FuzzServer", "CVGListen", "reset", "basic", "protocol="])
+		opts, args = getopt.getopt(arguments, "fcrbp:gi:n:", ["FuzzServer", "CVGListen", "reset", "basic", "protocol=", "generate", "individual=", "name="])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
@@ -266,7 +294,12 @@ if __name__ == "__main__":
 			command = "basic"
 		elif opt in ("-p", "--protocol"):
 			prot_def = arg
-
+		elif opt in ("-g", "--generate"):
+			command = "generate"
+		elif opt in ("-i", "--individual"):
+			ind = arg
+		elif opt in ("-n", "--name"):
+			p_name = arg
 
 	if command and command == "FuzzServer":
 		hermes = Hermes()
@@ -285,6 +318,12 @@ if __name__ == "__main__":
 		else:
 			hermes = Hermes()
 			hermes.runBasicFuzzServer()
+	elif command and command == "generate":
+		if ind and len(ind) > 0 and p_name and len(p_name) > 0:
+			hermes = Hermes()
+			hermes.generate_protocol_file(ind, p_name)
+		else:
+			usage()
 	else:
 		usage()
 		sys.exit(2)
