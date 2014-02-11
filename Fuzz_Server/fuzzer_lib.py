@@ -6,6 +6,7 @@ import os
 import time
 import imp
 import inspect
+import logging
 
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from datetime import datetime, timedelta
@@ -13,7 +14,13 @@ from datetime import datetime, timedelta
 from sulley import *
 import PD_Creator.protocol
 
-
+f_logger = logging.getLogger('Fuzzer_Lib_Logger')
+f_logger.setLevel(logging.DEBUG)
+f_fh = logging.FileHandler('Logs/fuzzer_lib.log')
+f_fh.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+f_fh.setFormatter(formatter)
+f_logger.addHandler(f_fh)
 
 # ----------------------------------------------------------------------------
 # Custom Exception class - thrown them max responses or time limit reached
@@ -58,8 +65,7 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 		self.end_headers()
 
 		mutation = self.Request.render()
-
-		print 'Sending mutation #' + str(self.Current_Response)
+		f_logger.info('Sending mutation #' + str(self.Current_Response))
 
 		# Send the fuzzed html to the client
 		self.wfile.write(mutation)
@@ -92,7 +98,7 @@ class FuzzServer():
 		try:
 			self.reloadSulleyRequest(self.prot_def_path, module)
 		except:
-			print 'Error: Reloading the Sulley request failed. Moving to new default protocol.'
+			f_logger.error('Reloading the Sulley request failed. Moving to new default protocol.')
 			pd = PDef_Creator()
 			prot = pd.genAdvancedHTML([1,1,1,1,1,1,1])
 			pd.save_protocol(prot)
@@ -104,14 +110,14 @@ class FuzzServer():
 		self.un_initialize_sulley_request('Protocol Definition')
 		#imp.reload(PD_Creator.protocol)
 		try:
-			print 'Loading path: ' + str(path) + ', module: ' + str(module)
+			f_logger.info('Loading path: ' + str(path) + ', module: ' + str(module))
 			self.prot_def_module = imp.load_source(module, path)
 		except Exception as e:
-			print str(e)
+			f_logger.error('Could not load path (' + str(path) + ') and module (' + module + '), ' + str(e))
 
 		self.Sulley_Request = s_get('Protocol Definition')
 
-		print 'Sulley request loaded. Number of mutations: ' + str(self.Sulley_Request.num_mutations())
+		f_logger.info('Sulley request loaded. Number of mutations: ' + str(self.Sulley_Request.num_mutations()))
 
 
 	# --------------------------------------------------------------------------------------------
@@ -124,13 +130,14 @@ class FuzzServer():
 			if blocks.CURRENT.name == name:
 				blocks.CURRENT = None
 		except Exception as e:
-			print 'An unexpected error occurred while un-initializing the sulley request ' + str(name)
+			f_logger.error('An unexpected error occurred while un-initializing the sulley request ' + str(name))
 
 
 
 	# Start the server
 	def run(self):
-		print 'http server is starting...'
+		print 'HTTP server is starting...'
+		f_logger.info('HTTP server is starting.')
 
 		host = '127.0.0.1'
 		port = 80
@@ -143,25 +150,27 @@ class FuzzServer():
 		self.httpd.handle_timeout = self.server_off
 
 		print 'http server is running on %s:%s ...\n\n' % (host, port)
+		f_logger.info('HTTP server is running on ' + str(host) + ':' + str(port))
 
 		try:
 			self.START_TIME = datetime.now()
 
 			while self.server_running:
-				print 'Waiting To Handle Request...'
+				f_logger.info('Waiting To Handle Request...')
 				self.httpd.handle_request()
 
 		except KeyboardInterrupt:
 			pass
 		self.server_off()
 		print 'Server stopped on %s:%s' % (host, port)
+		f_logger.info('Server stopped.')
 
 
 	def server_off(self):
 		self.server_running = False
 		self.END_TIME = datetime.now()
 		self.httpd.server_close()
-		print 'Server shutdown triggered by ' + str(inspect.stack()[1][3])
+		f_logger.info('Server shutdown triggered by ' + str(inspect.stack()[1][3]))
 
 
 	def reset(self):
@@ -182,9 +191,9 @@ class FuzzServer():
 			if datetime.now() > endtime:
 				self.server_running = False
 				self.END_TIME = datetime.now()
-				print 'Max Server Timeout Hit: Timeout = ' + \
+				f_logger.info('Max Server Timeout Hit: Timeout = ' + \
 						str(self.MAX_TIME_MINS) + ' minutes (Projected ' + \
-						'end time: ' + str(endtime) + ')'
+						'end time: ' + str(endtime) + ')')
 
 		else:
 			self.START_TIME = datetime.now()
@@ -192,7 +201,7 @@ class FuzzServer():
 		if self.CURRENT_RESPONSES >= self.MAX_RESPONSES:
 			self.server_running = False
 			self.END_TIME = datetime.now()
-			print 'Max Server Responses Hit: Max = ' + str(self.MAX_RESPONSES)
+			f_logger.info('Max Server Responses Hit: Max = ' + str(self.MAX_RESPONSES))
 
 		if self.server_running:
 			self.CURRENT_RESPONSES = self.CURRENT_RESPONSES + 1

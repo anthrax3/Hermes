@@ -56,7 +56,12 @@
 #
 
 
-import getopt, sys, os, inspect, imp
+import getopt
+import sys
+import os
+import inspect
+import imp
+import logging
 
 # Add the current path to the system path
 # Found here: http://stackoverflow.com/questions/279237/import-a-module-from-a-folder
@@ -66,15 +71,20 @@ if cmd_folder not in sys.path:
 
 
 
-
-
 class Hermes():
-
 
 	def __init__(self):
 		self.addSysPaths()
 		self.NUM_REQUESTS = 3600
 		self.TIMEOUT = 3600
+
+		self.logger = logging.getLogger('Hermes_Logger')
+		self.logger.setLevel(logging.DEBUG)
+		fh = logging.FileHandler('Logs/hermes.log')
+		fh.setLevel(logging.DEBUG)
+		formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		fh.setFormatter(formatter)
+		self.logger.addHandler(fh)
 
 
 # ----------------------------------------------------------------------------
@@ -112,7 +122,9 @@ class Hermes():
 
 		fuzz_alg.mark_server_start()
 		fuzz_svr.run()
-		print fuzz_alg.generate_results(prot_def)
+		results = fuzz_alg.generate_results(prot_def)
+		print str(results)
+		self.logger.info('Basic Server Results: ' + str(results))
 
 
 
@@ -138,9 +150,11 @@ class Hermes():
 			prot = pd.generate_html([1,1,1,1,1,1,1])
 			pd.save_protocol(prot)
 			print 'Fuzz Server Reset.'
+			self.logger.info('Fuzz Server Reset.')
 		except Exception as e:
-			print 'An unexpected exception has occurred while trying to ' + \
-					'reset Hermes: ' + str(e)
+			self.logger.error(
+				'An unexpected exception has occurred while trying to ' + \
+				'reset Hermes: ' + str(e))
 
 
 

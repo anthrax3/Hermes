@@ -19,6 +19,7 @@ import os
 import imp
 import time
 import traceback
+import logging
 
 from datetime import datetime, timedelta
 from deap import creator, base, tools
@@ -34,6 +35,14 @@ class CVG_Max():
 
 	def __init__(self, fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, 
 				simple=False):
+
+		self.logger = logging.getLogger('GA_CRI_Logger')
+		self.logger.setLevel(logging.DEBUG)
+		fh = logging.FileHandler('Logs/GA_CRI.log')
+		fh.setLevel(logging.DEBUG)
+		formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		fh.setFormatter(formatter)
+		self.logger.addHandler(fh)
 
 		# Probabilities and values for genetic algorithm
 		self.CXPB = CX
@@ -136,7 +145,8 @@ class CVG_Max():
 			used).
 		'''
 
-		print 'Individual: ' + str(individual)
+		print 'Evaluating individual: ' + str(individual)
+		self.logger.info('Individual: ' + str(individual))
 
 		# Time evaulation started - used to find latest eval report.
 		#self.start_time = datetime.now()
@@ -148,8 +158,8 @@ class CVG_Max():
 			pdef = self.pd_creator.generate_html(individual)
 
 		except Exception as ex:
-			print 'An unexpected exception occurred while generating the ' + \
-					'protocol definition.\n%s\n' % (str(ex))
+			self.logger.error('An unexpected exception occurred while generating the ' + \
+						'protocol definition.\n' + str(ex))
 
 		# try to save the generated protocol definition
 		if pdef:
@@ -171,9 +181,8 @@ class CVG_Max():
 			# now in generate_report()
 			#(num_resps, fsvr_start, fsvr_end) = self.Fuzz_Server.getStats()
 		except Exception as e:
-			print 'An unexpected error has occurred while evaluating the ' + \
-					'fuzz server.\n%s\n' % (str(e))
-			traceback.print_exc()
+			self.logger.critical('An unexpected error has occurred while evaluating the ' + \
+							'fuzz server.\n' + str(e))
 
 		return self.generate_results(individual)
 
@@ -202,21 +211,27 @@ class CVG_Max():
 			which saves it to file.
 		'''
 		if self.start_time > report_created:
+			self.logger.info('Waiting for coverage report to finish writing')
 			print 'Waiting for coverage report to finish writing'
 
 		timeout_time = datetime.now() + timedelta(minutes=self.TIMEOUT)
+		time_count = 0
 		while (self.start_time > report_created) and \
 				(datetime.now() < timeout_time):
 
 			time.sleep(1)
-			print '.',
+			if time_count % 10 == 0:
+				self.logger.info('... ' + str(time_count))
+				print '.',
+
 			report_file = self.get_latest_cvg_report()
 			if report_file:
 				report_created = datetime.fromtimestamp(
 									os.stat(report_file).st_mtime)
+			time_count = time_count + 1
 
-
-		print '\nAnalyzing Coverage XML Report.'
+		print 'Report found. Analyzing.'
+		self.logger.info('Analyzing Coverage XML Report.')
 
 		report_xml = ""
 		with open(report_file, "r") as f:
@@ -226,8 +241,7 @@ class CVG_Max():
 		try:
 			self.emma_xml_parser.extractEMMAData(report_xml)
 		except Exception as e:
-			print "%s" % (str(e))
-			print 'Parse Error: Skipping test.'
+			self.logger.error(str(e) + "\n" + 'Parse Error: Skipping test.')
 			return (0, 1, 1, 100)
 
 
@@ -238,11 +252,10 @@ class CVG_Max():
 		(tgt_rv, tgt_std, tgt_cvg_values) = self.crunch_cvg_data(tgt_data)
 		(comp_rv, comp_std, comp_cvg_values) = self.crunch_cvg_data(tgt_comp)
 
-		# --------------------------------------------------------------------------------------------------------DEBUG
-		# use 'logging' module from now on
-		print "Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + \
-			" coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] +  \
-			" granularity): " + str(tgt_rv)
+		self.logger.info(
+			"Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + \
+			" coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] + \
+			" granularity): " + str(tgt_rv))
 
 		self.save_cvg_log(
 			tgt_data, 
@@ -255,6 +268,7 @@ class CVG_Max():
 		gene_count = self.get_gene_count(individual)
 
 		return (tgt_rv, tgt_std, comp_rv, gene_count)
+
 
 
 	def get_gene_count(self, individual):
@@ -321,7 +335,7 @@ class CVG_Max():
 
 			
 			f.write(txt)
-			print 'Coverage log saved to %s' % (log_f)
+			self.logger.info('Coverage log saved to ' + str(log_f))
 
 
 
@@ -364,58 +378,6 @@ class CVG_Max():
 			std_deviation = abs(sum2 / nov - mean_cvg**2)**0.5
 
 		return (mean_cvg, std_deviation, (cc, mc, bc, lc))
-
-
-
-	# ------------------------------------------------------------------------
-	# Calculates the average coverage of the given targets at the set granularity level
-	# granularity is set by the self.GRANULARITY variable
-	# returns the sum of the coverages and the number of calculated values. the avg is easily calculated from this
-	# returned data format: (<num_of_values>, <class cvg>, <method cvg>, <block cvg>, <line cvg>)
-
-	'''
-		TODO: Test that this function is not used anywhere thoroughly before completely removing
-	'''
-
-	'''
-	# DEPRECATED--------------------------------------------------------------
-	def getTargetCoverageValues(self, target_data):
-		num_of_values = 0
-		class_cvg = []
-		method_cvg = []
-		block_cvg = []
-		line_cvg = []
-
-		#print 'Type: ' + target_data.type + ', target type: ' + self.CVG_GRANULARITY_LIST[self.GRANULARITY] + ', ' + str(target_data.type == self.CVG_GRANULARITY_LIST[self.GRANULARITY])
-
-		if target_data.type == self.CVG_GRANULARITY_LIST[self.GRANULARITY]:
-			class_cvg.append(target_data.class_coverage)
-			method_cvg.append(target_data.method_coverage)
-			block_cvg.append(target_data.block_coverage)
-			line_cvg.append(target_data.line_coverage)
-			num_of_values = 1
-
-		for child in target_data.children:
-			(tmp_nov, tmp_cc, tmp_mc, tmp_bc, tmp_lc) = self.getTargetCoverageValues(child)
-			num_of_values = num_of_values + tmp_nov
-			#class_cvg = class_cvg + tmp_cc
-			#method_cvg = method_cvg + tmp_mc
-			#block_cvg = block_cvg + tmp_bc
-			#line_cvg = line_cvg + tmp_lc
-			if tmp_cc:
-				class_cvg.append(tmp_cc[0])
-			if tmp_mc:
-				method_cvg.append(tmp_mc[0])
-			if tmp_bc:
-				block_cvg.append(tmp_bc[0])
-			if tmp_lc:
-				line_cvg.append(tmp_lc[0])
-
-
-
-		return (num_of_values, class_cvg, method_cvg, block_cvg, line_cvg)
-	'''
-
 
 
 
@@ -464,14 +426,11 @@ class CVG_Max():
 		else:
 			pop = self.toolbox.population(n=self.POP_SIZE)
 
-			print 'Starting Evolution Algorithm...'
+			print 'Starting Algorithm.'
+			self.logger.info('Starting Evolution Algorithm...')
 
 			fitnesses = map(self.toolbox.evaluate, pop)
 			for ind, fit in zip(pop, fitnesses):
-				# DEBUG--------------------------------------------------------------------------------DEBUG
-				print 'fit: ' + str(fit)
-				print 'ind: ' + str(ind)
-				# END DEBUG ---------------------------------------------------------------------------DEBUG
 				ind.fitness.values = fit
 
 			for g in range(self.NGEN):
@@ -510,12 +469,11 @@ class CVG_Max():
 			sum2 = sum(x*x for x in fits)
 			std = abs(sum2 / length - mean**2)**0.5
 
-			print 'Algorithm Execution Final Population Results'
-			print 'Max: ' + str(max(fits))
-			print 'Min: ' + str(min(fits))
-			print 'Avg: ' + str(mean)
-			print 'StD: ' + str(std)
-
+			self.logger.info('Algorithm Execution Final Population Results')
+			self.logger.info('Max: ' + str(max(fits)))
+			self.logger.info('Min: ' + str(min(fits)))
+			self.logger.info('Avg: ' + str(mean))
+			self.logger.info('StD: ' + str(std))
 
 		return pop
 
@@ -527,27 +485,4 @@ class CVG_Max():
 #test = CVG_Max(f)
 
 #test.evaluate()
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
