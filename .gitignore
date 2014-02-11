@@ -5,3 +5,5 @@ hermes_eval_dump.txt
 PD_Creator/protocol.py
 coverage.xml
 build/
+Logs/
+tests/
