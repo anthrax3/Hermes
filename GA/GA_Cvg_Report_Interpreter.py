@@ -38,7 +38,7 @@ class CVG_Max():
 
 		self.logger = logging.getLogger('GA_CRI_Logger')
 		self.logger.setLevel(logging.DEBUG)
-		fh = logging.FileHandler('Logs/GA_CRI.log')
+		fh = logging.FileHandler('Logs/GA_CRI.log', mode='w')
 		fh.setLevel(logging.DEBUG)
 		formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 		fh.setFormatter(formatter)

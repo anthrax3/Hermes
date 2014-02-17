@@ -1,9 +1,25 @@
 *.pyc
+*.log
+
+# Log files are to be ignored...
+
 hermes_f_dump.txt
 hermes_c_dump.txt
 hermes_eval_dump.txt
-PD_Creator/protocol.py
-coverage.xml
-build/
+
+parse_log.txt
+
 Logs/
+
+# 'tests/' directory used by EMMA. This is not the unit test directory!
+
 tests/
+
+# Resultant files to be ignored...
+
+build/
+coverage.xml
+PD_Creator/protocol.py
+fb_results.xml
+defectdensity.txt
+Analyzer/targets

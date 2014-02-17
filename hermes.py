@@ -80,7 +80,7 @@ class Hermes():
 
 		self.logger = logging.getLogger('Hermes_Logger')
 		self.logger.setLevel(logging.DEBUG)
-		fh = logging.FileHandler('Logs/hermes.log')
+		fh = logging.FileHandler('Logs/hermes.log', mode='w')
 		fh.setLevel(logging.DEBUG)
 		formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 		fh.setFormatter(formatter)
@@ -93,11 +93,15 @@ class Hermes():
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
 
+		self.logger.info('Running Hermes...')
+
 		# DEBUG - set the server to only take 10 requests or run for 1 minute
 		# Normal execution: 100 requests, or 10 minutes
 		#fuzz_algorithm = CVG_Max(FuzzServer(1000, 10))
 		fuzz_algorithm = CVG_Max(FuzzServer(self.NUM_REQUESTS, self.TIMEOUT))
-		fuzz_algorithm.run_algorithm()
+		population = fuzz_algorithm.run_algorithm()
+
+		self.logger.info('Analysis Complete: Final Population: \n' + str(population))
 
 
 # ----------------------------------------------------------------------------
@@ -105,6 +109,8 @@ class Hermes():
 			prot_def="PD_Creator/protocol.py", module="PD_Creator.protocol"):
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
+
+		self.logger.info('Running Basic Server...')
 
 		fuzz_svr = FuzzServer(
 			self.NUM_REQUESTS, 
@@ -185,6 +191,9 @@ class Hermes():
 
 # ----------------------------------------------------------------------------
 	def addSysPaths(self):
+
+		self.logger.info('Adding system paths for execution [Possible ' + \
+			'deprecated with setup.py use?]')
 
 		# Set the system path to include the path to the fuzzing code
 		fuzz_subfolder = os.path.realpath(

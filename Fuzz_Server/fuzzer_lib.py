@@ -16,7 +16,7 @@ import PD_Creator.protocol
 
 f_logger = logging.getLogger('Fuzzer_Lib_Logger')
 f_logger.setLevel(logging.DEBUG)
-f_fh = logging.FileHandler('Logs/fuzzer_lib.log')
+f_fh = logging.FileHandler('Logs/fuzzer_lib.log', mode='w')
 f_fh.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 f_fh.setFormatter(formatter)
@@ -117,7 +117,7 @@ class FuzzServer():
 
 		self.Sulley_Request = s_get('Protocol Definition')
 
-		f_logger.info('Sulley request loaded. Number of mutations: ' + str(self.Sulley_Request.num_mutations()))
+		f_logger.info('Sulley request loaded. Number of possible mutations: ' + str(self.Sulley_Request.num_mutations()))
 
 
 	# --------------------------------------------------------------------------------------------
