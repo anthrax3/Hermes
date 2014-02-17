@@ -192,9 +192,6 @@ class Hermes():
 # ----------------------------------------------------------------------------
 	def addSysPaths(self):
 
-		self.logger.info('Adding system paths for execution [Possible ' + \
-			'deprecated with setup.py use?]')
-
 		# Set the system path to include the path to the fuzzing code
 		fuzz_subfolder = os.path.realpath(
 			os.path.abspath(
