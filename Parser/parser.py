@@ -26,7 +26,7 @@ class FBParser(object):
 
 
 	def initialize(self):
-		self.parseDefectDensityFile()
+		#self.parseDefectDensityFile()
 		self.parseBugFile()
 
 
