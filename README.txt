@@ -95,8 +95,13 @@ Usage:
 
     E2:  Test the generated protocol:
 
+        1. Start Coverage Listener (helps to be a bg process):
         > python hermes.py -c
+
+        2. Start Fuzz Server (helps to be a bg process):
         > python hermes.py -b -p ./PD_Creator/some_protocol.py
+
+        3. Start Evaluation only once ([win/uni]_client runs a single evaluation):
         > win_client.bat
 
     E3:  Create a protocol given an individual

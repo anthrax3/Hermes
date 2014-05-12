@@ -34,7 +34,7 @@ from Config.fuzzserver import DETAILS as FUZZCONFIG
 class CVG_Max():
 
 	def __init__(self, fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, 
-				simple=False):
+				simple=False, timeout=3600):
 
 		self.logger = logging.getLogger('GA_CRI_Logger')
 		self.logger.setLevel(logging.DEBUG)
@@ -57,7 +57,7 @@ class CVG_Max():
 		self.start_time = None
 
 		# Server timeout in seconds
-		self.TIMEOUT = 3600
+		self.TIMEOUT = timeout
 
 		
 		self.pd_creator = PDef_Creator()

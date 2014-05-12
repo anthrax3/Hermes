@@ -75,8 +75,14 @@ class Hermes():
 
 	def __init__(self):
 		self.addSysPaths()
+
+		# GA Fuzz Server Config
 		self.NUM_REQUESTS = 3600
 		self.TIMEOUT = 3600
+
+		# Basic Fuzz Server Config
+		self.NUM_BFS_REQUESTS = 70000
+		self.BFS_TIMEOUT = 45000
 
 		self.logger = logging.getLogger('Hermes_Logger')
 		self.logger.setLevel(logging.DEBUG)
@@ -113,8 +119,8 @@ class Hermes():
 		self.logger.info('Running Basic Server...')
 
 		fuzz_svr = FuzzServer(
-			self.NUM_REQUESTS, 
-			self.TIMEOUT, 
+			self.NUM_BFS_REQUESTS, 
+			self.BFS_TIMEOUT, 
 			prot_def, 
 			module)
 
@@ -123,7 +129,8 @@ class Hermes():
 							MPB=0.2, 
 							NG=1, 
 							PS=1, 
-							simple=True
+							simple=True, 
+							timeout=self.BFS_TIMEOUT
 							)
 
 		fuzz_alg.mark_server_start()
