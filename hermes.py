@@ -80,7 +80,7 @@ class Hermes():
 		self.NUM_REQUESTS = 3600
 		self.TIMEOUT = 3600
 
-		# Basic Fuzz Server Config
+		# Basic Fuzz Server Config (timeout in seconds)
 		self.NUM_BFS_REQUESTS = 70000
 		self.BFS_TIMEOUT = 45000
 
@@ -129,8 +129,7 @@ class Hermes():
 							MPB=0.2, 
 							NG=1, 
 							PS=1, 
-							simple=True, 
-							timeout=self.BFS_TIMEOUT
+							simple=True
 							)
 
 		fuzz_alg.mark_server_start()
