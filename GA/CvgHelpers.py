@@ -9,6 +9,7 @@
 
 import xml.etree.cElementTree as et
 import sys, re
+import logging
 
 
 
@@ -69,6 +70,15 @@ class EMMAXMLParser:
 		self.target_list = targets
 
 
+		self.logger = logging.getLogger('EMMAXMLParser_Logger')
+		self.logger.setLevel(logging.DEBUG)
+		fh = logging.FileHandler('Logs/EMMAXMLParser.log', mode='w')
+		fh.setLevel(logging.DEBUG)
+		formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		fh.setFormatter(formatter)
+		self.logger.addHandler(fh)
+
+
 
 	# ---------------------------------------------------------------------------------------------------
 	# Takes an xml file (generated from EMMA) as a string then parses and extracts the required information
@@ -85,6 +95,7 @@ class EMMAXMLParser:
 		self.list_target_complement = []
 
 		if not xmlfile:
+			self.logger.error('XML file is not defined.')
 			print 'Error:\tXML file passed to EMMAXMLParser is not defined.'
 			return False
 
@@ -94,11 +105,14 @@ class EMMAXMLParser:
 		# 	Get Overall Results
 		# -----------------------------------------------------------------------------------------------
 		# total packages, classes, methods, executable files, executable lines
+		self.logger.info('Getting overall results...')
 		for el in xmltree.findall('stats'):
 			for ch in el.getchildren():
 				self.listofstatsresults.append( ch.get("value") )
 
 		self.listofoverallresults = [(item.get("type"), item.get("value")) for item in xmltree.findall('data/all/coverage')]
+		self.logger.info('Done.')
+		self.logger.info('Results: ' + str(self.listofoverallresults))
 
 		# -----------------------------------------------------------------------------------------------
 		# 	Get Package Results
@@ -159,7 +173,9 @@ class EMMAXMLParser:
 		'''
 
 		if self.target_list:
+			self.logger.info('Extracting coverage.')
 			self.extract_coverage(xmltree)
+			self.logger.info('Done.')
 
 		return True
 
@@ -253,6 +269,8 @@ class EMMAXMLParser:
 	# assumes that the given list of xml item is the target xml structure
 	def constructTargetTree(self, target_item):
 
+		self.logger.info('Constructing target tree.')
+
 		target_data = TargetData()
 		target_data.name = target_item.get("name")
 		target_data.type = target_item.tag
@@ -279,7 +297,7 @@ class EMMAXMLParser:
 			else:
 				target_data.addChild( self.constructTargetTree( child ) )
 
-
+		self.logger.info('Done.')
 		return target_data
 
 
