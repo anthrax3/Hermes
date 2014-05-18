@@ -73,6 +73,7 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 
 		except Exception as e:
 			print("An unexpected error occurred while processing POST: %s" % (e))
+			logger.error('An inexpected error occurred while processing POST: ' + str(e))
 
 		list_stats = None
 		list_overallresults = None
@@ -90,7 +91,7 @@ class ListenerRequestHandler(BaseHTTPRequestHandler):
 		# Save the corresponding data file in the logs with the snapshot information / stats
 		if list_stats and list_overallresults:
 			logpath = '%s%s.txt' % (DETAILS.CVG_LOG_PATH, datafilename)
-			logger.info('Saving log snapshop to ' + str(logpath))
+			logger.info('Saving log snapshot to ' + str(logpath))
 			with open(logpath, 'w') as f:
 				towrite = 'Stats:\t' + str(list_stats) + '\n\nOverall:\t' + str(list_overallresults)
 				f.write(towrite)
