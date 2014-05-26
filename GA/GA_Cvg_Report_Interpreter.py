@@ -137,7 +137,7 @@ class CVG_Max():
 
 		#fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, 
 		#simple=False, timeout=3600
-		params = {"CX": CX, "MTB": MTB, "NG": NG, "PS": PS, "simple": simple, "timeout": timeout}
+		params = {"CX": CX, "MPB": MPB, "NG": NG, "PS": PS, "simple": simple, "timeout": timeout}
 		self.logger.info('GA Initialized with params: ' + str(params))
 
 
