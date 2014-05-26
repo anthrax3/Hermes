@@ -206,7 +206,7 @@ class FuzzServer():
 		if self.START_TIME:
 			endtime = self.START_TIME + timedelta(minutes=self.MAX_TIME_MINS)
 			timed_out = (datetime.now() > endtime)
-			f_logger.info('Time-check: (now() > endtime) = ' str(timed_out))
+			f_logger.info('Time-check: (now() > endtime) = ' + str(timed_out))
 			if datetime.now() > endtime:
 				self.server_running = False
 				self.END_TIME = datetime.now()
