@@ -99,7 +99,7 @@ class Hermes():
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
 
-		self.logger.info('Running Hermes...')
+		self.logger.info('Running Hermes maximization framework...')
 
 		# DEBUG - set the server to only take 10 requests or run for 1 minute
 		# Normal execution: 100 requests, or 10 minutes
@@ -116,13 +116,20 @@ class Hermes():
 		from GA_Cvg_Report_Interpreter import CVG_Max
 		from fuzzer_lib import FuzzServer
 
-		self.logger.info('Running Basic Server...')
+		params = {"NUM_BFS_REQUESTS": self.NUM_BFS_REQUESTS, 
+					"BFS_TIMEOUT": self.BFS_TIMEOUT, 
+					"prot_def": prot_def, 
+					"module": module}
+		self.logger.info('Initializing Basic Server with params: ' + str(params))
 
+		# default is max 70,000 requests or 720 minutes
 		fuzz_svr = FuzzServer(
 			self.NUM_BFS_REQUESTS, 
 			self.BFS_TIMEOUT, 
 			prot_def, 
 			module)
+
+		self.logger.info('Initializing CVG Maximizer')
 
 		fuzz_alg = CVG_Max(fuzz_svr, 
 							CX=0.5, 
@@ -132,9 +139,13 @@ class Hermes():
 							simple=True
 							)
 
+		self.logger.info('Starting CVG Maximizer')
 		fuzz_alg.mark_server_start()
+		self.logger.info('Starting Fuzz Server')
 		fuzz_svr.run()
+		self.logger.info('Fuzz Server stopped. Getting results...')
 		results = fuzz_alg.generate_results(prot_def)
+		self.logger.info('Done.')
 		print str(results)
 		self.logger.info('Basic Server Results: ' + str(results))
 

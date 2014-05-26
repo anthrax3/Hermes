@@ -135,6 +135,11 @@ class CVG_Max():
 		self.toolbox.register("select", tools.selTournament, tournsize=3)
 		self.toolbox.register("evaluate", self.evaluate)
 
+		#fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, 
+		#simple=False, timeout=3600
+		params = {"CX": CX, "MTB": MTB, "NG": NG, "PS": PS, "simple": simple, "timeout": timeout}
+		self.logger.info('GA Initialized with params: ' + str(params))
+
 
 
 	def evaluate(self, individual):
@@ -190,6 +195,7 @@ class CVG_Max():
 
 	def mark_server_start(self):
 		self.start_time = datetime.now()
+		self.logger.info('mark_server_start: server start time set to ' + str(self.start_time))
 
 
 	def generate_results(self, individual):
