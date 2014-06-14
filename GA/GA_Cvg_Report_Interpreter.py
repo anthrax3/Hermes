@@ -150,7 +150,7 @@ class CVG_Max():
 			used).
 		'''
 
-		self.logger.info('Individual: ' + str(individual))
+		#self.logger.info('Individual: ' + str(individual))
 
 		# Time evaulation started - used to find latest eval report.
 		#self.start_time = datetime.now()

@@ -40,7 +40,7 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def __init__(self, context, *args):
 
-		f_logger.info('Request Hendler: New request handler generated.')
+		#f_logger.info('Request Hendler: New request handler generated.')
 
 		self.context = context
 
@@ -54,13 +54,13 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 		
 
 	def do_HEAD(self):
-		f_logger.info('Request Handler: do_HEAD')
+		#f_logger.info('Request Handler: do_HEAD')
 		s.send_response(200)
 		s.send_header('Content-type', 'text/html')
 		s.end_headers()
 
 	def do_GET(self):
-		f_logger.info('Request Handler: do_GET')
+		#f_logger.info('Request Handler: do_GET')
 		# Each request has x seconds to finish, else it times out
 		self.rfile._sock.settimeout(10)
 		self.wfile._sock.settimeout(10)
@@ -70,7 +70,7 @@ class FuzzHTTPRequestHandler(BaseHTTPRequestHandler):
 		self.end_headers()
 
 		mutation = self.Request.render()
-		f_logger.info('Request Handler: Sending mutation #' + str(self.Current_Response))
+		#f_logger.info('Request Handler: Sending mutation #' + str(self.Current_Response))
 
 		# Send the fuzzed html to the client
 		self.wfile.write(mutation)
@@ -107,7 +107,6 @@ class FuzzServer():
 		try:
 			f_logger.info('Attemtping to load specified module and protocol definition...')
 			self.reloadSulleyRequest(self.prot_def_path, module)
-			f_logger.info('Done.')
 		except:
 			f_logger.error('Reloading the Sulley request failed. Moving to new default protocol.')
 			pd = PDef_Creator()
@@ -121,7 +120,7 @@ class FuzzServer():
 		self.un_initialize_sulley_request('Protocol Definition')
 		#imp.reload(PD_Creator.protocol)
 		try:
-			f_logger.info('Loading path: ' + str(path) + ', module: ' + str(module))
+			#f_logger.info('Loading path: ' + str(path) + ', module: ' + str(module))
 			self.prot_def_module = imp.load_source(module, path)
 		except Exception as e:
 			f_logger.error('Could not load path (' + str(path) + ') and module (' + module + '), ' + str(e))
@@ -141,7 +140,6 @@ class FuzzServer():
 				del blocks.REQUESTS[name]
 			if blocks.CURRENT.name == name:
 				blocks.CURRENT = None
-			f_logger.info('Done.')
 		except Exception as e:
 			f_logger.error('An unexpected error occurred while un-initializing the sulley request ' + str(name))
 
@@ -200,13 +198,11 @@ class FuzzServer():
 
 	def argHandler(self, *args):
 
-		f_logger.info('Checking server status...')
-		f_logger.info('Checking Time.')
 		# Check if we should still be going (time and max requests)
 		if self.START_TIME:
 			endtime = self.START_TIME + timedelta(minutes=self.MAX_TIME_MINS)
 			timed_out = (datetime.now() > endtime)
-			f_logger.info('Time-check: (now() > endtime) = ' + str(timed_out))
+			#f_logger.info('Time-check: (now() > endtime) = ' + str(timed_out))
 			if datetime.now() > endtime:
 				self.server_running = False
 				self.END_TIME = datetime.now()
@@ -217,7 +213,6 @@ class FuzzServer():
 		else:
 			self.START_TIME = datetime.now()
 
-		f_logger.info('Checking response number...')
 		if self.CURRENT_RESPONSES >= self.MAX_RESPONSES:
 			self.server_running = False
 			self.END_TIME = datetime.now()
