@@ -167,7 +167,7 @@ class FuzzServer():
 			self.START_TIME = datetime.now()
 
 			while self.server_running:
-				f_logger.info('Waiting To Handle Request...')
+				#f_logger.info('Waiting To Handle Request...')
 				self.httpd.handle_request()
 
 		except KeyboardInterrupt:
