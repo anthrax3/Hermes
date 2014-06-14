@@ -150,7 +150,6 @@ class CVG_Max():
 			used).
 		'''
 
-		print 'Evaluating individual: ' + str(individual)
 		self.logger.info('Individual: ' + str(individual))
 
 		# Time evaulation started - used to find latest eval report.
@@ -218,7 +217,6 @@ class CVG_Max():
 		'''
 		if self.start_time > report_created:
 			self.logger.info('Waiting for coverage report to finish writing')
-			print 'Waiting for coverage report to finish writing'
 
 		timeout_time = datetime.now() + timedelta(minutes=self.TIMEOUT)
 		time_count = 0
@@ -228,7 +226,6 @@ class CVG_Max():
 			time.sleep(1)
 			if time_count % 10 == 0:
 				self.logger.info('... ' + str(time_count))
-				print '.',
 
 			report_file = self.get_latest_cvg_report()
 			if report_file:
@@ -236,8 +233,7 @@ class CVG_Max():
 									os.stat(report_file).st_mtime)
 			time_count = time_count + 1
 
-		print 'Report found. Analyzing.'
-		self.logger.info('Analyzing Coverage XML Report.')
+		self.logger.info('Report found. Analyzing Coverage XML Report.')
 
 		report_xml = ""
 		with open(report_file, "r") as f:
@@ -432,7 +428,6 @@ class CVG_Max():
 		else:
 			pop = self.toolbox.population(n=self.POP_SIZE)
 
-			print 'Starting Algorithm.'
 			self.logger.info('Starting Evolution Algorithm...')
 
 			fitnesses = map(self.toolbox.evaluate, pop)

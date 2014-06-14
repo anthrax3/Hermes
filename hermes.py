@@ -146,7 +146,6 @@ class Hermes():
 		self.logger.info('Fuzz Server stopped. Getting results...')
 		results = fuzz_alg.generate_results(prot_def)
 		self.logger.info('Done.')
-		print str(results)
 		self.logger.info('Basic Server Results: ' + str(results))
 
 
