@@ -44,6 +44,10 @@ class CVG_Max():
 		fh.setFormatter(formatter)
 		self.logger.addHandler(fh)
 
+		self.logger.info('CVG MAX Initialized: CX={} MPB={} NG={} PS={} simple={}, timeout={}'.format(
+			CX, MPB, NG, PS, simple, timeout
+		))
+
 		# Probabilities and values for genetic algorithm
 		self.CXPB = CX
 		self.MUTPB = MPB
@@ -63,8 +67,11 @@ class CVG_Max():
 		self.pd_creator = PDef_Creator()
 		self.helper_functions = HelperFunctions()
 
-		self.target_list = self.helper_functions.loadPickledFile(
-					DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME)
+		f_path = DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME
+
+		self.logger.info("Loading pickeled file {}".format(f_path))
+
+		self.target_list = self.helper_functions.loadPickledFile(f_path)
 
 
 		self.emma_xml_parser = EMMAXMLParser(self.target_list)
