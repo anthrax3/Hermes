@@ -31,20 +31,29 @@ from CvgHelpers import EMMAXMLParser
 from Config.fuzzserver import DETAILS as FUZZCONFIG
 
 
+ga_logger = logging.getLogger('GA_CRI_Logger')
+ga_logger.setLevel(logging.DEBUG)
+fh = logging.FileHandler('Logs/GA_CRI.log', mode='w')
+fh.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+ga_logger.addHandler(fh)
+
+
 class CVG_Max():
 
 	def __init__(self, fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, 
 				simple=False, timeout=3600):
 
-		self.logger = logging.getLogger('GA_CRI_Logger')
-		self.logger.setLevel(logging.DEBUG)
-		fh = logging.FileHandler('Logs/GA_CRI.log', mode='w')
-		fh.setLevel(logging.DEBUG)
-		formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-		fh.setFormatter(formatter)
-		self.logger.addHandler(fh)
+		# self.logger = logging.getLogger('GA_CRI_Logger')
+		# self.logger.setLevel(logging.DEBUG)
+		# fh = logging.FileHandler('Logs/GA_CRI.log', mode='w')
+		# fh.setLevel(logging.DEBUG)
+		# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		# fh.setFormatter(formatter)
+		# self.logger.addHandler(fh)
 
-		self.logger.info('CVG MAX Initialized: CX={} MPB={} NG={} PS={} simple={}, timeout={}'.format(
+		ga_logger.info('CVG MAX Initialized: CX={} MPB={} NG={} PS={} simple={}, timeout={}'.format(
 			CX, MPB, NG, PS, simple, timeout
 		))
 
@@ -69,7 +78,7 @@ class CVG_Max():
 
 		f_path = DETAILS.PATH_TO_ANALYZER + DETAILS.TARGET_FILENAME
 
-		self.logger.info("Loading pickeled file {}".format(f_path))
+		ga_logger.info("Loading pickeled file {}".format(f_path))
 
 		self.target_list = self.helper_functions.loadPickledFile(f_path)
 
@@ -145,7 +154,7 @@ class CVG_Max():
 		#fuzz_server, CX=0.5, MPB=0.1, NG=30, PS=10, 
 		#simple=False, timeout=3600
 		params = {"CX": CX, "MPB": MPB, "NG": NG, "PS": PS, "simple": simple, "timeout": timeout}
-		self.logger.info('GA Initialized with params: ' + str(params))
+		ga_logger.info('GA Initialized with params: ' + str(params))
 
 
 
@@ -169,7 +178,7 @@ class CVG_Max():
 			pdef = self.pd_creator.generate_html(individual)
 
 		except Exception as ex:
-			self.logger.error('An unexpected exception occurred while generating the ' + \
+			ga_logger.error('An unexpected exception occurred while generating the ' + \
 						'protocol definition.\n' + str(ex))
 
 		# try to save the generated protocol definition
@@ -192,7 +201,7 @@ class CVG_Max():
 			# now in generate_report()
 			#(num_resps, fsvr_start, fsvr_end) = self.Fuzz_Server.getStats()
 		except Exception as e:
-			self.logger.critical('An unexpected error has occurred while evaluating the ' + \
+			ga_logger.critical('An unexpected error has occurred while evaluating the ' + \
 							'fuzz server.\n' + str(e))
 
 		return self.generate_results(individual)
@@ -201,7 +210,7 @@ class CVG_Max():
 
 	def mark_server_start(self):
 		self.start_time = datetime.now()
-		self.logger.info('mark_server_start: server start time set to ' + str(self.start_time))
+		ga_logger.info('mark_server_start: server start time set to ' + str(self.start_time))
 
 
 	def generate_results(self, individual):
@@ -223,7 +232,7 @@ class CVG_Max():
 			which saves it to file.
 		'''
 		if self.start_time > report_created:
-			self.logger.info('Waiting for coverage report to finish writing')
+			ga_logger.info('Waiting for coverage report to finish writing')
 
 		timeout_time = datetime.now() + timedelta(minutes=self.TIMEOUT)
 		time_count = 0
@@ -232,7 +241,7 @@ class CVG_Max():
 
 			time.sleep(1)
 			if time_count % 10 == 0:
-				self.logger.info('... ' + str(time_count))
+				ga_logger.info('... ' + str(time_count))
 
 			report_file = self.get_latest_cvg_report()
 			if report_file:
@@ -240,7 +249,7 @@ class CVG_Max():
 									os.stat(report_file).st_mtime)
 			time_count = time_count + 1
 
-		self.logger.info('Report found. Analyzing Coverage XML Report.')
+		ga_logger.info('Report found. Analyzing Coverage XML Report.')
 
 		report_xml = ""
 		with open(report_file, "r") as f:
@@ -250,7 +259,7 @@ class CVG_Max():
 		try:
 			self.emma_xml_parser.extractEMMAData(report_xml)
 		except Exception as e:
-			self.logger.error(str(e) + "\n" + 'Parse Error: Skipping test.')
+			ga_logger.error(str(e) + "\n" + 'Parse Error: Skipping test.')
 			return (0, 1, 1, 100)
 
 
@@ -261,7 +270,7 @@ class CVG_Max():
 		(tgt_rv, tgt_std, tgt_cvg_values) = self.crunch_cvg_data(tgt_data)
 		(comp_rv, comp_std, comp_cvg_values) = self.crunch_cvg_data(tgt_comp)
 
-		self.logger.info(
+		ga_logger.info(
 			"Coverage Value (" + str(self.CVG_FOCUSES[self.CVG_FOCUS]) + \
 			" coverage, " + self.CVG_GRANULARITY_LIST[self.GRANULARITY] + \
 			" granularity): " + str(tgt_rv))
@@ -344,7 +353,7 @@ class CVG_Max():
 
 			
 			f.write(txt)
-			self.logger.info('Coverage log saved to ' + str(log_f))
+			ga_logger.info('Coverage log saved to ' + str(log_f))
 
 
 
@@ -435,7 +444,7 @@ class CVG_Max():
 		else:
 			pop = self.toolbox.population(n=self.POP_SIZE)
 
-			self.logger.info('Starting Evolution Algorithm...')
+			ga_logger.info('Starting Evolution Algorithm...')
 
 			fitnesses = map(self.toolbox.evaluate, pop)
 			for ind, fit in zip(pop, fitnesses):
@@ -477,11 +486,11 @@ class CVG_Max():
 			sum2 = sum(x*x for x in fits)
 			std = abs(sum2 / length - mean**2)**0.5
 
-			self.logger.info('Algorithm Execution Final Population Results')
-			self.logger.info('Max: ' + str(max(fits)))
-			self.logger.info('Min: ' + str(min(fits)))
-			self.logger.info('Avg: ' + str(mean))
-			self.logger.info('StD: ' + str(std))
+			ga_logger.info('Algorithm Execution Final Population Results')
+			ga_logger.info('Max: ' + str(max(fits)))
+			ga_logger.info('Min: ' + str(min(fits)))
+			ga_logger.info('Avg: ' + str(mean))
+			ga_logger.info('StD: ' + str(std))
 
 		return pop
 
