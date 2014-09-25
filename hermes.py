@@ -82,7 +82,7 @@ class Hermes():
 
 		# Basic Fuzz Server Config (timeout in minutes)
 		self.NUM_BFS_REQUESTS = 70000
-		self.BFS_TIMEOUT = 720
+		self.BFS_TIMEOUT = 2880
 
 		self.logger = logging.getLogger('Hermes_Logger')
 		self.logger.setLevel(logging.DEBUG)

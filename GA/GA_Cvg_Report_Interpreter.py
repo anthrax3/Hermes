@@ -290,7 +290,8 @@ class CVG_Max():
 
 
 	def get_gene_count(self, individual):
-		return sum(individual)
+		ints = [int(gene) for gene in individual]
+		return sum(ints)
 
 
 

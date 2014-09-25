@@ -107,6 +107,7 @@ class FuzzServer():
 		try:
 			f_logger.info('Attemtping to load specified module and protocol definition...')
 			self.reloadSulleyRequest(self.prot_def_path, module)
+			f_logger.info('Done')
 		except:
 			f_logger.error('Reloading the Sulley request failed. Moving to new default protocol.')
 			pd = PDef_Creator()
@@ -120,14 +121,20 @@ class FuzzServer():
 		self.un_initialize_sulley_request('Protocol Definition')
 		#imp.reload(PD_Creator.protocol)
 		try:
-			#f_logger.info('Loading path: ' + str(path) + ', module: ' + str(module))
+			f_logger.info('Loading path: ' + str(path) + ', module: ' + str(module))
 			self.prot_def_module = imp.load_source(module, path)
+			
 		except Exception as e:
 			f_logger.error('Could not load path (' + str(path) + ') and module (' + module + '), ' + str(e))
 
 		self.Sulley_Request = s_get('Protocol Definition')
 
-		f_logger.info('Sulley request loaded. Number of possible mutations: ' + str(self.Sulley_Request.num_mutations()))
+		max_mutations = self.Sulley_Request.num_mutations()
+		f_logger.info('Sulley request loaded. Number of possible mutations: ' + str(max_mutations))
+
+		if self.MAX_RESPONSES > max_mutations:
+			self.MAX_RESPONSES = max_mutations
+
 
 
 	# --------------------------------------------------------------------------------------------
