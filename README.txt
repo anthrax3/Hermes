@@ -26,6 +26,16 @@ Contents:
 ==============================================================================
 ------------------------------------------------------------------------------
 
+Installation
+------------------------------------------------------------------------------
+EC2 Ubuntu VM Setup:
+
+Install git		sudo apt-get install git
+Install pip		sudo apt-get install python-pip
+Install deap		sudo pip install deap
+Install java		sudo apt-get install openjdk-7-jre
+
+Get repo:		git clone https://cshortt@bitbucket.org/cshortt/thesis-code.git .
 
 Configuration and Usage
 ------------------------------------------------------------------------------
